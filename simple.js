@@ -15,7 +15,7 @@ function loadFonts(fields){return Promise.all([...new Set(fields.map(f=>(f.style
 
 /* images */
 const imgP={};
-function loadImg(src){if(!src)return Promise.reject();if(!imgP[src])imgP[src]=new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>{delete imgP[src];rej()};i.src=src});return imgP[src]}
+function loadImg(src){if(!src)return Promise.reject();if(src.startsWith('assets/'))src='inv/'+src;if(!imgP[src])imgP[src]=new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>{delete imgP[src];rej()};i.src=src});return imgP[src]}
 
 function wrap(ctx,text,maxW,maxLines){const out=[];for(const raw of String(text).split('\n')){const words=raw.split(/\s+/).filter(Boolean);if(!words.length){out.push('');continue}let line='';for(const w of words){const t=line?line+' '+w:w;if(ctx.measureText(t).width>maxW&&line){out.push(line);line=w}else line=t}if(line)out.push(line)}
  if(maxLines>0&&out.length>maxLines){const c=out.slice(0,maxLines);c[maxLines-1]=c[maxLines-1].replace(/\s?\S*$/,'')+'…';return c}return out}
@@ -45,10 +45,10 @@ const thumbIO=new IntersectionObserver(es=>es.forEach(async e=>{if(!e.isIntersec
 function tile(card){const b=document.createElement('a');b.className='tpl';b.href='#card-'+card.slug;b.style.aspectRatio=card.w+'/'+card.h;b.style.background=card.bg||'#fff';const c=document.createElement('canvas');c.width=260;c.height=Math.round(260*card.h/card.w);c._card=card;thumbIO.observe(c);b.appendChild(c);
  if(card.new){const s=document.createElement('span');s.className='badge';s.textContent='New';b.appendChild(s)}return b}
 function renderGallery(){const g=$('#sGrid');g.innerHTML='';const q=curQ.toLowerCase();
- list=SD.cards.filter(c=>(curCat==='all'||c.cat===curCat)&&(!q||(c.name+' '+c.slug+' '+c.cat).toLowerCase().includes(q)));
+ list=SD.cards.filter(c=>c.a&&(curCat==='all'||c.cat===curCat)&&(!q||(c.name+' '+c.slug+' '+c.cat).toLowerCase().includes(q)));
  $('#sCount').textContent=list.length+' designs';shown=0;more()}
 function more(){const g=$('#sGrid');list.slice(shown,shown+PAGE).forEach(c=>g.appendChild(tile(c)));shown+=PAGE;$('#sMore').style.display=shown<list.length?'':'none'}
-async function showGallery(cat){await loadSimple();curCat=cat||'all';const ch=$('#sCats');ch.innerHTML='';[{slug:'all',name:'All',n:SD.cards.length},...SD.cats].forEach(k=>{const b=document.createElement('a');b.href=k.slug==='all'?'#simple':'#simple-'+k.slug;b.className='schip'+(k.slug===curCat?' on':'');b.textContent=k.name+' · '+k.n;ch.appendChild(b)});
+async function showGallery(cat){await loadSimple();curCat=cat||'all';const ch=$('#sCats');ch.innerHTML='';[{slug:'all',name:'All',n:SD.cards.filter(c=>c.a).length},...SD.cats.map(k=>({...k,n:SD.cards.filter(c=>c.a&&c.cat===k.slug).length})).filter(k=>k.n)].forEach(k=>{const b=document.createElement('a');b.href=k.slug==='all'?'#simple':'#simple-'+k.slug;b.className='schip'+(k.slug===curCat?' on':'');b.textContent=k.name+' · '+k.n;ch.appendChild(b)});
  $('#sGallery').style.display='';$('#sCard').style.display='none';renderGallery()}
 let CUR=null;
 async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.slug===slug);if(!card){location.hash='#simple';return}
