@@ -697,7 +697,8 @@ function sampleToDesign(r){const [id,k,l,tier,title,segs,hs]=r;const R=rng(hs);
  return{bg,objs,tier,cat:k,title,sid:id,lang:l}}
 const EX_BG=[[/navy/i,2,8],[/pink|blush|peony/i,4,7],[/dusty blue|blue/i,5,3],[/burgundy/i,22,7],[/lavender/i,7,11],[/silver/i,11,8],[/letterpress|gold/i,0,3],[/marble/i,2,13],[/paper-cut/i,0,12],[/watercolor/i,9,11],[/rose/i,2,7]];
 function exToDesign(e,i){let bg={p:0,s:8};for(const [rx,p,st] of EX_BG)if(rx.test(e.title)){bg={p,s:st};break}return{bg,objs:JSON.parse(JSON.stringify(e.objs)),tier:'free',cat:e.k,title:e.title,lang:/English/.test(e.title)?'en':'yi',featured:1}}
-function catDesigns(k){const L=[];const top=(SMP_BY[k]||[]).filter(r=>r[6]),rest=(SMP_BY[k]||[]).filter(r=>!r[6]);[...top,...rest].forEach(r=>L.push(Object.assign(()=>layoutDesign(r),{r})));for(let i=0;i<TPL_PER;i++)L.push(Object.assign(()=>buildTemplate(k,i),{gi:i}));return L}
+const hasBg=r=>{const m=LAYC[r[1]];const L=m&&m[r[0]];return !!L&&!L.bg.sub};
+function catDesigns(k){const L=[];const ok=(SMP_BY[k]||[]).filter(hasBg);const top=ok.filter(r=>r[6]),rest=ok.filter(r=>!r[6]);[...top,...rest].forEach(r=>L.push(Object.assign(()=>layoutDesign(r),{r})));for(let i=0;i<TPL_PER;i++)L.push(Object.assign(()=>buildTemplate(k,i),{gi:i}));return L}
 function dMeta(fn){if(fn.r)return{tier:fn.r[3],lang:fn.r[2],text:fn.r[4]+' '+fn.r[5]};const d=fn();return{tier:d.tier,lang:tplLang(fn.gi),text:d.objs.map(o=>o.text||'').join(' ')}}
 
 function blankDesign(){return{bg:{p:0,s:3},objs:[T('ב״ה',110,34,'Frank Ruhl Libre',{color:'#3A2A12',bold:false,x:900}),T('Tap to type',620,96,'Playfair Display',{color:'#B8892E',fill:'gold'})],cat:curCat}}
@@ -751,7 +752,7 @@ function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*((d.h||(d.land?
 function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
 function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='★ Example';b.appendChild(s)}else if(d.tier!=='free'){const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':'');s.textContent=d.tier==='pro'?'Pro':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
 function renderPremium(){const g=$('#premGrid');g.innerHTML='<p class="hint"><span class="spin"></span></p>';const picks=['wedding','barmitzvah','kiddush','vort','bris','lchaim','sholomzochor','shevabrachos'];
- const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const L=(SMP_BY[k]||[]).filter(r=>r[3]!=='free'&&!r[7]);const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
+ const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const L=(SMP_BY[k]||[]).filter(r=>r[3]!=='free'&&!r[7]&&hasBg(r));const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
 const TPL_PER=19;
 let gL='all',gQ='',gList=[],gShown=0;const PAGE=24;
 function tplLang(i){return i%3===2?'en':'yi'}
