@@ -40,6 +40,12 @@ nav.main a:hover,nav.main button:hover{background:#EDE4D3}
 .hero p{font-size:19px;color:var(--muted);max-width:640px;margin:0 auto 24px}
 .tiers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .tier{border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:10px 16px;font-weight:700;display:flex;gap:8px;align-items:center}
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px;margin:6px auto 0}
+.door{display:block;text-decoration:none;background:#fff;border:2px solid var(--line);border-radius:20px;padding:22px 18px;text-align:center;box-shadow:0 4px 0 #e2d2b0;transition:.15s}
+.door:hover{transform:translateY(-2px);border-color:#2d4939}.door i{font-style:normal;font-size:34px;display:block}.door b{display:block;font-size:22px;color:#2d4939;margin:6px 0 4px;font-family:"Playfair Display",serif}.door span{color:var(--muted);font-size:15px}
+@media(max-width:560px){.choose{grid-template-columns:1fr}}
+.schip{display:inline-block;white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;text-decoration:none;margin:0 6px 6px 0}.schip.on{background:#2d4939;color:#fff;border-color:#2d4939}
+#sCanvas{width:100%;height:auto;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.18);background:#fff}
 .tierbox{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
 @media(max-width:760px){.tierbox{grid-template-columns:1fr}}
 .tb{display:flex;align-items:center;gap:12px;text-align:start;border:0;border-radius:18px;padding:14px 16px;color:#fff}
@@ -180,9 +186,9 @@ input[type=range]{padding:0;border:0;background:none}
       <p class="hint" style="letter-spacing:.08em;font-weight:700;margin-bottom:10px">English · אידיש · עברית</p>
       <h1 data-ih="hero_h">Simcha invitations,<br><em>beautifully simple.</em></h1>
       <p data-i="hero_p">Choose a design, type your names, download. Ready designs for every simcha, plus Premium and Premium Pro collections (photo-scene invitations, new ideas, envelope styles and more) and video invitations.</p>
-      <div class="row" style="justify-content:center;gap:10px;flex:none">
-        <a class="btn gold" href="#events" style="flex:none" data-i="cta_start">Start designing</a>
-        <a class="btn ghost" href="#ai" style="flex:none" data-i="cta_ai">✨ AI mode</a>
+      <div class="choose">
+        <a class="door" href="#simple"><i>✨</i><b>Simple</b><span>Pick a design, fill in the names, download. Done in a minute.</span></a>
+        <a class="door" href="#events"><i>🎨</i><b>Custom</b><span>Full editor: fonts, backgrounds, elements, effects and video.</span></a>
       </div>
       <p style="margin-top:16px"><a href="#events" style="font-weight:700">Pick your simcha ↓</a></p>
     </div>
@@ -302,6 +308,30 @@ input[type=range]{padding:0;border:0;background:none}
   <div class="row" style="margin-bottom:14px"><input id="gSearch" type="search" placeholder="Search in this category…" style="flex:2;min-width:180px"><button class="btn sm ghost" id="gSurprise" style="flex:none">🎲 Surprise me</button><div class="seg" id="gLang" style="flex:none"><button data-l="all" class="on">All</button><button data-l="yi">יידיש / עברית</button><button data-l="en">English</button></div></div>
   <p class="hint" id="gCount"></p><div class="grid" id="catGrid"></div><div style="text-align:center;margin-top:16px"><button class="btn ghost" id="gMore">Show more</button></div>
   <div style="height:40px"></div>
+</div></main>
+
+<main id="simpleView" class="view"><div class="wrap">
+  <div id="sGallery">
+    <div class="catHead"><a href="#home" class="btn ghost sm">←</a><h2>✨ Simple</h2><span class="muted">Pick a design, fill in the blanks, download.</span></div>
+    <div id="sCats" style="margin-bottom:8px"></div>
+    <input id="sSearch" type="search" placeholder="Search designs…" style="margin-bottom:10px">
+    <p class="hint" id="sCount"></p>
+    <div class="grid" id="sGrid"></div>
+    <div style="text-align:center;margin:16px 0 40px"><button class="btn ghost" id="sMore">Show more</button></div>
+  </div>
+  <div id="sCard" style="display:none">
+    <div class="catHead"><a id="sBack" href="#simple" class="btn ghost sm">←</a><h2 id="sName"></h2></div>
+    <div class="two" style="align-items:start">
+      <div><canvas id="sCanvas"></canvas></div>
+      <div class="card">
+        <b>Your details</b><p class="hint">Change any line. The preview updates as you type.</p>
+        <div id="sForm"></div>
+        <div class="row" style="margin-top:14px"><button class="btn" id="sDown">⬇ Download</button><button class="btn ghost" id="sEdit">🎨 Edit more</button></div>
+        <p class="hint">"Edit more" opens this design in the Custom editor with your words already in.</p>
+      </div>
+    </div>
+    <div style="height:40px"></div>
+  </div>
 </div></main>
 
 <!-- EDITOR -->
@@ -658,7 +688,7 @@ function blankDesign(){return{bg:{p:0,s:3},objs:[T('ב״ה',110,34,'Frank Ruhl L
 function fillFor(ctx,o,bb){if(o.fill==='gold')return goldGrad(ctx,0,-bb.h/2,0,bb.h/2);
  if(o.fill==='silver'){const g=ctx.createLinearGradient(0,-bb.h/2,0,bb.h/2);['#6E6E6E','#F2F2F2','#9A9A9A','#FFFFFF','#7C7C7C'].forEach((c,i)=>g.addColorStop(i/4,c));return g}
  if(o.fill==='rose'){const g=ctx.createLinearGradient(0,-bb.h/2,0,bb.h/2);['#8C4A3C','#F6C7B6','#B76E5D','#FFE1D6','#9A5546'].forEach((c,i)=>g.addColorStop(i/4,c));return g}return o.color}
-function measure(ctx,o){if(o.t==='text'){ctx.font=`${o.bold?700:400} ${o.size}px "${o.font}"`;const L=o.text.split('\n');let w=0;L.forEach(l=>w=Math.max(w,ctx.measureText(l).width));return{w:Math.max(w,o.size*.6),h:L.length*o.size*o.lh}}
+function measure(ctx,o){if(o.t==='text'){ctx.font=`${o.bold?700:400} ${o.size}px "${o.font}"`;const L=o.text.split('\n');let w=0;L.forEach(l=>w=Math.max(w,ctx.measureText(l).width));return{w:Math.max(w,o.size*.6,o.bw||0),h:L.length*o.size*o.lh}}
  if(o.t==='el'){if(o.ch.startsWith('sv:')){const b=BASES[o.ch.split(':')[1]];return{w:o.size,h:b?o.size*b[4]/b[3]:o.size}}const sh=o.ch[0]===':'&&o.ch.slice(1);if(sh&&sh.startsWith('frame'))return{w:o.size,h:o.size*1.25};if(sh&&sh.startsWith('divider'))return{w:o.size,h:o.size*.12};return{w:o.size,h:o.size}}
  if(o.t==='photo'){if(!o.src)return{w:o.size,h:o.shape==='circle'?o.size:o.size*(o.ar||1)};const im=getImg(o.src),ar=im.naturalWidth?im.naturalHeight/im.naturalWidth:1;return{w:o.size,h:o.shape==='free'?o.size*ar:o.shape==='circle'?o.size:o.size*(o.ar||1)}}}
 function drawObj(ctx,o){const bb=measure(ctx,o);o._bb=bb;ctx.save();ctx.translate(o.x,o.y);ctx.rotate((o.rot||0)*Math.PI/180);
@@ -683,7 +713,7 @@ function drawObj(ctx,o){const bb=measure(ctx,o);o._bb=bb;ctx.save();ctx.translat
   const ir=im.naturalWidth/im.naturalHeight,tr=w/h;let sw=im.naturalWidth,sh=im.naturalHeight,sx=0,sy=0;if(ir>tr){sw=sh*tr;sx=(im.naturalWidth-sw)/2}else{sh=sw/tr;sy=(im.naturalHeight-sh)/2}
   ctx.drawImage(im,sx,sy,sw,sh,-w/2,-h/2,w,h);ctx.restore()}}
  ctx.restore()}
-function renderDesign(ctx,d,w,h,sel){const DH=d.land?864:1350;ctx.save();ctx.clearRect(0,0,w,h);ctx.scale(w/W,h/DH);drawBg(ctx,W,DH,d.bg);d.objs.forEach((o,i)=>drawObj(ctx,o));
+function renderDesign(ctx,d,w,h,sel){const DH=d.h||(d.land?864:1350);ctx.save();ctx.clearRect(0,0,w,h);ctx.scale(w/W,h/DH);drawBg(ctx,W,DH,d.bg);d.objs.forEach((o,i)=>drawObj(ctx,o));
  if(sel>=0&&d.objs[sel]){const o=d.objs[sel],bb=o._bb;ctx.translate(o.x,o.y);ctx.rotate((o.rot||0)*Math.PI/180);ctx.setLineDash([14,10]);ctx.lineWidth=3;ctx.strokeStyle='#2B7FFF';ctx.strokeRect(-bb.w/2-14,-bb.h/2-14,bb.w+28,bb.h+28);ctx.setLineDash([]);ctx.fillStyle='#2B7FFF';[[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>{ctx.beginPath();ctx.arc(a*(bb.w/2+14),b*(bb.h/2+14),9,0,7);ctx.fill()})}
  ctx.restore()}
 const cv=$('#cv'),cx=cv.getContext('2d');
@@ -697,7 +727,7 @@ function queueThumb(canvas,fn){thumbQ.push([canvas,fn]);if(!thumbBusy)pumpThumbs
 async function pumpThumbs(){thumbBusy=true;while(thumbQ.length){const [c,fn]=thumbQ.shift();if(!c.isConnected)continue;fn(c.getContext('2d'),c.width,c.height);c._done=1;await new Promise(r=>setTimeout(r,0))}thumbBusy=false}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.unobserve(e.target);e.target._draw&&queueThumb(e.target,e.target._draw)}}),{rootMargin:'200px'});
 function thumbCanvas(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;c._draw=fn;io.observe(c);return c}
-function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*(d.land?.8:1.25)),(ctx,cw,ch)=>renderDesign(ctx,d,cw,ch,-1));const fs=[...new Set(d.objs.filter(o=>o.t==='text').map(o=>o.font))];Promise.all(fs.map(f=>loadFont(f))).then(()=>{if(c._done&&c.isConnected)queueThumb(c,c._draw)});return c}
+function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*((d.h||(d.land?864:1350))/1080)),(ctx,cw,ch)=>renderDesign(ctx,d,cw,ch,-1));const fs=[...new Set(d.objs.filter(o=>o.t==='text').map(o=>o.font))];Promise.all(fs.map(f=>loadFont(f))).then(()=>{if(c._done&&c.isConnected)queueThumb(c,c._draw)});return c}
 
 /* ---------------- home rendering ---------------- */
 function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
@@ -736,7 +766,7 @@ const FAQ=[
 function renderFAQ(){$('#faqList').innerHTML='';FAQ.forEach(([q,a])=>{const d=document.createElement('details');d.className='faq';d.innerHTML='<summary></summary><p></p>';d.querySelector('summary').textContent=q;d.querySelector('p').textContent=a;$('#faqList').appendChild(d)})}
 
 /* ---------------- routing ---------------- */
-function route(){const h=location.hash.slice(1);if(h.startsWith('c-')&&CAT[h.slice(2)]){$('#home').classList.remove('on');$('#catView').classList.add('on');$$('#catFilter button').forEach((b,i)=>b.classList.toggle('on',i===0));gQ='';$('#gSearch').value='';renderCat(h.slice(2));scrollTo(0,0);return}
+function route(){const h=location.hash.slice(1);if(h==='simple'||h.startsWith('simple-')||h.startsWith('card-')){$('#home').classList.remove('on');$('#catView').classList.remove('on');return}if(h.startsWith('c-')&&CAT[h.slice(2)]){$('#home').classList.remove('on');$('#catView').classList.add('on');$$('#catFilter button').forEach((b,i)=>b.classList.toggle('on',i===0));gQ='';$('#gSearch').value='';renderCat(h.slice(2));scrollTo(0,0);return}
  $('#catView').classList.remove('on');$('#home').classList.add('on');if(h&&h!=='home'){const el=document.getElementById(h);el&&setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),30)}else scrollTo(0,0)}
 addEventListener('hashchange',route);
 
@@ -744,7 +774,7 @@ addEventListener('hashchange',route);
 function snap(){HIST.push(JSON.stringify(D));if(HIST.length>80)HIST.shift();FUT=[]}
 function undo(){if(!HIST.length)return;FUT.push(JSON.stringify(D));D=JSON.parse(HIST.pop());SEL=-1;draw();renderPanel()}
 function redo(){if(!FUT.length)return;HIST.push(JSON.stringify(D));D=JSON.parse(FUT.pop());SEL=-1;draw();renderPanel()}
-async function openEditor(d){D=d;EH=d.land?864:1350;cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
+async function openEditor(d){D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
  const fonts=[...new Set(D.objs.filter(o=>o.t==='text').map(o=>o.font))];await Promise.all(fonts.map(f=>loadFont(f)));draw();setTab('bg')}
 $('#eClose').onclick=()=>{$('#editor').classList.remove('on');document.body.style.overflow='';$('#kbd').classList.remove('on')};
 $('#eUndo').onclick=undo;$('#eRedo').onclick=redo;
@@ -1026,5 +1056,6 @@ route();initShared();
 ['Frank Ruhl Libre','Suez One','Playfair Display','Great Vibes'].forEach(f=>loadFont(f));
 document.fonts.ready.then(()=>{$$('canvas').forEach(c=>{if(c._draw&&c.isConnected&&c.getBoundingClientRect().top<innerHeight*2)queueThumb(c,c._draw)})});
 </script>
+<script src="simple.js"></script>
 </body>
 </html>
