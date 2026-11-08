@@ -71,7 +71,7 @@ async function toCustom(){const {card,fields,values}=CUR;const s=1080/card.w,H=M
  const bg=card.art?{img:card.art,fb:{custom:[card.bg||'#ffffff']}}:{custom:[card.bg||'#ffffff']};
  window.openEditor({bg,objs,h:H,tier:'free',cat:'simple',title:card.name})}
 
-function route(){const h=location.hash.slice(1);const on=h==='simple'||h.startsWith('simple-')||h.startsWith('card-');view().classList.toggle('on',on);
+function route(){const h=location.hash.slice(1);const on=h==='simple'||h.startsWith('simple-')||h.startsWith('card-');view().classList.toggle('on',on);document.body.classList.toggle('inv',on);
  if(!on)return;document.querySelectorAll('main.view').forEach(m=>{if(m.id!=='simpleView')m.classList.remove('on')});
  if(h.startsWith('card-'))showCard(h.slice(5));else showGallery(h.startsWith('simple-')?h.slice(7):'all')}
 window.addEventListener('hashchange',route);
