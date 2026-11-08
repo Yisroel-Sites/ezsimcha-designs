@@ -1,4 +1,4 @@
-# EZ Simcha Designs
+# Invitely
 
 Simcha invitation maker: pick a design, type your names, download.
 
