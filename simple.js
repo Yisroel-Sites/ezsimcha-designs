@@ -56,7 +56,13 @@ async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.s
  const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
  const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>{const c=f=>{const p=f.position_config||{};return (p.y||0)+(p.height||0)/2};return c(a)-c(b)}).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
   const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=String(values[f.id]).replace(/\+/g,'');ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
-  if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);form.appendChild(fb)}});
+  if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);
+   const row=document.createElement('div');row.className='frow';row.appendChild(fb);
+   const sc=f.style_config=f.style_config||{};const base=sc.font_size||12;let pct=100;
+   const sz=document.createElement('div');sz.className='fsize';sz.innerHTML='<button type="button" aria-label="Smaller text">A−</button><span>100%</span><button type="button" aria-label="Bigger text">A+</button>';
+   const out=sz.querySelector('span');const set=v=>{pct=Math.max(50,Math.min(200,v));sc.font_size=base*pct/100;out.textContent=pct+'%';queue()};
+   sz.children[0].onclick=()=>set(pct-10);sz.children[2].onclick=()=>set(pct+10);out.onclick=()=>set(100);out.title='Tap to reset';
+   row.appendChild(sz);form.appendChild(row)}});
  await draw();scrollTo(0,0)}
 let qT=0;function queue(){clearTimeout(qT);qT=setTimeout(draw,120)}
 async function draw(){if(!CUR)return;const c=$('#sCanvas');const s=Math.min(2,900/CUR.card.w);await renderCard(c,CUR.card,CUR.fields,CUR.values,s)}
@@ -82,7 +88,12 @@ if(document.readyState!=='loading'){setTimeout(()=>{$('#sMore').onclick=more;$('
 
 /* ---- font changer ---- */
 (function(){const st=document.createElement('style');st.textContent=`
-.fontbtn{display:block;margin:-2px 0 14px;padding:7px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:inherit;font:inherit;font-size:13px;cursor:pointer}
+.frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:-2px 0 14px}
+.fsize{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+.fsize button{border:0;background:none;color:inherit;font:700 14px Georgia,serif;padding:7px 12px;cursor:pointer}
+.fsize button:active{background:var(--line)}
+.fsize span{font-size:13px;min-width:44px;text-align:center;cursor:pointer;font-variant-numeric:tabular-nums}
+.fontbtn{display:block;margin:0;padding:7px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:inherit;font:inherit;font-size:13px;cursor:pointer}
 .fontbtn span{font-family:Georgia,serif;font-weight:700;margin-right:4px}
 #mFont .sheet{max-width:560px}
 #fList{display:grid;gap:8px;margin-top:6px}
