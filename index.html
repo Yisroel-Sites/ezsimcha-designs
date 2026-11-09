@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script src="ezdata.js"></script>
 <script src="gen.js"></script>
+<script src="backend.js"></script>
 <style>
 :root{--cream:#fff0d1;--paper:#FFFFFF;--ink:#2E2216;--muted:#76634D;--gold:#605643;--gold2:#E7C873;--navy:#2d4939;--line:#E7D9BD;--accent:#605643;--r:16px}
 *{box-sizing:border-box}html,body{margin:0}
@@ -916,7 +917,7 @@ $('#eKbd').onclick=()=>{buildKbd();$('#kbd').classList.toggle('on');if(selObj()?
 
 /* ---------------- capabilities ---------------- */
 let CAP={};
-function cap(n){if(!CAP[n])CAP[n]=(window.claude&&claude.use?claude.use(n):Promise.resolve(null)).catch(()=>null);return CAP[n]}
+function cap(n){if(!CAP[n])CAP[n]=(window.INV&&INV.use?INV.use(n):window.claude&&claude.use?claude.use(n):Promise.resolve(null)).catch(()=>null);return CAP[n]}
 
 /* ---------------- download / save ---------------- */
 function exportPNG(){const c=document.createElement('canvas');c.width=W;c.height=EH;renderDesign(c.getContext('2d'),D,W,EH,-1);return c}
@@ -943,7 +944,7 @@ Return JSON only: {"designs":[3 objects]}. Each object: {"category": one of [${A
 Write proper wording in the language the user asked for (default: Yiddish with Hebrew title; English if the user wrote English only and did not ask for Yiddish). Use the real names, date and place from the description; use ____ for anything missing. Start Yiddish/Hebrew designs with "ב״ה" as opening. 5-8 lines per design, short lines, use \\n inside a line for 2-line blocks. Make the three designs clearly different in palette, style and wording tone. Palettes: 0 cream/gold,1 navy/gold,2 white/gold,3 green/gold,4 blush,5 sky blue,6 chocolate/gold,7 lavender,8 sunny,9 sage,10 burgundy/gold,11 grey,12 peach,13 teal,14 black/gold,15 olive,16 purple/gold,17 pink,18 royal blue,19 espresso,20 kraft,21 emerald,22 terracotta,23 midnight/red,24 lemon,25 plum,26 stone,27 deep sea,28 rust,29 mint.`;
  try{const r=await sample.json(ask,{modelTier:'default'});const ds=(r&&r.designs||[]).slice(0,3).map(specToDesign);if(!ds.length)throw 0;out.innerHTML='';
   for(const d of ds){await Promise.all([...new Set(d.objs.filter(o=>o.t==='text').map(o=>o.font))].map(f=>loadFont(f)));const b=tplButton(d);b.onclick=()=>{$$('.modal').forEach(m=>m.classList.remove('on'));openEditor(JSON.parse(JSON.stringify(d)))};out.appendChild(b)}}
- catch(e){out.innerHTML=`<p class="hint" style="grid-column:1/-1">${e&&e.code==='rate_limited'?'AI is busy. Try again in a minute.':e&&e.code==='not_granted'?'AI mode isn\'t available in this view.':'That didn\'t work. Try describing it a little differently.'}</p>`}}
+ catch(e){out.innerHTML=`<p class="hint" style="grid-column:1/-1">${e&&e.code==='rate_limited'?'AI is busy. Try again in a minute.':e&&(e.code==='not_granted'||e.code==='not_configured')?'AI mode isn\'t switched on yet.':'That didn\'t work. Try describing it a little differently.'}</p>`}}
 function specToDesign(s){const bg={p:clamp(s.palette|0,0,29),s:clamp(s.style|0,0,17)};const ink=bgInk(bg),ac=bgAcc(bg),ci=cardInner(bg)||{x:0,y:0,w:1,h:1};const sc=Math.min(1,ci.w*1.15);
  const lines=(s.lines||[]).slice(0,9);const sizes={opening:32,invite:40,title:130,names:64,details:38,place:36,closing:34};
  const tot=lines.reduce((a,l)=>a+(sizes[l.role]||40)*1.25*(String(l.text).split('\n').length)+28,0);let y=(ci.y+ci.h*.5)*H-tot*sc/2;const objs=[];
@@ -1042,8 +1043,8 @@ $('#evG').onclick=e=>{if(!evParts()){e.preventDefault();toast('Pick a date first
 /* ---------------- reviews, members, account ---------------- */
 let myStars=5,ME=null;
 function renderStarPick(){$('#starPick').innerHTML='';for(let i=1;i<=5;i++){const b=document.createElement('button');b.textContent='★';b.classList.toggle('on',i<=myStars);b.onclick=()=>{myStars=i;renderStarPick()};$('#starPick').appendChild(b)}}
-async function initShared(){const u=await cap('user'),db=await cap('db');const uid=u?await u.id():null;ME={u,db,uid};
- if(!db){$('#rvNote').textContent='Reviews and accounts work when this page is opened in Claude.';$('#fCount').textContent='30 founding spots';$('#fMeter').style.width='0%';return}
+async function initShared(){const u=await cap('user'),db=await cap('db');const uid=u?await u.id():null;ME={u,db,uid};if(uid){const m=await u.me();if(m&&m.name)$('#loginBtn').textContent=m.name.split(' ')[0].slice(0,14)}
+ if(!db){$('#rvNote').textContent='Reviews are not available right now.';$('#fCount').textContent='30 founding spots';$('#fMeter').style.width='0%';return}
  let to=setTimeout(()=>{$('#rvNote').textContent='Reviews can\'t be reached right now.'},10000);
  db.collection('reviews').onSnapshot(async s=>{clearTimeout(to);const rows=s.docs.map(d=>d.data()).filter(r=>r&&r.stars).sort((a,b)=>(b.at||0)-(a.at||0));
    const avg=rows.length?(rows.reduce((a,r)=>a+(+r.stars||0),0)/rows.length):0;$('#rvAvg').textContent=rows.length?`${'★'.repeat(Math.round(avg))} ${avg.toFixed(1)} · ${rows.length} review${rows.length>1?'s':''}`:'No reviews yet. Be the first.';
@@ -1051,20 +1052,23 @@ async function initShared(){const u=await cap('user'),db=await cap('db');const u
   ()=>{clearTimeout(to);$('#rvNote').textContent='Reviews can\'t be reached right now.'});
  db.collection('members').onSnapshot(s=>{const n=s.size;$('#fMeter').style.width=Math.min(100,n/30*100)+'%';$('#fCount').textContent=n>=30?'All 30 founding spots are taken':`${30-n} of 30 spots left.`;const mine=uid&&s.docs.some(d=>d.id===uid);$('#joinBtn').textContent=mine?'✔ You\'re a founding member':(I18N[LANG]?.f_join||EN.f_join);$('#joinBtn').disabled=!!mine||n>=30},()=>{});
 }
-$('#rvPost').onclick=async()=>{const t=$('#rvText').value.trim();if(!ME||!ME.db||!ME.uid){toast('Open this page in Claude to post a review');return}if(t.length<3){toast('Write a few words first');return}
- try{await ME.db.doc('reviews/'+ME.uid).set({uid:ME.uid,name:$('#rvName').value.trim().slice(0,40),stars:myStars,text:t.slice(0,600),at:Date.now()});$('#rvText').value='';toast('Thanks for your review!')}catch(e){toast(e&&e.code==='invalid_argument'?'You can view reviews but not post here':'Could not post right now')}};
-async function joinFounders(){if(!ME||!ME.db||!ME.uid){toast('Open this page in Claude to join');return}try{await ME.db.doc('members/'+ME.uid).set({uid:ME.uid,at:Date.now()});toast('Welcome, founding member! 🎉')}catch(e){toast('Could not join right now')}}
+$('#rvPost').onclick=async()=>{const t=$('#rvText').value.trim();if(!ME||!ME.db||!ME.uid){toast('Log in to post a review');openAccount();return}if(t.length<3){toast('Write a few words first');return}
+ try{await ME.db.doc('reviews/'+ME.uid).set({uid:ME.uid,name:$('#rvName').value.trim().slice(0,40),stars:myStars,text:t.slice(0,600),at:Date.now()});$('#rvText').value='';toast('Thanks for your review!')}catch(e){toast(e&&e.code==='invalid_argument'?'Write a few words and pick your stars':e&&e.code==='login'?'Log in to post a review':'Could not post right now')}};
+async function joinFounders(){if(!ME||!ME.db||!ME.uid){toast('Log in to join');openAccount();return}try{await ME.db.doc('members/'+ME.uid).set({uid:ME.uid,at:Date.now()});toast('Welcome, founding member! 🎉')}catch(e){toast(e&&e.code==='full'?'All 30 founding spots are taken':e&&e.code==='login'?'Log in to join':'Could not join right now')}}
 $('#joinBtn').onclick=joinFounders;$('#joinBtn2').onclick=joinFounders;
 async function openAccount(){openM('mAcct');const b=$('#acBody');b.innerHTML='<span class="spin"></span>';const u=ME?.u,me=u?await u.me():null;
  const list=[];if(ME?.db&&ME.uid){try{const s=await ME.db.collection('data/users/'+ME.uid).get();s.docs.forEach(d=>list.push(d.data()))}catch(e){}}localDesigns().forEach(r=>list.push({...r,local:1}));list.sort((a,b)=>(b.at||0)-(a.at||0));
- b.innerHTML='';if(me&&me.id){b.appendChild(h(`<div class="row" style="flex:none;gap:10px"><img src="" id="acAv" style="width:44px;height:44px;border-radius:50%;flex:none"><div><b id="acNm"></b><div class="hint">Signed in with your Claude account</div></div></div>`));$('#acAv').src=me.avatarUrl;$('#acNm').textContent=me.name||'You'}
- else b.appendChild(h(`<p class="muted">You're designing as a guest. Designs save on this device. Open this page in Claude to save them to your account.</p>`));
+ b.innerHTML='';if(me&&me.id){b.appendChild(h(`<div class="row" style="flex:none;gap:10px"><img src="" id="acAv" style="width:44px;height:44px;border-radius:50%;flex:none"><div><b id="acNm"></b><div class="hint" id="acEm"></div></div><button class="btn sm ghost" id="acOut" style="margin-left:auto">Log out</button></div>`));$('#acAv').src=me.avatarUrl;$('#acNm').textContent=me.name||'You';$('#acEm').textContent=me.email||'';$('#acOut').onclick=async()=>{try{await u.logout()}catch(e){}location.reload()}}
+ else{b.appendChild(h(`<div id="acForm"><p class="muted" style="margin:0 0 10px">Log in to save designs to your account, post a review and join the founding members. You can also keep designing as a guest.</p><input id="auName" placeholder="Your name (for a new account)" maxlength="40" style="width:100%;margin-bottom:8px"><input id="auEmail" type="email" placeholder="Email" autocomplete="email" style="width:100%;margin-bottom:8px"><input id="auPw" type="password" placeholder="Password (8+ characters)" autocomplete="current-password" style="width:100%;margin-bottom:8px"><div class="row" style="gap:8px"><button class="btn gold" id="auIn" style="flex:1">Log in</button><button class="btn ghost" id="auUp" style="flex:1">Create account</button></div><p class="hint" id="auErr" style="color:#A33;min-height:18px;margin:8px 0 0"></p></div>`));
+  const ERR={bad_email:'That email doesn\'t look right.',short_password:'Use a password with at least 8 characters.',email_taken:'That email already has an account. Tap Log in.',bad_login:'Wrong email or password.',rate_limited:'Too many tries. Wait a bit and try again.',not_configured:'Accounts are not switched on yet.'};
+  const go=async up=>{const e=$('#auEmail').value.trim(),pw=$('#auPw').value;$('#auErr').textContent='';$('#auIn').disabled=$('#auUp').disabled=true;try{if(up)await u.signup($('#auName').value.trim(),e,pw);else await u.login(e,pw);location.reload()}catch(x){$('#auErr').textContent=ERR[x.code]||'Something went wrong. Try again.';$('#auIn').disabled=$('#auUp').disabled=false}};
+  $('#auIn').onclick=()=>go(false);$('#auUp').onclick=()=>go(true)}
  b.appendChild(h(`<h4 style="margin:18px 0 8px">My designs</h4><div class="grid" id="acG" style="grid-template-columns:repeat(3,1fr);gap:8px"></div>`));
  if(!list.length)$('#acG').innerHTML='<p class="hint" style="grid-column:1/-1">Nothing saved yet. Tap 💾 Save in the editor.</p>';
  list.forEach(r=>{let d;try{d=JSON.parse(r.design)}catch(e){return}const bt=tplButton(d);bt.onclick=()=>{$('#mAcct').classList.remove('on');openEditor(d)};$('#acG').appendChild(bt)});
  if(me&&me.id)b.appendChild(h(`<div style="margin-top:22px;border-top:1px solid var(--line);padding-top:14px"><button class="btn sm ghost" id="acDel" style="color:#A33">Delete my account</button><p class="hint" id="acDelNote">Removes your saved designs, review and founding-member spot.</p></div>`));
  const del=$('#acDel');if(del){let armed=false;del.onclick=async()=>{if(!armed){armed=true;del.textContent='Tap again to confirm delete';return}del.disabled=true;
-  try{for(const r of list.filter(x=>!x.local))await ME.db.collection('data/users/'+ME.uid).doc(r.id).delete();await ME.db.doc('reviews/'+ME.uid).delete();await ME.db.doc('members/'+ME.uid).delete();localStorage.removeItem('ez_designs');toast('Your account data was deleted');$('#mAcct').classList.remove('on')}catch(e){toast('Some data could not be deleted');del.disabled=false}}}}
+  try{for(const r of list.filter(x=>!x.local))await ME.db.collection('data/users/'+ME.uid).doc(r.id).delete();await ME.db.doc('reviews/'+ME.uid).delete();await ME.db.doc('members/'+ME.uid).delete();if(ME.u.deleteAccount)await ME.u.deleteAccount();localStorage.removeItem('ez_designs');toast('Your account was deleted');$('#mAcct').classList.remove('on');setTimeout(()=>location.reload(),900)}catch(e){toast('Some data could not be deleted');del.disabled=false}}}}
 $('#loginBtn').onclick=openAccount;
 $$('.tb').forEach(b=>b.onclick=()=>{toast('Premium is open to everyone right now. Pick any design!');document.getElementById(b.dataset.tier==='vid'?'video':'premium').scrollIntoView({behavior:'smooth'})});
 
