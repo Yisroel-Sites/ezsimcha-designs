@@ -6,7 +6,7 @@
     if (lum(deep) > .8) deep = mix(brand, '#000000', .45);
     return { id, name, note, bg: '#FFFFFF', paper: '#FFFFFF', ink: mix(brand, '#111111', .75), muted: '#5f6670',
       line: mix(brand, '#FFFFFF', .82), tint: mix(brand, '#FFFFFF', .92), brand, deep, ac,
-      acl: mix(ac, '#FFFFFF', .45), acd: lum(ac) > .55 ? mix(ac, '#000000', .45) : mix(ac, '#000000', .2) };
+      acl: mix(ac, '#FFFFFF', .45), acd: lum(ac) > .55 ? mix(ac, '#000000', .45) : mix(ac, '#000000', .2), logo: lum(ac) > .6 ? mix(ac, '#000000', .3) : ac };
   };
   const T = [
     mk('emerald', '1. Emerald & Champagne Gold', 'Luxury and exclusivity', '#064E3B', '#D4AF37', '#111111'),
@@ -24,7 +24,7 @@
   function css(t) {
     const d = shade(t.brand, .35), dg = shade(t.acd, .35);
     return `
-:root,body.inv{--cream:${t.bg};--paper:${t.paper};--ink:${t.ink};--muted:${t.muted};--line:${t.line};--gold:${t.brand};--gold2:${t.acl};--navy:${t.brand};--accent:${t.brand};--logo:${t.brand}}
+:root,body.inv{--cream:${t.bg};--paper:${t.paper};--ink:${t.ink};--muted:${t.muted};--line:${t.line};--gold:${t.brand};--gold2:${t.acl};--navy:${t.brand};--accent:${t.brand};--logo:${t.logo}}
 body,body.inv{background:${t.bg};color:${t.ink}}
 header.top,body.inv header.top{background:${t.bg}ee;border-color:${t.line}}
 nav.main a:hover,nav.main button:hover{background:${t.tint}}
