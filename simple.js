@@ -53,7 +53,7 @@ async function showGallery(cat){await loadSimple();curCat=cat||'all';const ch=$(
 let CUR=null;
 async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.slug===slug);if(!card){location.hash='#simple';return}
  $('#sGallery').style.display='none';$('#sCard').style.display='';$('#sName').textContent=card.name;$('#sBack').href=curCat&&curCat!=='all'?'#simple-'+curCat:'#simple';
- const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
+ SZ=1;$('#sZoomBox').classList.remove('zoomed');$('#sCanvas').style.width='';$('#sZoom span').textContent='100%';const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
  const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>{const c=f=>{const p=f.position_config||{};return (p.y||0)+(p.height||0)/2};return c(a)-c(b)}).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
   const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=String(values[f.id]).replace(/\+/g,'');ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
   if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);
@@ -65,7 +65,10 @@ async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.s
    row.appendChild(sz);form.appendChild(row)}});
  await draw();scrollTo(0,0)}
 let qT=0;function queue(){clearTimeout(qT);qT=setTimeout(draw,120)}
-async function draw(){if(!CUR)return;const c=$('#sCanvas');const s=Math.min(2,900/CUR.card.w);await renderCard(c,CUR.card,CUR.fields,CUR.values,s)}
+let SZ=1;
+function setSZ(z){z=Math.max(1,Math.min(4,Math.round(z*100)/100));const box=$('#sZoomBox'),sc=$('#sScroll'),c=$('#sCanvas');const fx=(sc.scrollLeft+sc.clientWidth/2)/Math.max(1,sc.scrollWidth),fy=(sc.scrollTop+sc.clientHeight/2)/Math.max(1,sc.scrollHeight);SZ=z;$('#sZoom span').textContent=Math.round(z*100)+'%';box.classList.toggle('zoomed',z>1);c.style.width=z>1?(z*100)+'%':'';draw().then(()=>{sc.scrollLeft=fx*sc.scrollWidth-sc.clientWidth/2;sc.scrollTop=fy*sc.scrollHeight-sc.clientHeight/2})}
+document.addEventListener('click',e=>{const z=e.target.closest('#sZoom');if(!z)return;const b=e.target.closest('button');if(b)setSZ(SZ*(b.dataset.z==='+'?1.25:.8));else if(e.target.tagName==='SPAN')setSZ(1)});
+async function draw(){if(!CUR)return;const c=$('#sCanvas');const s=Math.min(2,900/CUR.card.w)*Math.min(2,SZ);await renderCard(c,CUR.card,CUR.fields,CUR.values,s)}
 async function download(){const c=document.createElement('canvas');await renderCard(c,CUR.card,CUR.fields,CUR.values,1600/CUR.card.w);c.toBlob(b=>window.offerFile(b,CUR.card.slug+'-invitation.png'),'image/png')}
 
 /* "Edit more": hand the filled-in design to the Custom editor */

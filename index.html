@@ -127,13 +127,18 @@ label.f{display:block;font-weight:700;font-size:13px;margin:10px 0 4px;color:var
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;z-index:120;font-weight:600;opacity:0;transition:.25s;pointer-events:none;max-width:90vw;text-align:center}
 .toast.on{opacity:1}
 /* editor */
-#editor{position:fixed;inset:0;z-index:60;background:#ECE6DA;display:none;flex-direction:column}
+#editor{position:fixed;inset:0;z-index:60;background:#E9EBEF;display:none;flex-direction:column}
 #editor.on{display:flex}
 .etop{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;flex-shrink:0}
 .etop button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-weight:700;font-size:14px;white-space:nowrap}
 .etop button.pri{background:#605643;color:#fff;border-color:#605643}
 .etop button.gold{background:#2d4939;color:#fff;border-color:#2d4939}
 .estage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:10px;position:relative}
+.zbar{position:absolute;top:10px;right:10px;z-index:5;display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.15);overflow:hidden}
+.zbar button{border:0;background:none;width:40px;height:38px;font:700 22px system-ui,sans-serif;color:var(--ink);cursor:pointer}.zbar button:active{background:var(--line)}
+.zbar span{min-width:52px;text-align:center;font:700 13px system-ui,sans-serif;cursor:pointer;font-variant-numeric:tabular-nums}
+.escroll{position:absolute;inset:0;padding:inherit;display:flex;align-items:center;justify-content:center}.escroll.zoomed{overflow:auto;align-items:safe center;justify-content:safe center}.escroll.zoomed #cv{max-width:none;max-height:none;flex:none;margin:auto}
+.szoom{position:relative}.szoom .zbar{top:10px;right:10px}.szoom .sscroll{overflow:auto;border-radius:6px;max-height:80vh}.szoom.zoomed #sCanvas{max-width:none}
 #cv{max-width:100%;max-height:100%;box-shadow:0 10px 30px rgba(0,0,0,.18);touch-action:none;background:#fff;border-radius:4px}
 .ebody{display:flex;flex:1;min-height:0}
 .epanel{width:380px;background:var(--paper);border-inline-start:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
@@ -342,7 +347,7 @@ input[type=range]{padding:0;border:0;background:none}
   <div id="sCard" style="display:none">
     <div class="catHead"><a id="sBack" href="#simple" class="btn ghost sm">←</a><h2 id="sName"></h2></div>
     <div class="two" style="align-items:start">
-      <div><canvas id="sCanvas"></canvas></div>
+      <div class="szoom" id="sZoomBox"><div class="sscroll" id="sScroll"><canvas id="sCanvas"></canvas></div><div class="zbar" id="sZoom"><button type="button" data-z="-" aria-label="Zoom out">−</button><span>100%</span><button type="button" data-z="+" aria-label="Zoom in">+</button></div></div>
       <div class="card">
         <b>Your details</b><p class="hint">Change any line. The preview updates as you type.</p>
         <div id="sForm"></div>
@@ -368,7 +373,7 @@ input[type=range]{padding:0;border:0;background:none}
     <button id="eDown" class="pri">⬇ <span data-i="download">Download</span></button>
   </div>
   <div class="ebody">
-    <div class="estage" id="stage"><canvas id="cv" width="1080" height="1350"></canvas><p class="hint" style="position:absolute;bottom:2px;left:0;right:0;text-align:center;margin:0">Tap words to change them · drag to move</p></div>
+    <div class="estage" id="stage"><div class="escroll" id="eScroll"><canvas id="cv" width="1080" height="1350"></canvas></div><div class="zbar" id="eZoom"><button type="button" data-z="-" aria-label="Zoom out">−</button><span>100%</span><button type="button" data-z="+" aria-label="Zoom in">+</button></div><p class="hint" style="position:absolute;bottom:2px;left:0;right:0;text-align:center;margin:0">Tap words to change them · drag to move</p></div>
     <div class="epanel">
       <div class="etabs" id="etabs">
         <button data-t="bg" class="on" data-i="tb_bg">Background</button>
@@ -797,7 +802,7 @@ addEventListener('hashchange',route);
 function snap(){HIST.push(JSON.stringify(D));if(HIST.length>80)HIST.shift();FUT=[]}
 function undo(){if(!HIST.length)return;FUT.push(JSON.stringify(D));D=JSON.parse(HIST.pop());SEL=-1;draw();renderPanel()}
 function redo(){if(!FUT.length)return;HIST.push(JSON.stringify(D));D=JSON.parse(FUT.pop());SEL=-1;draw();renderPanel()}
-async function openEditor(d){D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
+async function openEditor(d){try{setEZ(1)}catch(e){}D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
  const fonts=[...new Set(D.objs.filter(o=>o.t==='text').map(o=>o.font))];await Promise.all(fonts.map(f=>loadFont(f)));draw();setTab('bg')}
 $('#eClose').onclick=()=>{$('#editor').classList.remove('on');document.body.style.overflow='';$('#kbd').classList.remove('on')};
 $('#eUndo').onclick=undo;$('#eRedo').onclick=redo;
@@ -888,16 +893,21 @@ const ptrs=new Map();let drag=null;
 function toDesign(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*EH/r.height}}
 function hit(p){for(let i=D.objs.length-1;i>=0;i--){const o=D.objs[i];if(!o._bb)continue;const a=-(o.rot||0)*Math.PI/180,dx=p.x-o.x,dy=p.y-o.y,lx=dx*Math.cos(a)-dy*Math.sin(a),ly=dx*Math.sin(a)+dy*Math.cos(a);const pad=20;
  let bw=o._bb.w/2+pad,bh=o._bb.h/2+pad;if(o.t==='el'&&o.ch.includes('frame')){if(Math.abs(lx)<bw&&Math.abs(ly)<bh&&(Math.abs(lx)>bw-70||Math.abs(ly)>bh-70))return i;continue}if(Math.abs(lx)<bw&&Math.abs(ly)<bh)return i}return -1}
+let EZ=1,EZbase=0;const stg=$('#eScroll');
+function setEZ(z,cx,cy){z=clamp(Math.round(z*100)/100,1,4);if(z===EZ)return;if(EZ===1)EZbase=cv.getBoundingClientRect().width;const r=stg.getBoundingClientRect(),fx=cx??r.left+r.width/2,fy=cy??r.top+r.height/2;const cr=cv.getBoundingClientRect(),rx=(fx-cr.left)/cr.width,ry=(fy-cr.top)/cr.height;EZ=z;$('#eZoom span').textContent=Math.round(z*100)+'%';
+ if(z===1){stg.classList.remove('zoomed');cv.style.width='';cv.style.height='';return}stg.classList.add('zoomed');cv.style.width=EZbase*z+'px';cv.style.height='auto';const nr=cv.getBoundingClientRect();stg.scrollLeft+=nr.left+rx*nr.width-fx;stg.scrollTop+=nr.top+ry*nr.height-fy}
+$('#eZoom').onclick=e=>{const b=e.target.closest('button');if(b)setEZ(EZ*(b.dataset.z==='+'?1.25:.8));else if(e.target.tagName==='SPAN')setEZ(1)};
 cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);const p=toDesign(e);ptrs.set(e.pointerId,p);
+ if(ptrs.size===2&&SEL<0){const [a,b]=[...ptrs.values()];drag={vz:1,d0:Math.hypot(a.x-b.x,a.y-b.y)*(cv.getBoundingClientRect().width/W),z0:EZ};return}
  if(ptrs.size===2&&SEL>=0){const [a,b]=[...ptrs.values()],o=selObj();drag={pinch:1,d0:Math.hypot(a.x-b.x,a.y-b.y),a0:Math.atan2(b.y-a.y,b.x-a.x),s0:o.size,r0:o.rot||0};return}
- const i=hit(p);const was=SEL;SEL=i;if(i>=0){const o=D.objs[i];drag={i,ox:o.x-p.x,oy:o.y-p.y,moved:false,was,snapped:false,start:p}}else drag=null;draw();
+ const i=hit(p);const was=SEL;SEL=i;if(i>=0){const o=D.objs[i];drag={i,ox:o.x-p.x,oy:o.y-p.y,moved:false,was,snapped:false,start:p}}else drag=EZ>1?{pan:1,sx:e.clientX,sy:e.clientY,sl:stg.scrollLeft,st:stg.scrollTop}:null;draw();
  if(i!==was){const o=selObj();if(o){const t=o.t==='text'?'text':o.t==='el'?'el':'photo';if(TAB!=='ready'||o.t!=='text')setTab(t);else renderPanel()}else renderPanel()}});
-cv.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const p=toDesign(e);ptrs.set(e.pointerId,p);if(!drag)return;const o=selObj();if(!o)return;
+cv.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const p=toDesign(e);ptrs.set(e.pointerId,p);if(!drag)return;if(drag.pan){stg.scrollLeft=drag.sl-(e.clientX-drag.sx);stg.scrollTop=drag.st-(e.clientY-drag.sy);return}if(drag.vz){if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y)*(cv.getBoundingClientRect().width/W);setEZ(drag.z0*d/drag.d0)}return}const o=selObj();if(!o)return;
  if(drag.pinch&&ptrs.size===2){const [a,b]=[...ptrs.values()];if(!drag.snapped){snap();drag.snapped=true}const d=Math.hypot(a.x-b.x,a.y-b.y);o.size=clamp(drag.s0*d/drag.d0,12,1400);o.rot=Math.round(drag.r0+(Math.atan2(b.y-a.y,b.x-a.x)-drag.a0)*180/Math.PI);draw();return}
  if(Math.hypot(p.x-drag.start.x,p.y-drag.start.y)>6){if(!drag.snapped){snap();drag.snapped=true}drag.moved=true;let nx=p.x+drag.ox,ny=p.y+drag.oy;if(Math.abs(nx-540)<14)nx=540;o.x=nx;o.y=ny;draw()}});
 const endPtr=e=>{ptrs.delete(e.pointerId);if(drag&&!drag.pinch&&!drag.moved&&drag.was===drag.i){const o=selObj();if(o&&o.t==='text'){setTab('text');setTimeout(()=>{const t=$('#tTxt');if(t){t.focus();t.select()}},30)}}if(!ptrs.size)drag=null};
 cv.addEventListener('pointerup',endPtr);cv.addEventListener('pointercancel',endPtr);
-cv.addEventListener('wheel',e=>{const o=selObj();if(!o)return;e.preventDefault();o.size=clamp(o.size*(e.deltaY<0?1.05:.95),12,1400);draw()},{passive:false});
+cv.addEventListener('wheel',e=>{const o=selObj();if(!o||e.ctrlKey){e.preventDefault();setEZ(EZ*(e.deltaY<0?1.1:.9),e.clientX,e.clientY);return}e.preventDefault();o.size=clamp(o.size*(e.deltaY<0?1.05:.95),12,1400);draw()},{passive:false});
 addEventListener('keydown',e=>{if(!$('#editor').classList.contains('on'))return;const tag=document.activeElement.tagName;if(tag==='TEXTAREA'||tag==='INPUT')return;
  if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();e.shiftKey?redo():undo()}else if((e.key==='Delete'||e.key==='Backspace')&&SEL>=0){snap();D.objs.splice(SEL,1);SEL=-1;draw();renderPanel()}
  else if(SEL>=0&&e.key.startsWith('Arrow')){const o=selObj(),s=e.shiftKey?20:4;if(e.key==='ArrowLeft')o.x-=s;if(e.key==='ArrowRight')o.x+=s;if(e.key==='ArrowUp')o.y-=s;if(e.key==='ArrowDown')o.y+=s;draw()}});
