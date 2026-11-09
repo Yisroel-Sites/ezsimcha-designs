@@ -57,6 +57,10 @@ module.exports = async (req, res) => {
       let rec = await L.getJ(key);
       if (!rec) { rec = { first: Date.now(), kind: s.metadata.kind, tier: s.metadata.tier }; await L.putJ(key, rec); }
       if (Date.now() - rec.first > VALID_MS) return L.send(res, 410, { error: 'expired' });
+      // One paid session can be confirmed only a few times, so a shared link can't unlock downloads for everyone.
+      rec.v = (rec.v || 0) + 1;
+      if (rec.v > 4) return L.send(res, 429, { error: 'used_up' });
+      await L.putJ(key, rec);
       return L.send(res, 200, { ok: 1, kind: rec.kind, tier: rec.tier });
     }
     return L.send(res, 400, { error: 'bad_op' });
