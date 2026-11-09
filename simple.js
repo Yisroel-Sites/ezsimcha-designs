@@ -53,9 +53,10 @@ async function showGallery(cat){await loadSimple();curCat=cat||'all';const ch=$(
 let CUR=null;
 async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.slug===slug);if(!card){location.hash='#simple';return}
  $('#sGallery').style.display='none';$('#sCard').style.display='';$('#sName').textContent=card.name;$('#sBack').href=curCat&&curCat!=='all'?'#simple-'+curCat:'#simple';
- const fields=await loadFields(card.id);const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
+ const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
  const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>(a.display_order||0)-(b.display_order||0)).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
-  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=values[f.id];ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta)});
+  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=values[f.id];ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
+  if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);form.appendChild(fb)}});
  await draw();scrollTo(0,0)}
 let qT=0;function queue(){clearTimeout(qT);qT=setTimeout(draw,120)}
 async function draw(){if(!CUR)return;const c=$('#sCanvas');const s=Math.min(2,900/CUR.card.w);await renderCard(c,CUR.card,CUR.fields,CUR.values,s)}
@@ -77,4 +78,35 @@ function route(){const h=location.hash.slice(1);const on=h==='simple'||h.startsW
 window.addEventListener('hashchange',route);
 document.addEventListener('DOMContentLoaded',()=>{$('#sMore').onclick=more;$('#sSearch').oninput=e=>{curQ=e.target.value;renderGallery()};$('#sDown').onclick=download;$('#sEdit').onclick=toCustom;route()});
 if(document.readyState!=='loading'){setTimeout(()=>{$('#sMore').onclick=more;$('#sSearch').oninput=e=>{curQ=e.target.value;renderGallery()};$('#sDown').onclick=download;$('#sEdit').onclick=toCustom;route()},0)}
+
+
+/* ---- font changer ---- */
+(function(){const st=document.createElement('style');st.textContent=`
+.fontbtn{display:block;margin:-2px 0 14px;padding:7px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:inherit;font:inherit;font-size:13px;cursor:pointer}
+.fontbtn span{font-family:Georgia,serif;font-weight:700;margin-right:4px}
+#mFont .sheet{max-width:560px}
+#fList{display:grid;gap:8px;margin-top:6px}
+#mFont #fAll{width:20px;height:20px;flex:none;margin:0}
+#mFont label{justify-content:flex-start}
+.fopt{display:block;width:100%;text-align:start;padding:10px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:inherit;cursor:pointer}
+.fopt.on{border-color:#0B3D91;box-shadow:0 0 0 2px #8FB0EA}
+.fopt small{display:block;font:12px Manrope,sans-serif;color:var(--muted);margin-bottom:2px}
+.fopt .pv{font-size:26px;line-height:1.3;word-break:break-word}
+`;document.head.appendChild(st)})();
+let fontIO=null;
+function openFontPicker(f,ta){
+ let m=document.getElementById('mFont');
+ if(!m){m=document.createElement('div');m.className='modal';m.id='mFont';
+  m.innerHTML='<div class="sheet"><h3><span>Choose a font</span><button class="x" type="button" aria-label="Close">×</button></h3><input id="fSearch" placeholder="Search fonts" style="width:100%;margin-bottom:8px"><label style="display:flex;gap:8px;align-items:center;margin:4px 0 8px;font-size:14px"><input type="checkbox" id="fAll"> Use this font for all lines</label><div id="fList"></div></div>';
+  document.body.appendChild(m);m.querySelector('.x').onclick=()=>m.classList.remove('on');m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on')})}
+ const list=m.querySelector('#fList'),search=m.querySelector('#fSearch'),all=m.querySelector('#fAll');all.checked=false;search.value='';
+ const cur=(f.style_config||{}).font_family||'Arial';
+ const sample=()=>{const t=String(ta.value||'').split('\n')[0].trim().slice(0,40);return t||'Aa בראשית'};
+ const names=Object.keys(SD.fonts).sort((a,b)=>a.localeCompare(b,undefined,{sensitivity:'base'}));
+ const order=[cur,...names.filter(n=>n!==cur)];
+ if(fontIO)fontIO.disconnect();
+ fontIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){fontIO.unobserve(e.target);loadFamily(e.target.dataset.f).then(()=>{e.target.querySelector('.pv').style.fontFamily='"'+e.target.dataset.f+'"'})}}),{root:m.querySelector('.sheet'),rootMargin:'300px'});
+ const apply=async fam=>{const targets=all.checked?CUR.fields.filter(x=>x.field_type!=='image'&&isText(x)):[f];targets.forEach(x=>{x.style_config=x.style_config||{};x.style_config.font_family=fam;if(x._lbl)x._lbl()});await loadFamily(fam);m.classList.remove('on');draw()};
+ const render=()=>{const q=search.value.trim().toLowerCase();list.innerHTML='';fontIO.disconnect();order.filter(n=>!q||n.toLowerCase().includes(q)).forEach(n=>{const b=document.createElement('button');b.type='button';b.className='fopt'+(n===cur?' on':'');b.dataset.f=n;b.innerHTML='<small></small><div class="pv"></div>';b.querySelector('small').textContent=n+(n===cur?' (current)':'');b.querySelector('.pv').textContent=sample();b.onclick=()=>apply(n);list.appendChild(b);fontIO.observe(b)})};
+ search.oninput=render;render();m.classList.add('on');m.querySelector('.sheet').scrollTop=0}
 })();
