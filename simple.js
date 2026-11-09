@@ -54,8 +54,8 @@ let CUR=null;
 async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.slug===slug);if(!card){location.hash='#simple';return}
  $('#sGallery').style.display='none';$('#sCard').style.display='';$('#sName').textContent=card.name;$('#sBack').href=curCat&&curCat!=='all'?'#simple-'+curCat:'#simple';
  const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
- const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>(a.display_order||0)-(b.display_order||0)).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
-  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=values[f.id];ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
+ const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>{const c=f=>{const p=f.position_config||{};return (p.y||0)+(p.height||0)/2};return c(a)-c(b)}).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
+  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=String(values[f.id]).replace(/\+/g,'');ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
   if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);form.appendChild(fb)}});
  await draw();scrollTo(0,0)}
 let qT=0;function queue(){clearTimeout(qT);qT=setTimeout(draw,120)}
