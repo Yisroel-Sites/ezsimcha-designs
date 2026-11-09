@@ -13,6 +13,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script src="ezdata.js"></script>
 <script src="gen.js"></script>
+<script>
+/* invitely.com marks: small one on every downloaded file, tiled one over previews while browsing */
+window.stampMark=function(ctx,w,h){const fs=Math.max(10,Math.round(w*.016));ctx.save();ctx.translate(Math.max(fs*.9,w*.022),h*.87);ctx.rotate(-Math.PI/2);ctx.font=`600 ${fs}px Manrope,system-ui,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.globalAlpha=.7;ctx.lineWidth=Math.max(1,fs*.18);ctx.strokeStyle='rgba(0,0,0,.45)';ctx.strokeText('invitely.com',0,0);ctx.fillStyle='#fff';ctx.fillText('invitely.com',0,0);ctx.restore()};
+document.addEventListener('contextmenu',e=>{if(e.target.closest('canvas,.tpl,#sScroll,#stage,img'))e.preventDefault()});
+document.addEventListener('dragstart',e=>{if(e.target.closest('canvas,img'))e.preventDefault()});
+</script>
 <script src="backend.js"></script>
 <style>
 :root{--cream:#fff0d1;--paper:#FFFFFF;--ink:#2E2216;--muted:#76634D;--gold:#605643;--gold2:#E7C873;--navy:#2d4939;--line:#E7D9BD;--accent:#605643;--logo:#1252B8;--r:16px}
@@ -190,6 +196,10 @@ input[type=range]{padding:0;border:0;background:none}
 .catHead h2{margin:0;font-family:"Playfair Display",serif;font-size:32px}
 .catHead .he{font-family:"Frank Ruhl Libre",serif;color:var(--accent);font-size:28px}
 .filters{margin-inline-start:auto}
+
+.tpl::after,#sZoomBox::after,#stage::after,.wmk::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27170%27%20height%3D%27120%27%3E%3Ctext%20x%3D%2785%27%20y%3D%2764%27%20transform%3D%27rotate%28-28%2085%2060%29%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2717%27%20font-weight%3D%27700%27%20fill%3D%27white%27%20fill-opacity%3D%27.5%27%20stroke%3D%27black%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%27.8%27%3Einvitely.com%3C/text%3E%3C/svg%3E");background-size:150px auto}
+
+canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 </style>
 <script src="theme.js"></script>
 </head>
@@ -936,7 +946,7 @@ function cap(n){if(!CAP[n])CAP[n]=(window.INV&&INV.use?INV.use(n):window.claude&
 function exportPNG(){const c=document.createElement('canvas');c.width=W;c.height=EH;renderDesign(c.getContext('2d'),D,W,EH,-1);return c}
 async function offerFile(blob,filename,kind){const dl=await cap('downloads');if(dl){try{await dl.save({filename,data:blob});toast('Saved ✔');return}catch(e){if(e&&e.code==='declined')return}}
  const url=URL.createObjectURL(blob);if(!window.claude){const l=document.createElement('a');l.href=url;l.download=filename;document.body.appendChild(l);l.click();l.remove();toast('Downloaded ✔');return}if(kind==='video'){$('#imgOut').style.display='none';const v=$('#vidOut');v.style.display='';v.src=url}else{$('#vidOut').style.display='none';const i=$('#imgOut');i.style.display='';i.src=url}openM('mImg')}
-$('#eDown').onclick=()=>{SEL=-1;draw();exportPNG().toBlob(b=>offerFile(b,`${CAT[curCat]?.slug||'simcha'}-invitation.png`),'image/png')};
+$('#eDown').onclick=()=>{SEL=-1;draw();(c=>{stampMark(c.getContext('2d'),c.width,c.height);return c})(exportPNG()).toBlob(b=>offerFile(b,`${CAT[curCat]?.slug||'simcha'}-invitation.png`),'image/png')};
 function localDesigns(){try{return JSON.parse(localStorage.getItem('ez_designs')||'[]')}catch(e){return[]}}
 async function saveDesign(){const id=D.id||('d'+Date.now().toString(36));D.id=id;const rec={id,cat:curCat,at:Date.now(),design:JSON.stringify(D)};
  const u=await cap('user'),db=await cap('db');const uid=u&&await u.id();
@@ -1073,7 +1083,7 @@ $('#eVideo').onclick=()=>{$('#kbd').classList.remove('on');SEL=-1;draw();buildVi
 $('#vPlay').onclick=()=>playPreview(true);
 $('#vUp').onchange=async e=>{const f=e.target.files[0];if(!f)return;UPRAW=await f.arrayBuffer();VS=99;$('#vUpN').textContent=' '+f.name;buildVideoUI();playPreview(true)};
 $('#vRec').onclick=async()=>{if(typeof MediaRecorder==='undefined'){$('#vStatus').textContent='Video recording is not supported in this browser.';return}stopPreview();
- const vc=$('#vcv'),ctx=vc.getContext('2d'),img=designImage(vc.width,vc.height);const stream=vc.captureStream(30);let ac=null;
+ const vc=$('#vcv'),ctx=vc.getContext('2d'),img=designImage(vc.width,vc.height);stampMark(img.getContext('2d'),img.width,img.height);const stream=vc.captureStream(30);let ac=null;
  if(VS>=0){try{ac=new AudioContext();const dst=ac.createMediaStreamDestination();scheduleSong(ac,dst,VS,ac.currentTime+.1,VD);dst.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}catch(e){}}
  const types=['video/mp4;codecs=avc1,mp4a','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];const mt=types.find(t=>MediaRecorder.isTypeSupported(t))||'';const rec=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:5e6}:{});const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
  const btn=$('#vRec');btn.disabled=true;rec.start(250);const t0=performance.now();

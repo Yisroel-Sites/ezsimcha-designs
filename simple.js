@@ -70,7 +70,7 @@ let SZ=1;
 function setSZ(z){z=Math.max(1,Math.min(4,Math.round(z*100)/100));const box=$('#sZoomBox'),sc=$('#sScroll'),c=$('#sCanvas');const fx=(sc.scrollLeft+sc.clientWidth/2)/Math.max(1,sc.scrollWidth),fy=(sc.scrollTop+sc.clientHeight/2)/Math.max(1,sc.scrollHeight);SZ=z;$('#sZoom span').textContent=Math.round(z*100)+'%';box.classList.toggle('zoomed',z>1);c.style.width=z>1?(z*100)+'%':'';draw().then(()=>{sc.scrollLeft=fx*sc.scrollWidth-sc.clientWidth/2;sc.scrollTop=fy*sc.scrollHeight-sc.clientHeight/2})}
 document.addEventListener('click',e=>{const z=e.target.closest('#sZoom');if(!z)return;const b=e.target.closest('button');if(b)setSZ(SZ*(b.dataset.z==='+'?1.25:.8));else if(e.target.tagName==='SPAN')setSZ(1)});
 async function draw(){if(!CUR)return;const c=$('#sCanvas');const s=Math.min(2,900/CUR.card.w)*Math.min(2,SZ);await renderCard(c,CUR.card,CUR.fields,CUR.values,s)}
-async function download(){const c=document.createElement('canvas');await renderCard(c,CUR.card,CUR.fields,CUR.values,1600/CUR.card.w);c.toBlob(b=>window.offerFile(b,CUR.card.slug+'-invitation.png'),'image/png')}
+async function download(){const c=document.createElement('canvas');await renderCard(c,CUR.card,CUR.fields,CUR.values,1600/CUR.card.w);window.stampMark&&stampMark(c.getContext('2d'),c.width,c.height);c.toBlob(b=>window.offerFile(b,CUR.card.slug+'-invitation.png'),'image/png')}
 
 /* "Edit more": hand the filled-in design to the Custom editor */
 async function toCustom(){const {card,fields,values}=CUR;const s=1080/card.w,H=Math.round(card.h*s);await loadFonts(fields);const m=document.createElement('canvas').getContext('2d');const objs=[];
