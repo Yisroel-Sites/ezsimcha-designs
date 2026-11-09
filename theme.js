@@ -75,11 +75,11 @@ footer{background:${t.deep};color:rgba(255,255,255,.8);border-top:0;margin-top:0
     const t = T.find(x => x.id === id) || T.find(x => x.id === DEF); if (!T.find(x => x.id === id)) id = DEF; cur = t.id;
     st.textContent = css(t);
     const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t.brand;
-    try { localStorage.setItem('inv_theme', t.id) } catch (e) {}
+    try { localStorage.setItem('inv_theme2', t.id) } catch (e) {}
     document.querySelectorAll('.thOpt').forEach(b => b.classList.toggle('on', b.dataset.id === t.id));
   }
-  const DEF = 'emerald';
-  let cur = DEF, saved = null; try { saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('inv_theme') } catch (e) {}
+  const DEF = 'electric';
+  let cur = DEF, saved = null; try { saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('inv_theme2') } catch (e) {}
   apply(saved || DEF);
 
   document.addEventListener('DOMContentLoaded', () => {
