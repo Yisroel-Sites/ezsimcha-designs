@@ -25,8 +25,9 @@
 <script src="ezdata.js"></script>
 <script src="gen.js"></script>
 <script>
-/* invitely.com marks: small one on every downloaded file, tiled one over previews while browsing */
-window.stampMark=function(ctx,w,h){const fs=Math.max(10,Math.round(w*.016));ctx.save();ctx.translate(Math.max(fs*.9,w*.022),h*.87);ctx.rotate(-Math.PI/2);ctx.font=`600 ${fs}px Manrope,system-ui,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.globalAlpha=.7;ctx.lineWidth=Math.max(1,fs*.18);ctx.strokeStyle='rgba(0,0,0,.45)';ctx.strokeText('invitely.com',0,0);ctx.fillStyle='#fff';ctx.fillText('invitely.com',0,0);ctx.restore()};
+/* Site stamp: small and only on FREE downloads. Paid downloads (window.PAID_RUN) get no stamp. Change STAMP_TEXT when you have your own domain. */
+window.STAMP_TEXT='invitely-com.vercel.app';window.PAID_RUN=false;
+window.stampMark=function(ctx,w,h){if(window.PAID_RUN||!window.STAMP_TEXT)return;const fs=Math.max(10,Math.round(w*.014));ctx.save();ctx.translate(Math.max(fs*.9,w*.02),h*.84);ctx.rotate(-Math.PI/2);ctx.font=`600 ${fs}px Manrope,system-ui,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.globalAlpha=.65;ctx.lineWidth=Math.max(1,fs*.18);ctx.strokeStyle='rgba(0,0,0,.45)';ctx.strokeText(STAMP_TEXT,0,0);ctx.fillStyle='#fff';ctx.fillText(STAMP_TEXT,0,0);ctx.restore()};
 document.addEventListener('contextmenu',e=>{if(e.target.closest('canvas,.tpl,#sScroll,#stage,img'))e.preventDefault()});
 document.addEventListener('dragstart',e=>{if(e.target.closest('canvas,img'))e.preventDefault()});
 </script>
@@ -208,6 +209,7 @@ input[type=range]{padding:0;border:0;background:none}
 .catHead .he{font-family:"Frank Ruhl Libre",serif;color:var(--accent);font-size:28px}
 .filters{margin-inline-start:auto}
 
+#stage.paidok::after{display:none}
 .tpl::after,#sZoomBox::after,#stage::after,.wmk::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27170%27%20height%3D%27120%27%3E%3Ctext%20x%3D%2785%27%20y%3D%2764%27%20transform%3D%27rotate%28-28%2085%2060%29%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2717%27%20font-weight%3D%27700%27%20fill%3D%27white%27%20fill-opacity%3D%27.5%27%20stroke%3D%27black%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%27.8%27%3Einvitely.com%3C/text%3E%3C/svg%3E");background-size:150px auto}
 
 canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
@@ -546,7 +548,7 @@ const GEN=window.EZ_GEN||{list:[],pal:[]};const GENBY=Object.fromEntries(GEN.lis
 const PLAIN=(window.EZD&&EZD.plain)||[['#ffffff','White'],['#FBF5E8','Cream'],['#E3EDFF','Light Blue'],['#1B4FD8','Blue'],['#0E2563','Navy'],['#FF841A','Orange'],['#111111','Black'],['#F8E1DA','Blush']];
 const packP={};function packURL(path){const e=BGPACK[path];if(!e)return Promise.resolve(path);const [n,off,len]=e;const f='packs/p'+String(n).padStart(3,'0')+'.jpg';if(!packP[f])packP[f]=fetch(f).then(r=>{if(!r.ok)throw 0;return r.blob()}).catch(()=>{delete packP[f];return null});return packP[f].then(b=>b?URL.createObjectURL(new Blob([b.slice(off,off+len)],{type:'image/jpeg'})):null)}
 function packedImage(path,onload){const i=new Image();i.onload=onload;packURL(path).then(u=>{if(u)i.src=u});return i}
-const bgImgs={};function bgImg(src){if(!bgImgs[src]){bgImgs[src]=packedImage(src,()=>{draw();thumbRedraw()})}return bgImgs[src]}
+window.FULLART={};const bgImgs={};function bgImg(src){if(FULLART[src])return FULLART[src];if(!bgImgs[src]){bgImgs[src]=packedImage(src,()=>{draw();thumbRedraw()})}return bgImgs[src]}
 function drawBg(ctx,w,h,bg){
  if(bg.img){const im=bgImg(bg.img);if(ctx.canvas)ctx.canvas._hasSv=true;if(im.complete&&im.naturalWidth){const ir=im.naturalWidth/im.naturalHeight,tr=w/h;let sw=im.naturalWidth,sh=im.naturalHeight,sx=0,sy=0;if(ir>tr){sw=sh*tr;sx=(im.naturalWidth-sw)/2}else{sh=sw/tr;sy=(im.naturalHeight-sh)/2}ctx.drawImage(im,sx,sy,sw,sh,0,0,w,h);return}return drawBg(ctx,w,h,bg.fb||{p:0,s:1})}
  if(bg.gen){const g=GENBY[bg.gen];if(g){ctx.save();ctx.scale(w/1080,h/1350);GEN.draw(ctx,g);ctx.restore();return}}
@@ -828,7 +830,7 @@ addEventListener('hashchange',route);
 function snap(){HIST.push(JSON.stringify(D));if(HIST.length>80)HIST.shift();FUT=[]}
 function undo(){if(!HIST.length)return;FUT.push(JSON.stringify(D));D=JSON.parse(HIST.pop());SEL=-1;draw();renderPanel()}
 function redo(){if(!FUT.length)return;HIST.push(JSON.stringify(D));D=JSON.parse(FUT.pop());SEL=-1;draw();renderPanel()}
-async function openEditor(d){try{setEZ(1)}catch(e){}D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
+async function openEditor(d){try{setEZ(1)}catch(e){}document.getElementById('stage').classList.remove('paidok');D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
  const fonts=[...new Set(D.objs.filter(o=>o.t==='text').map(o=>o.font))];await Promise.all(fonts.map(f=>loadFont(f)));draw();setTab('bg')}
 $('#eClose').onclick=()=>{$('#editor').classList.remove('on');document.body.style.overflow='';$('#kbd').classList.remove('on')};
 $('#eUndo').onclick=undo;$('#eRedo').onclick=redo;

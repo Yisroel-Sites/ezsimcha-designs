@@ -8,8 +8,19 @@
   const status = () => ST || (ST = post({ op: 'status' }).catch(() => ({ configured: false, founder: false })));
   const money = c => '$' + (c % 100 ? (c / 100).toFixed(2) : c / 100);
   const level = () => (typeof D !== 'undefined' && D && RANK[D.tier]) ? D.tier : 'free';
-  const getCredit = () => { try { return JSON.parse(localStorage.getItem('inv_credit') || 'null') } catch (e) { return null } };
-  const setCredit = c => { try { c ? localStorage.setItem('inv_credit', JSON.stringify(c)) : localStorage.removeItem('inv_credit') } catch (e) {} };
+  const getCredit = () => { try { return localStorage.getItem('inv_credit2') || '' } catch (e) { return '' } };
+  const setCredit = c => { try { c ? localStorage.setItem('inv_credit2', c) : localStorage.removeItem('inv_credit2'); localStorage.removeItem('inv_credit') } catch (e) {} };
+  const artOf = () => (typeof D !== 'undefined' && D && D.bg && D.bg.img) ? [D.bg.img] : [];
+  function loadFull(grants) {
+    window.FULLART = window.FULLART || {};
+    return Promise.all(Object.entries(grants || {}).map(([p, g]) => FULLART[p] ? null : new Promise(r => {
+      const i = new Image(); i.onload = () => { FULLART[p] = i; r() }; i.onerror = r; i.src = '/full/' + p + '?g=' + encodeURIComponent(g);
+    })));
+  }
+  async function paidRun(run) {
+    window.PAID_RUN = true; document.getElementById('stage')?.classList.add('paidok');
+    try { if (typeof draw === 'function') draw(); await run(); } finally { setTimeout(() => { window.PAID_RUN = false }, 15000) }
+  }
 
   function modal(html) {
     let m = document.getElementById('mPay');
@@ -19,17 +30,24 @@
   }
 
   async function gate(kind, run) {
-    const lvl = level();
-    if (lvl === 'free') return run();
-    const st = await status();
-    if (!st.configured || st.founder) return run();
-    const cr = getCredit();
-    if (cr && cr.kind === kind && RANK[cr.tier] >= RANK[lvl] && cr.uses > 0 && Date.now() - cr.at < 47 * 3600e3) {
-      cr.uses--; setCredit(cr.uses > 0 ? cr : null); return run();
+    const lvl = level(), art = artOf();
+    if (lvl === 'free' && !art.length) { window.PAID_RUN = false; return run() }
+    let r;
+    try { r = await post({ op: 'use', kind, tier: lvl, art, credit: getCredit() }) }
+    catch (e) {
+      if (e.code === 'need_pay' || e.code === 'used_up' || e.code === 'expired') return askPay(kind, lvl === 'free' ? 'premium' : lvl, e.code);
+      return (window.toast || alert)('Could not reach the server. Please check your connection and try again.');
     }
-    const price = st.prices[kind][lvl];
-    const m = modal(`<div style="font-size:40px;line-height:1">${lvl === 'pro' ? '💎' : '👑'}</div>
-      <h3 style="justify-content:center;margin:8px 0 4px">${NAME[lvl]} design</h3>
+    if (!r.paid) { window.PAID_RUN = false; return run() }
+    await loadFull(r.grants);
+    if (r.left === 0) setCredit(null);
+    return paidRun(run);
+  }
+  async function askPay(kind, lvl, why) {
+    const st = await status();
+    const price = st.prices && st.prices[kind] ? st.prices[kind][lvl] : 0;
+    const note = why === 'used_up' ? '<p class="hint" style="margin:0 0 10px">Your last payment has been fully used.</p>' : '';
+    const m = modal(`<h3 style="justify-content:center;margin:8px 0 4px">${NAME[lvl]} design</h3>${note}
       <p class="muted" style="margin:0 0 16px">Download this ${kind === 'video' ? 'video' : 'picture'} for <b>${money(price)}</b>. One-time payment, no account needed.</p>
       <button class="btn gold" id="payGo" style="width:100%">Pay ${money(price)} and download</button>
       <button class="btn ghost" data-x style="width:100%;margin-top:8px">Not now</button>
@@ -61,9 +79,9 @@
       if (!sid) return;
       try {
         const v = await post({ op: 'verify', sid });
-        setCredit({ sid, kind: v.kind, tier: v.tier, uses: v.kind === 'video' ? 3 : 2, at: Date.now() });
-        if (v.kind === 'video') { (window.toast || alert)('Payment received! Tap Create video.'); $('#eVideo').click() }
-        else { (window.toast || alert)('Payment received! Your download is starting.'); setTimeout(() => $('#eDown').click(), 600) }
+        setCredit(v.credit);
+        if (v.kind === 'video') { (window.toast || alert)('Payment received. Tap Create video.'); $('#eVideo').click() }
+        else { (window.toast || alert)('Payment received. Your download is starting.'); setTimeout(() => $('#eDown').click(), 600) }
       } catch (e) { (window.toast || alert)('We could not confirm the payment. If you were charged, contact us.') }
     })();
   });
