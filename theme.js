@@ -1,13 +1,12 @@
 /* Invitely color themes. Pick one with the 🎨 button. The choice is remembered on this device. */
 (function () {
   const T = [
-    { id: 'current', name: 'Current look', note: 'Cream and green on Custom, ivory and navy on Simple' },
-    { id: 'navy', name: 'Royal Navy & Gold', bg: '#FAF6EC', paper: '#FFFCF4', ink: '#14203a', muted: '#5d6475', line: '#E1D6C1', brand: '#0B3D91', deep: '#0B2A63', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#E4EBF8' },
-    { id: 'emerald', name: 'Emerald & Champagne', bg: '#F6F2E7', paper: '#FFFDF7', ink: '#1b2b23', muted: '#5b6a62', line: '#DCD5BE', brand: '#1F5C45', deep: '#123A2B', ac: '#B8923A', acl: '#EBD79A', acd: '#8A6A1E', tint: '#E2EEE8' },
-    { id: 'burgundy', name: 'Burgundy & Rose Gold', bg: '#FBF4F1', paper: '#FFFBF9', ink: '#34202a', muted: '#75616a', line: '#EBD7D2', brand: '#7C2D3A', deep: '#4A1822', ac: '#B9805A', acl: '#E9C6A8', acd: '#8B5A3C', tint: '#F6E4E6' },
-    { id: 'plum', name: 'Plum & Gold', bg: '#F8F3F8', paper: '#FFFCFF', ink: '#2b1f36', muted: '#6d6178', line: '#E2D6E8', brand: '#5B2E7A', deep: '#3A1B50', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#EEE3F5' },
-    { id: 'charcoal', name: 'Charcoal & Brass', bg: '#F4F1EC', paper: '#FFFFFF', ink: '#1f2124', muted: '#666a70', line: '#DDD8CF', brand: '#2E3238', deep: '#1A1D21', ac: '#B08D57', acl: '#E3CFA3', acd: '#7F6334', tint: '#E8E6E1' },
-    { id: 'sky', name: 'Sky Blue & Silver', bg: '#F3F7FB', paper: '#FFFFFF', ink: '#182a3d', muted: '#5a6b7d', line: '#D5E0EC', brand: '#2A6FB7', deep: '#1B4A7E', ac: '#8795A5', acl: '#D3DCE6', acd: '#5E6E80', tint: '#E1ECF8' }
+    { id: 'navy', name: 'Royal Navy & Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#14203a', muted: '#5d6475', line: '#D6DEEC', brand: '#0B3D91', deep: '#0B2A63', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#E4EBF8' },
+    { id: 'emerald', name: 'Emerald & Champagne', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#1b2b23', muted: '#5b6a62', line: '#CFE0D7', brand: '#1F5C45', deep: '#123A2B', ac: '#B8923A', acl: '#EBD79A', acd: '#8A6A1E', tint: '#E2EEE8' },
+    { id: 'burgundy', name: 'Burgundy & Rose Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#34202a', muted: '#75616a', line: '#EBD3D8', brand: '#7C2D3A', deep: '#4A1822', ac: '#B9805A', acl: '#E9C6A8', acd: '#8B5A3C', tint: '#F6E4E6' },
+    { id: 'plum', name: 'Plum & Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#2b1f36', muted: '#6d6178', line: '#E0D2EA', brand: '#5B2E7A', deep: '#3A1B50', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#EEE3F5' },
+    { id: 'charcoal', name: 'Charcoal & Brass', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#1f2124', muted: '#666a70', line: '#DADCDF', brand: '#2E3238', deep: '#1A1D21', ac: '#B08D57', acl: '#E3CFA3', acd: '#7F6334', tint: '#E8E6E1' },
+    { id: 'sky', name: 'Sky Blue & Silver', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#182a3d', muted: '#5a6b7d', line: '#D5E0EC', brand: '#2A6FB7', deep: '#1B4A7E', ac: '#8795A5', acl: '#D3DCE6', acd: '#5E6E80', tint: '#E1ECF8' }
   ];
   const shade = (hex, f) => '#' + [1, 3, 5].map(i => Math.round(parseInt(hex.substr(i, 2), 16) * (1 - f)).toString(16).padStart(2, '0')).join('');
   function css(t) {
@@ -39,18 +38,37 @@ body.inv textarea:focus,body.inv input:focus{outline:3px solid ${t.acl}}
 .stars,.starpick button.on{color:${t.ac}}.starpick button{color:${t.line}}
 .etop button.pri{background:${t.brand};border-color:${t.brand}}.etop button.gold{background:${t.acd};border-color:${t.acd}}
 .t-green{background:linear-gradient(135deg,${t.brand},${t.deep})}.t-blue{background:linear-gradient(135deg,${t.acd},${t.ac})}.t-purple{background:linear-gradient(135deg,${t.deep},${t.brand} 60%,${t.ac})}
-.fopt.on{border-color:${t.brand};box-shadow:0 0 0 2px ${t.acl}}`;
+.fopt.on{border-color:${t.brand};box-shadow:0 0 0 2px ${t.acl}}
+/* bold look: white page, color band hero, tinted alternate sections */
+html,body{overflow-x:hidden}
+header.top,body.inv header.top{background:#ffffffee;border-bottom:3px solid ${t.brand}}
+.hero{position:relative;isolation:isolate;padding:64px 12px 48px;color:#fff}
+.hero::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;background:radial-gradient(1200px 500px at 50% -10%,${t.brand},${t.deep} 70%)}
+.hero h1{color:#fff}.hero h1 em{background:linear-gradient(135deg,${t.acl},${t.ac},${t.acl});-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p,.hero .hint{color:rgba(255,255,255,.88)}.hero a{color:#fff}
+.door{background:#fff;border:0;box-shadow:0 14px 36px rgba(0,0,0,.28)}.door:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(0,0,0,.34)}
+.door span{color:${t.muted}}
+#home section:nth-of-type(even){background:${t.tint}}
+#home section{padding-top:44px;padding-bottom:44px}
+.cat{background:#fff;border:1px solid ${t.line};box-shadow:0 4px 14px rgba(0,0,0,.06)}.cat:hover{border-color:${t.brand};box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.card,body.inv .card{background:#fff;box-shadow:0 6px 22px rgba(0,0,0,.07)}
+.sheet{background:#fff}
+.tier{background:#fff}
+.schip{background:#fff}
+body.inv .catHead h2,body.inv #sName{color:${t.brand}}
+footer{background:${t.deep};color:rgba(255,255,255,.8);border-top:0;margin-top:0}footer a{color:#fff}`;
   }
   const st = document.createElement('style'); st.id = 'themeCss'; document.head.appendChild(st);
   function apply(id) {
-    const t = T.find(x => x.id === id) || T[0]; cur = t.id;
-    st.textContent = t.bg ? css(t) : '';
-    const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t.bg || '#fff0d1';
+    const t = T.find(x => x.id === id) || T.find(x => x.id === DEF); cur = t.id;
+    st.textContent = css(t);
+    const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t.brand;
     try { localStorage.setItem('inv_theme', t.id) } catch (e) {}
     document.querySelectorAll('.thOpt').forEach(b => b.classList.toggle('on', b.dataset.id === t.id));
   }
-  let cur = 'current', saved = null; try { saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('inv_theme') } catch (e) {}
-  apply(saved || 'current');
+  const DEF = 'navy';
+  let cur = DEF, saved = null; try { saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('inv_theme') } catch (e) {}
+  apply(saved || DEF);
 
   document.addEventListener('DOMContentLoaded', () => {
     const ui = document.createElement('style');
@@ -66,7 +84,7 @@ body.inv textarea:focus,body.inv input:focus{outline:3px solid ${t.acl}}
     p.innerHTML = '<h4>Pick a color theme</h4>';
     T.forEach(t => {
       const o = document.createElement('button'); o.type = 'button'; o.className = 'thOpt'; o.dataset.id = t.id;
-      const dots = t.bg ? [t.bg, t.brand, t.ac, t.deep] : ['#fff0d1', '#2d4939', '#0B3D91', '#E7C873'];
+      const dots = [t.brand, t.deep, t.ac, t.tint];
       o.innerHTML = '<span class="thDots">' + dots.map(c => `<i style="background:${c}"></i>`).join('') + '</span><span>' + t.name + (t.note ? '<small>' + t.note + '</small>' : '') + '</span>';
       o.onclick = () => apply(t.id); p.appendChild(o);
     });
