@@ -35,7 +35,8 @@ async function renderCard(canvas,card,fields,values,scale){
   const size=sc.font_size||12;setFont(ctx,sc);ctx.fillStyle=sc.color||'#000';
   if(Array.isArray(sc.foil)&&sc.foil.length>=2){const g=ctx.createLinearGradient(0,y,0,y+h);sc.foil.forEach((c,i)=>g.addColorStop(i/(sc.foil.length-1),c));ctx.fillStyle=g}
   const align=sc.text_align||'center';ctx.textAlign=align;ctx.textBaseline='middle';if(sc.text_direction){try{ctx.direction=sc.text_direction}catch(e){}}
-  const ax=align==='center'?x+w/2:(align==='right'||align==='end')?x+w:x;const lh=size*(sc.line_height||1.2);const lines=wrap(ctx,text,w,sc.max_lines||0);const sy=y+h/2-lines.length*lh/2+lh/2;
+  const ax=align==='center'?x+w/2:(align==='right'||align==='end')?x+w:x;let lh=size*(sc.line_height||1.2);let lines=wrap(ctx,text,w,0);const ml=sc.max_lines||0;
+  if(ml&&lines.length>ml){const room=ml*lh;let fs=size;while(fs>3&&lines.length*fs*(sc.line_height||1.2)>room){fs*=.94;setFont(ctx,{...sc,font_size:fs});lines=wrap(ctx,text,w,0)}lh=fs*(sc.line_height||1.2)}const sy=y+h/2-lines.length*lh/2+lh/2;
   lines.forEach((l,i)=>ctx.fillText(l,ax,sy+i*lh,w));ctx.restore()}
  ctx.restore()}
 
@@ -55,7 +56,7 @@ async function showCard(slug){await loadSimple();const card=SD.cards.find(c=>c.s
  $('#sGallery').style.display='none';$('#sCard').style.display='';$('#sName').textContent=card.name;$('#sBack').href=curCat&&curCat!=='all'?'#simple-'+curCat:'#simple';
  SZ=1;$('#sZoomBox').classList.remove('zoomed');$('#sCanvas').style.width='';$('#sZoom span').textContent='100%';const fields=JSON.parse(JSON.stringify(await loadFields(card.id)));const values={};fields.forEach(f=>values[f.id]=fieldDefault(f));CUR={card,fields,values};
  const form=$('#sForm');form.innerHTML='';fields.filter(isText).sort((a,b)=>{const c=f=>{const p=f.position_config||{};return (p.y||0)+(p.height||0)/2};return c(a)-c(b)}).forEach((f,i)=>{const lab=document.createElement('label');lab.className='f';lab.textContent=f.field_type==='location'?'Place':/date/.test(f.field_type)?'Date':'Line '+(i+1);
-  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));ta.dir='auto';ta.value=String(values[f.id]).replace(/\+/g,'');ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
+  const ta=document.createElement('textarea');ta.rows=Math.min(4,Math.max(1,String(values[f.id]).split('\n').length));const grow=()=>{ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px'};ta.addEventListener('input',grow);requestAnimationFrame(grow);setTimeout(grow,300);ta.dir='auto';ta.value=String(values[f.id]).replace(/\+/g,'');ta.oninput=()=>{values[f.id]=ta.value;queue()};form.appendChild(lab);form.appendChild(ta);
   if(f.field_type!=='image'){const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';const lbl=()=>{fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=(f.style_config||{}).font_family||'Arial'};lbl();f._lbl=lbl;fb.onclick=()=>openFontPicker(f,ta);
    const row=document.createElement('div');row.className='frow';row.appendChild(fb);
    const sc=f.style_config=f.style_config||{};const base=sc.font_size||12;let pct=100;
