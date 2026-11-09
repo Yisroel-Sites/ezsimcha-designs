@@ -82,7 +82,7 @@ p.sub{text-align:center;color:var(--muted);margin:0 0 26px;font-size:17px}
 .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .cat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 10px;text-align:center;text-decoration:none;transition:.15s;display:block}
 .cat:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(60,40,10,.08);border-color:#D8C7A4}
-.cat .ic{font-size:34px;line-height:1}
+.cat .ic{font-size:34px;line-height:1;height:40px;display:flex;align-items:center;justify-content:center;gap:2px}.cat .ic img{width:42px;height:42px}.cat .ic em{font-style:normal;font-size:26px;margin-inline-start:-6px;align-self:flex-end}
 .cat b{display:block;margin-top:8px;font-size:15px}
 .cat span{display:block;font-family:"Frank Ruhl Libre",serif;font-size:17px;color:#2d4939;direction:rtl}.cat b{color:#2d4939}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
@@ -459,7 +459,7 @@ const CATS=[
 ['bris','Bris','ברית מילה','👶','בשעה טובה ומוצלחת','מיט שמחה און דאנקבארקייט לאדן מיר אייך איין צו דער','Please join us for the Bris of our son'],
 ['vachnacht','Vachnacht','וואכנאכט','🕯️','וואכנאכט','מיר לאדן אייך הערצליך איין צום','You are invited to the Vachnacht'],
 ['vachbris','Vachnacht & Bris','וואכנאכט און ברית','✡️','וואכנאכט און ברית','מיר לאדן אייך איין צו די שמחות פון','Please join us for the Vachnacht and Bris'],
-['kiddush','Kiddush','קידוש','🍷','קידוש','מיר לאדן אייך איין צו א','Please join us for a Kiddush'],
+['kiddush','Kiddush','קידוש','🥃','קידוש','מיר לאדן אייך איין צו א','Please join us for a Kiddush'],
 ['barmitzvah','Bar Mitzvah','בר מצוה','📜','בר מצוה','מיט גרויס פרייד לאדן מיר אייך איין צו דער','Please join us for the Bar Mitzvah of'],
 ['basmitzvah','Bas Mitzvah','בת מצוה','🌸','בת מצוה','מיט גרויס פרייד לאדן מיר אייך איין צו דער','Please join us for the Bas Mitzvah of'],
 ['lchaim',"L'chaim",'לחיים','🥂','לחיים','מיר זענען מודיע מיט פרייד וועגן דעם','Please join us for the L\'chaim of'],
@@ -468,7 +468,7 @@ const CATS=[
 ['birth','Mazel Tov (Birth)','מזל טוב','🍼','מזל טוב','מיט דאנק צום אייבערשטן זענען מיר מודיע','We are thrilled to announce the birth of'],
 ['birthday','Happy Birthday','יום הולדת','🎂','יום הולדת שמח','מיר פייערן','Happy Birthday'],
 ['wedding','Wedding','חתונה','💐','חתונה','מיט שבח והודיה להשי״ת לאדן מיר אייך איין צו דער','Together with their families, please join us for the wedding of'],
-['sholomzochor','Sholom Zochor','שלום זכר','🫘','שלום זכר','מיר לאדן אייך איין צום','Please join us for the Sholom Zochor'],
+['sholomzochor','Sholom Zochor','שלום זכר','🍺','שלום זכר','מיר לאדן אייך איין צום','Please join us for the Sholom Zochor'],
 ['pidyon','Pidyon Haben','פדיון הבן','🪙','פדיון הבן','מיר לאדן אייך איין צו דער סעודת','Please join us for the Pidyon Haben of'],
 ['upsherin','Upsherin','אפשערן','✂️','אפשערן','מיר לאדן אייך איין צום','Please join us for the Upsherin of'],
 ['tenaim','Tenaim','תנאים','🍽️','תנאים','מיר לאדן אייך איין צו די','Please join us for the Tenaim of'],
@@ -751,7 +751,8 @@ function thumbCanvas(w,h,fn){const c=document.createElement('canvas');c.width=w;
 function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*((d.h||(d.land?864:1350))/1080)),(ctx,cw,ch)=>renderDesign(ctx,d,cw,ch,-1));const fs=[...new Set(d.objs.filter(o=>o.t==='text').map(o=>o.font))];Promise.all(fs.map(f=>loadFont(f))).then(()=>{if(c._done&&c.isConnected)queueThumb(c,c._draw)});return c}
 
 /* ---------------- home rendering ---------------- */
-function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
+const CAT_IC={vachnacht:'<img src="ic/cradle.svg" alt="">',vachbris:'<img src="ic/throne.svg" alt=""><em>🍻</em>',barmitzvah:'<img src="ic/tefillin.svg" alt="">',bavarfen:'<img src="ic/shtreimel.svg" alt="">',tenaim:'<img src="ic/plate.svg" alt="">',wedding:'<img src="ic/chuppah.svg" alt="">',sholomzochor:'🥜<em>🍺</em>',pidyon:'<img src="ic/coins.svg" alt="">',kiddush:'🥃'};
+function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${CAT_IC[c[0]]||c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
 function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='★ Example';b.appendChild(s)}else if(d.tier!=='free'){const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':'');s.textContent=d.tier==='pro'?'Pro':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
 function renderPremium(){const g=$('#premGrid');g.innerHTML='<p class="hint"><span class="spin"></span></p>';const picks=['wedding','barmitzvah','kiddush','vort','bris','lchaim','sholomzochor','shevabrachos'];
  const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const L=(SMP_BY[k]||[]).filter(r=>r[3]!=='free'&&!r[7]&&hasBg(r));const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
