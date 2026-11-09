@@ -19,7 +19,7 @@
   }
   async function paidRun(run) {
     window.PAID_RUN = true; document.getElementById('stage')?.classList.add('paidok');
-    try { if (typeof draw === 'function') draw(); await run(); } finally { setTimeout(() => { window.PAID_RUN = false }, 15000) }
+    try { if (typeof draw === 'function') draw(); await run(); } finally { setTimeout(() => { window.PAID_RUN = false }, 20000) }
   }
 
   function modal(html) {
@@ -32,6 +32,7 @@
   async function gate(kind, run) {
     const lvl = level(), art = artOf();
     if (lvl === 'free' && !art.length) { window.PAID_RUN = false; return run() }
+    const U = window.UNLOCK; if (U && U.d === D && (U.k === kind || U.k === 'video') && Date.now() - U.t < 30 * 60e3) return paidRun(run);
     let r;
     try { r = await post({ op: 'use', kind, tier: lvl, art, credit: getCredit() }) }
     catch (e) {
@@ -40,6 +41,7 @@
     }
     if (!r.paid) { window.PAID_RUN = false; return run() }
     await loadFull(r.grants);
+    if (r.paid) window.UNLOCK = { d: D, k: kind, t: Date.now() };
     if (r.left === 0) setCredit(null);
     return paidRun(run);
   }
@@ -63,8 +65,8 @@
   }
 
   window.addEventListener('load', () => {
-    const down = $('#eDown').onclick, rec = $('#vRec').onclick;
-    $('#eDown').onclick = () => gate('image', down);
+    const rec = $('#vRec').onclick;
+    window.payGate = gate;
     $('#vRec').onclick = () => gate('video', rec);
 
     const q = new URLSearchParams(location.search), sid = q.get('paid');

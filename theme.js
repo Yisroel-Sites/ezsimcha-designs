@@ -1,4 +1,4 @@
-/* Invitely color themes. Pick one with the 🎨 button. The choice is remembered on this device. */
+/* Invitely color themes. Pick one with the Colors button. The choice is remembered on this device. */
 (function () {
   const mix = (a, b, f) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - f) + parseInt(b.substr(i, 2), 16) * f).toString(16).padStart(2, '0')).join('');
   const lum = h => [1, 3, 5].reduce((s, i, k) => s + parseInt(h.substr(i, 2), 16) * [.2126, .7152, .0722][k], 0) / 255;
@@ -91,7 +91,7 @@ footer{background:${t.deep};color:rgba(255,255,255,.8);border-top:0;margin-top:0
 .thOpt.on{border-color:#222}.thOpt small{display:block;font-weight:400;color:#777;font-size:12px}
 .thDots{display:flex;flex:none}.thDots i{width:22px;height:22px;border-radius:50%;margin-inline-end:-7px;border:2px solid #fff}`;
     document.head.appendChild(ui);
-    const b = document.createElement('button'); b.id = 'thBtn'; b.type = 'button'; b.textContent = '🎨 Colors';
+    const b = document.createElement('button'); b.id = 'thBtn'; b.type = 'button'; b.innerHTML = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.5 0-1.2-1-1.5-1-2.5S13.3 15 14.5 15H17a4 4 0 004-4c0-4.4-4-8-9-8zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg> <span>Colors</span>';
     const p = document.createElement('div'); p.id = 'thPanel';
     p.innerHTML = '<h4>Pick a color theme</h4>';
     T.forEach(t => {

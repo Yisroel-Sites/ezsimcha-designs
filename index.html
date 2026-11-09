@@ -10,20 +10,21 @@
 <link rel="canonical" href="https://invitely-com.vercel.app/">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Invitely">
 <meta property="og:title" content="Invitely | Invitations for every simcha">
-<meta property="og:description" content="Design beautiful simcha invitations in English, Yiddish or Hebrew. Thousands of designs for Bar Mitzvah, Kiddush, Vort, Bris, weddings and more.">
+<meta property="og:description" content="Design beautiful simcha invitations in English, Yiddish or Lashon Kodesh. Thousands of designs for Bar Mitzvah, Kiddush, Vort, Bris, weddings and more.">
 <meta property="og:url" content="https://invitely-com.vercel.app/"><meta property="og:image" content="https://invitely-com.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Invitely | Invitations for every simcha">
-<meta name="twitter:description" content="Design beautiful simcha invitations in English, Yiddish or Hebrew."><meta name="twitter:image" content="https://invitely-com.vercel.app/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Invitely","url":"https://invitely-com.vercel.app/","description":"Design simcha invitations in English, Yiddish or Hebrew and download them as pictures or videos."}</script>
+<meta name="twitter:description" content="Design beautiful simcha invitations in English, Yiddish or Lashon Kodesh."><meta name="twitter:image" content="https://invitely-com.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Invitely","url":"https://invitely-com.vercel.app/","description":"Design simcha invitations in English, Yiddish or Lashon Kodesh and download them as pictures or videos."}</script>
 <title>Invitely | Invitations for every simcha</title>
-<meta name="description" content="Design beautiful simcha invitations. Type in English, Yiddish or Hebrew and download. Bar Mitzvah, Kiddush, Vort, L'chaim, Upsherin, Sholom Zochor, Bris and wedding designs.">
+<meta name="description" content="Design beautiful simcha invitations. Type in English, Yiddish or Lashon Kodesh and download. Bar Mitzvah, Kiddush, Vort, L'chaim, Upsherin, Sholom Zochor, Bris and wedding designs.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700;900&family=Heebo:wght@400;700;900&family=Rubik:wght@400;700&family=Assistant:wght@400;700&family=Secular+One&family=Suez+One&family=Bellefair&family=David+Libre:wght@400;700&family=Amatic+SC:wght@400;700&family=Karantina:wght@400;700&family=Varela+Round&family=Alef:wght@400;700&family=Miriam+Libre:wght@400;700&family=Noto+Serif+Hebrew:wght@400;700;900&family=Noto+Sans+Hebrew:wght@400;700&family=Bona+Nova:wght@400;700&family=Rubik+Bubbles&family=Rubik+Wet+Paint&family=Rubik+Beastly&family=Rubik+Moonrocks&family=Rubik+Puddles&family=Rubik+Microbe&family=Rubik+Vinyl&family=Rubik+Spray+Paint&family=Rubik+Maze&family=Rubik+Gemstones&family=Rubik+Doodle+Shadow&family=Rubik+Lines&family=Rubik+Scribble&family=Rubik+Marker+Hatch&family=Playfair+Display:wght@400;700;900&family=Great+Vibes&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Dancing+Script:wght@400;700&family=Lobster&family=Montserrat:wght@400;700&family=Pacifico&family=Abril+Fatface&family=Parisienne&family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Rashi+Hebrew:wght@400;700&family=Tinos:wght@400;700&family=Arimo:wght@400;700&family=IBM+Plex+Sans+Hebrew:wght@400;700&family=Playpen+Sans+Hebrew:wght@400;700&family=Solitreo&family=Fredoka:wght@400;700&family=Open+Sans:wght@400;700&family=Cousine:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Allura&family=Alex+Brush&family=Pinyon+Script&family=Tangerine:wght@400;700&family=Sacramento&family=Satisfy&family=Kaushan+Script&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Oswald:wght@400;700&family=Bebas+Neue&family=Lora:wght@400;700&family=Libre+Baskerville:wght@400;700&family=EB+Garamond:wght@400;700&family=Merriweather:wght@400;700&family=Quicksand:wght@400;700&family=Comfortaa:wght@400;700&family=Marcellus&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script src="ezdata.js"></script>
 <script src="gen.js"></script>
+<script src="hebdate.js" defer></script>
 <script>
 /* Site stamp: small and only on FREE downloads. Paid downloads (window.PAID_RUN) get no stamp. Change STAMP_TEXT when you have your own domain. */
 window.STAMP_TEXT='invitely-com.vercel.app';window.PAID_RUN=false;
@@ -79,7 +80,8 @@ body.inv .lang button.on{background:#0B3D91;color:#fff}
 body.inv footer{color:#5d6475}
 .choose{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px;margin:6px auto 0}
 .door{display:block;text-decoration:none;background:#fff;border:2px solid var(--line);border-radius:20px;padding:22px 18px;text-align:center;box-shadow:0 4px 0 #e2d2b0;transition:.15s}
-.door:hover{transform:translateY(-2px);border-color:#2d4939}.door.inv-door b{color:#0B3D91;font-family:'Cormorant Garamond',serif;font-size:26px}.door.inv-door:hover{border-color:#0B3D91}.door i{font-style:normal;font-size:34px;display:block}.door b{display:block;font-size:22px;color:#2d4939;margin:6px 0 4px;font-family:"Playfair Display",serif}.door span{color:var(--muted);font-size:15px}
+.door:hover{transform:translateY(-2px);border-color:#2d4939}.door.inv-door b{color:#0B3D91;font-family:'Cormorant Garamond',serif;font-size:26px}.door.inv-door:hover{border-color:#0B3D91}.door i svg.ic.big{width:34px;height:34px}
+.door i{font-style:normal;font-size:34px;display:block}.door b{display:block;font-size:22px;color:#2d4939;margin:6px 0 4px;font-family:"Playfair Display",serif}.door span{color:var(--muted);font-size:15px}
 @media(max-width:560px){.choose{grid-template-columns:1fr}}
 .schip{display:inline-block;white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;text-decoration:none;margin:0 6px 6px 0}.schip.on{background:#2d4939;color:#fff;border-color:#2d4939}
 #sCanvas{width:100%;height:auto;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.18);background:#fff}
@@ -148,7 +150,17 @@ label.f{display:block;font-weight:700;font-size:13px;margin:10px 0 4px;color:var
 #editor{position:fixed;inset:0;z-index:60;background:#E9EBEF;display:none;flex-direction:column}
 #editor.on{display:flex}
 .etop{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;flex-shrink:0}
-.etop button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-weight:700;font-size:14px;white-space:nowrap}
+.etop button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-weight:700;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;min-height:38px}
+svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:480px){
+ .etop{gap:4px;padding:6px 8px}
+ .etop button{padding:7px 9px}
+ .etop button .lb{display:none}
+ .etop #eDown{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:60;justify-content:center;font-size:17px;padding:14px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+ #editor .ebody{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ .etabs{flex-wrap:wrap;overflow:visible}
+ .etabs button{flex:1 1 33%;padding:9px 4px}
+}
 .etop button.pri{background:#605643;color:#fff;border-color:#605643}
 .etop button.gold{background:#2d4939;color:#fff;border-color:#2d4939}
 .estage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:10px;position:relative}
@@ -210,12 +222,39 @@ input[type=range]{padding:0;border:0;background:none}
 .filters{margin-inline-start:auto}
 
 #stage.paidok::after{display:none}
-.tpl::after,#sZoomBox::after,#stage::after,.wmk::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27170%27%20height%3D%27120%27%3E%3Ctext%20x%3D%2785%27%20y%3D%2764%27%20transform%3D%27rotate%28-28%2085%2060%29%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2717%27%20font-weight%3D%27700%27%20fill%3D%27white%27%20fill-opacity%3D%27.5%27%20stroke%3D%27black%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%27.8%27%3Einvitely.com%3C/text%3E%3C/svg%3E");background-size:150px auto}
+html:not(.ai-on) #ai,html:not(.ai-on) a[href="#ai"],html:not(.ai-on) #eAI,html:not(.ai-on) #mAI{display:none!important}
+.tpl::after,#sZoomBox::after,#stage::after,.wmk::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27170%27%20height%3D%27120%27%3E%3Ctext%20x%3D%2785%27%20y%3D%2764%27%20transform%3D%27rotate%28-28%2085%2060%29%27%20text-anchor%3D%27middle%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2717%27%20font-weight%3D%27700%27%20fill%3D%27white%27%20fill-opacity%3D%27.5%27%20stroke%3D%27black%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%27.8%27%3EINVITELY PREVIEW%3C/text%3E%3C/svg%3E");background-size:150px auto}
 
 canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 
 :focus-visible{outline:3px solid var(--logo);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.cic img{width:40px;height:40px;vertical-align:middle}.cic em{font-style:normal}
+@media (max-width:700px){
+ #sZoomBox{position:sticky;top:var(--hh,58px);z-index:30;background:var(--cream);padding:6px 0 8px;box-shadow:0 10px 14px -12px rgba(0,0,0,.35)}
+ #sZoomBox:not(.zoomed) .sscroll{max-height:36vh;display:flex;justify-content:center}
+ #sZoomBox:not(.zoomed) #sCanvas{width:auto!important;max-width:100%;max-height:35vh}
+}
+.lang .lang-cur{display:none}
+@media (max-width:480px){
+ .lang{position:relative;overflow:visible;border:0;background:none}
+ .lang .lang-cur{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;background:var(--paper);padding:6px 10px}
+ .lang button[data-l]{display:none}
+ .lang.open button[data-l]{display:block;width:100%;text-align:start;padding:10px 14px;border-radius:0}
+ .lang.open{display:block}
+ .lang.open::after{content:'';display:block}
+ .lang.open > button[data-l]:first-of-type{margin-top:0}
+ .lang.open{z-index:60}
+ .lang.open .lang-cur{position:relative}
+ .lang.open > button[data-l]{position:relative}
+ .lang.open{box-shadow:none}
+ #langBox.open{display:flex;flex-direction:column;position:absolute;inset-inline-end:10px;top:8px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);min-width:160px;overflow:hidden}
+ #langBox.open .lang-cur{border:0;border-bottom:1px solid var(--line);border-radius:0;justify-content:flex-start;padding:10px 14px}
+}
+.hdate{margin:10px 0;padding:10px;border:1px solid var(--line);border-radius:12px}.chk{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;white-space:nowrap}
+.dlopts{display:grid;gap:8px}.dlopts .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:start;padding:12px 14px}.dlopts small{font-weight:500;opacity:.8;font-size:13px}
+.door i,.tb .ti{color:var(--logo)}
+@media (max-width:480px){nav.main a[href="#events"]{display:none}nav.main a,nav.main button{padding:8px 7px}nav.main{gap:2px}}
 </style>
 <script src="theme.js"></script>
 </head>
@@ -228,31 +267,31 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     <a href="#reviews" class="hide-sm" data-i="nav_reviews">Reviews</a>
     <a href="#ai" class="hide-sm" data-i="nav_ai" style="border:1px solid var(--line);background:#fff;border-radius:999px">Invitely AI</a>
     <button id="loginBtn" data-i="nav_login">Log in</button>
-    <div class="lang"><button data-l="en" class="on">EN</button><button data-l="yi">ייִדיש</button><button data-l="he">עב</button></div>
+    <div class="lang" id="langBox"><button type="button" class="lang-cur" id="langCur" aria-label="Language" aria-haspopup="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>EN</span></button><button data-l="en" class="on">English</button><button data-l="yi">אידיש</button><button data-l="he">לשון קודש</button></div>
   </nav>
 </div></header>
 
 <main id="home" class="view on">
   <div class="wrap">
     <div class="hero">
-      <p class="hint" style="letter-spacing:.08em;font-weight:700;margin-bottom:10px">English · אידיש · עברית</p>
+      <p class="hint" style="letter-spacing:.08em;font-weight:700;margin-bottom:10px">English · אידיש · לשון קודש</p>
       <h1 data-ih="hero_h">Simcha invitations,<br><em>beautifully simple.</em></h1>
       <p data-i="hero_p">Choose a design, type your names, download. Ready designs for every simcha, plus Premium and Premium Pro collections (photo-scene invitations, new ideas, envelope styles and more) and video invitations.</p>
       <div class="choose">
-        <a class="door inv-door" href="#simple"><i>✨</i><b>Simple</b><span>Pick a design, fill in the names, download. Done in a minute.</span></a>
-        <a class="door" href="#events"><i>🎨</i><b>Custom</b><span>Full editor: fonts, backgrounds, elements, effects and video.</span></a>
+        <a class="door inv-door" href="#simple"><i><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L16 8M14 4v3M20 10h-3M18 4l-2 2M9 3l1 2M21 13l-2 1"/></svg></i><b>Simple</b><span>Pick a design, fill in the names, download. Done in a minute.</span></a>
+        <a class="door" href="#events"><i><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.5 0-1.2-1-1.5-1-2.5S13.3 15 14.5 15H17a4 4 0 004-4c0-4.4-4-8-9-8zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg></i><b>Custom</b><span>Full editor: fonts, backgrounds, elements, effects and video.</span></a>
       </div>
-      <p style="margin-top:16px"><a href="#events" style="font-weight:700">Pick your simcha ↓</a></p>
+      <p style="margin-top:16px"><a href="#events" style="font-weight:700">Pick your simcha</a></p>
     </div>
   </div>
 
   <section id="events"><div class="wrap">
     <div class="tierbox">
-      <button class="tb t-green" data-tier="premium"><span class="ti">👑</span><span><b>Premium <span class="pr">$4.99</span></b><span class="yi">פרעמיום</span><small>Gold foil, arch windows, starry night, watercolor, marble and more</small></span><span class="go">›</span></button>
-      <button class="tb t-blue" data-tier="pro"><span class="ti">💎</span><span><b>Premium Pro <span class="pr">$8.99</span></b><span class="yi">פרעמיום פראו</span><small>Photo scene invitations</small></span><span class="go">›</span></button>
-      <button class="tb t-purple" data-tier="vid"><span class="ti">▶️</span><span><b>Premium Vid <span class="pr">from $9.99</span></b><span class="yi">פרעמיום ווידעא</span><small>Every Pro design as a 10-second video</small></span><span class="go">›</span></button>
+      <button class="tb t-green" data-tier="premium"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span><b>Premium <span class="pr">$4.99</span></b><span class="yi">פרימיום</span><small>Gold foil, arch windows, starry night, watercolor, marble and more</small></span><span class="go">›</span></button>
+      <button class="tb t-blue" data-tier="pro"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9zM2 9h20M9 3l3 18 3-18"/></svg></span><span><b>Premium Pro <span class="pr">$8.99</span></b><span class="yi">פרימיום פראו</span><small>Photo scene invitations</small></span><span class="go">›</span></button>
+      <button class="tb t-purple" data-tier="vid"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></span><span><b>Premium Vid <span class="pr">from $9.99</span></b><span class="yi">פרימיום ווידעא</span><small>Every Pro design as a 10-second video</small></span><span class="go">›</span></button>
     </div>
-    <p class="hint" style="text-align:center;margin:-4px 0 22px" data-i="t_open">💳 Free to design. Pay only when you download: pictures from $4.99, videos from $9.99.</p>
+    <p class="hint" style="text-align:center;margin:-4px 0 22px" data-i="t_open">Free to design. Pay only when you download: pictures from $4.99, videos from $9.99.</p>
     <h2 class="sec" data-i="pick">Pick your simcha</h2>
     <p class="sub" data-i="pick_s">Tap a simcha to see all of its designs.</p>
     <div class="cats" id="cats"></div>
@@ -278,7 +317,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     <div class="card two">
       <div>
         <span class="badge">New</span>
-        <h2 style="font-family:'Playfair Display',serif;font-size:34px;margin:8px 0" data-i="ai_h">✨ New: AI mode</h2>
+        <h2 style="font-family:'Playfair Display',serif;font-size:34px;margin:8px 0" data-i="ai_h">New: AI mode</h2>
         <p class="muted" style="font-size:17px" data-i="ai_p">Tell it your simcha, the names and the date. It makes 3 designs for you and suggests the wording.</p>
       </div>
       <div>
@@ -306,7 +345,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     <p class="sub" data-i="how_s">Three steps. No design skills needed.</p>
     <div class="steps">
       <div class="step"><div class="n">1</div><h3 data-i="s1">Pick a design</h3><p data-i="s1p">Start from a ready example or one of hundreds of backgrounds.</p></div>
-      <div class="step"><div class="n">2</div><h3 data-i="s2">Type your words</h3><p data-i="s2p">Tap any text to change it. Yiddish and Hebrew go right-to-left on their own.</p></div>
+      <div class="step"><div class="n">2</div><h3 data-i="s2">Type your words</h3><p data-i="s2p">Tap any text to change it. Yiddish and Lashon Kodesh go right-to-left on their own.</p></div>
       <div class="step"><div class="n">3</div><h3 data-i="s3">Download & share</h3><p data-i="s3p">Save a sharp picture and send it on WhatsApp, or print it.</p></div>
     </div>
     <div class="stats" id="stats"></div>
@@ -333,12 +372,12 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     <div class="card" id="pricing">
       <h3 style="margin-top:0;font-family:'Playfair Display',serif">What's free?</h3>
       <ul style="line-height:1.6;padding-inline-start:20px">
-        <li><b>Free for everyone:</b> designing, all the basic backgrounds, fonts, stickers, ready text and examples, and unlimited downloads.</li>
-        <li><b>Premium:</b> some extra-fancy backgrounds, fonts and stickers are marked Premium. Right now they are open to everyone.</li>
+        <li><b>Free for everyone:</b> designing, every free design, the basic backgrounds, fonts, stickers, ready text and examples. Free designs download free.</li>
+        <li><b>Premium and Premium Pro:</b> free to design, you pay only when you download. Pictures $4.99 or $8.99, videos $9.99 or $11.99. No subscription.</li>
         <li><b>Founding members:</b> the first 30 people who sign up keep every Premium item free, for good.</li>
-        <li>No credit card, no ads in your design, no watermark.</li>
+        <li>No ads in your design. Paid downloads have no stamp. Free downloads carry a small site address in the corner.</li>
       </ul>
-      <button class="btn" id="joinBtn2">Become a member – free</button>
+      <button class="btn" id="joinBtn2">Become a member, free</button>
     </div>
   </div></div></section>
 
@@ -353,18 +392,18 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <main id="catView" class="view"><div class="wrap">
   <div class="catHead">
     <a href="#events" class="btn ghost sm">←</a>
-    <span id="catIcon" style="font-size:36px"></span><h2 id="catName"></h2><span class="he" id="catHe"></span>
+    <span id="catIcon" class="cic" style="font-size:30px"></span><h2 id="catName"></h2><span class="he" id="catHe"></span>
     <div class="seg filters" id="catFilter"><button data-f="all" class="on">All</button><button data-f="free">Free</button><button data-f="premium">Premium</button><button data-f="pro">Pro</button></div>
   </div>
   <p class="muted" style="margin:-6px 0 12px">Tap a design to open it, change the names and words, and download.</p>
-  <div class="row" style="margin-bottom:14px"><input id="gSearch" type="search" placeholder="Search in this category…" style="flex:2;min-width:180px"><button class="btn sm ghost" id="gSurprise" style="flex:none">🎲 Surprise me</button><div class="seg" id="gLang" style="flex:none"><button data-l="all" class="on">All</button><button data-l="yi">יידיש / עברית</button><button data-l="en">English</button></div></div>
+  <div class="row" style="margin-bottom:14px"><input id="gSearch" type="search" placeholder="Search in this category…" style="flex:2;min-width:180px"><button class="btn sm ghost" id="gSurprise" style="flex:none">Surprise me</button><div class="seg" id="gLang" style="flex:none"><button data-l="all" class="on">All</button><button data-l="yi">יידיש / עברית</button><button data-l="en">English</button></div></div>
   <p class="hint" id="gCount"></p><div class="grid" id="catGrid"></div><div style="text-align:center;margin-top:16px"><button class="btn ghost" id="gMore">Show more</button></div>
   <div style="height:40px"></div>
 </div></main>
 
 <main id="simpleView" class="view"><div class="wrap">
   <div id="sGallery">
-    <div class="catHead"><a href="#home" class="btn ghost sm">←</a><h2>✨ Simple</h2><span class="muted">Pick a design, fill in the blanks, download.</span></div>
+    <div class="catHead"><a href="#home" class="btn ghost sm">←</a><h2>Simple</h2><span class="muted">Pick a design, fill in the blanks, download.</span></div>
     <div id="sCats" style="margin-bottom:8px"></div>
     <input id="sSearch" type="search" placeholder="Search designs…" style="margin-bottom:10px">
     <p class="hint" id="sCount"></p>
@@ -378,7 +417,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
       <div class="card">
         <b>Your details</b><p class="hint">Change any line. The preview updates as you type.</p>
         <div id="sForm"></div>
-        <div class="row" style="margin-top:14px"><button class="btn" id="sDown">⬇ Download</button><button class="btn ghost" id="sEdit">🎨 Edit more</button></div>
+        <div class="row" style="margin-top:14px"><button class="btn" id="sDown"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> <span>Download</span></button><button class="btn ghost" id="sEdit">Edit more</button></div>
         <p class="hint">"Edit more" opens this design in the Custom editor with your words already in.</p>
       </div>
     </div>
@@ -389,15 +428,15 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <!-- EDITOR -->
 <div id="editor">
   <div class="etop">
-    <button id="eClose">✕</button>
-    <button id="eUndo">↶ <span data-i="undo">Undo</span></button>
-    <button id="eRedo">↷</button>
-    <button id="eSurprise">🎲 <span data-i="surprise">Surprise</span></button>
-    <button id="eAI">✨ AI</button>
-    <button id="eKbd" title="Yiddish keyboard / אידיש קלאוויאטור">⌨ Yiddish keyboard</button>
-    <button id="eSave">💾 <span data-i="save">Save</span></button>
-    <button id="eVideo" class="gold">🎬 Video</button>
-    <button id="eDown" class="pri">⬇ <span data-i="download">Download</span></button>
+    <button id="eClose" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button id="eUndo" aria-label="Undo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7L4 12l5 5M4 12h11a5 5 0 010 10h-2"/></svg><span class="lb" data-i="undo">Undo</span></button>
+    <button id="eRedo" aria-label="Redo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 5-5 5M20 12H9a5 5 0 000 10h2"/></svg></button>
+    <button id="eSurprise" aria-label="Surprise"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg><span class="lb" data-i="surprise">Surprise</span></button>
+    <button id="eAI" aria-label="AI"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 3v4M17 5h4"/></svg><span class="lb">AI</span></button>
+    <button id="eKbd" aria-label="Yiddish keyboard" title="Yiddish keyboard / אידיש קלאוויאטור"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM7 10h1M11 10h1M15 10h1M7 14h10"/></svg><span class="lb" data-i="kbd">Yiddish keyboard</span></button>
+    <button id="eSave" aria-label="Save"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="lb" data-i="save">Save</span></button>
+    <button id="eVideo" class="gold" aria-label="Video"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h11v12H4zM15 10l5-3v10l-5-3"/></svg><span class="lb" data-i="video">Video</span></button>
+    <button id="eDown" class="pri"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i="download">Download</span></button>
   </div>
   <div class="ebody">
     <div class="estage" id="stage"><div class="escroll" id="eScroll"><canvas id="cv" width="1080" height="1350"></canvas></div><div class="zbar" id="eZoom"><button type="button" data-z="-" aria-label="Zoom out">−</button><span>100%</span><button type="button" data-z="+" aria-label="Zoom in">+</button></div><p class="hint" style="position:absolute;bottom:2px;left:0;right:0;text-align:center;margin:0">Tap words to change them · drag to move</p></div>
@@ -418,15 +457,15 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <div class="kbd" id="kbd"></div>
 
 <div class="modal" id="mVideo"><div class="sheet" style="max-width:860px">
-  <h3><span>🎬 Video & invitation link</span><button class="x" data-close>×</button></h3>
+  <h3><span>Video and invitation link</span><button class="x" data-close>×</button></h3>
   <div class="vidwrap">
     <div><canvas id="vcv" width="720" height="900"></canvas>
-      <div class="row" style="margin-top:8px"><button class="btn ghost sm" id="vPlay">▶ Preview</button><button class="btn sm" id="vRec">⬇ Make video</button></div>
+      <div class="row" style="margin-top:8px"><button class="btn ghost sm" id="vPlay">Preview</button><button class="btn sm" id="vRec">Make video</button></div>
       <p class="hint" id="vStatus"></p></div>
     <div>
       <label class="f">Length</label><div class="seg" id="vDur"><button data-d="5">5s</button><button data-d="10" class="on">10s</button><button data-d="15">15s</button></div>
       <label class="f">Animation</label><div class="animgrid" id="vAnims"></div>
-      <label class="f">Tune</label><select id="vSong"></select><label class="btn sm ghost" style="margin-top:6px">🎵 Upload your own music<input type="file" accept="audio/*" id="vUp" hidden></label><span class="hint" id="vUpN"></span>
+      <label class="f">Tune</label><select id="vSong"></select><label class="btn sm ghost" style="margin-top:6px">Upload your own music<input type="file" accept="audio/*" id="vUp" hidden></label><span class="hint" id="vUpN"></span>
       <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
       <b>Invitation link with Add to Calendar</b>
       <label class="f">Event name</label><input id="evTitle">
@@ -439,7 +478,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 </div></div>
 
 <div class="modal" id="mAI"><div class="sheet">
-  <h3><span>✨ AI mode</span><button class="x" data-close>×</button></h3>
+  <h3><span>AI mode</span><button class="x" data-close>×</button></h3>
   <p class="muted">Describe the simcha, names, date and the look you want.</p>
   <textarea id="aiText" rows="4"></textarea>
   <button class="btn gold" style="margin-top:10px;width:100%" id="aiGo">Make 3 designs</button>
@@ -453,7 +492,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 
 <div class="modal" id="mImg"><div class="sheet" style="text-align:center">
   <h3><span>Your design</span><button class="x" data-close>×</button></h3>
-  <p class="muted">Press and hold the image to save it (or right-click → Save image).</p>
+  <p class="muted">Press and hold the image to save it (or right-click and choose Save image).</p>
   <img id="imgOut" style="max-width:100%;max-height:65vh;border-radius:8px">
   <video id="vidOut" controls playsinline style="max-width:100%;max-height:65vh;display:none"></video>
 </div></div>
@@ -464,7 +503,8 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 "use strict";
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const W=1080,H=1350;let EH=1350;
-function toast(m,ms=2400){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),ms)}
+function toast(m,ms){m=window.trUI?trUI(String(m)):m;return toast0(m,ms)}
+function toast0(m,ms=2400){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),ms)}
 function rng(seed){let s=seed>>>0||1;return()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return((s>>>0)%100000)/100000}}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
@@ -475,8 +515,8 @@ function shade(h,f){const n=parseInt(h.slice(1),16);let r=n>>16&255,g=n>>8&255,b
 
 /* ---------------- i18n ---------------- */
 const I18N={
- yi:{nav_designs:"דיזיינס",nav_reviews:"רעצענזיעס",nav_ai:"Invitely AI",nav_login:"אריינגיין",hero_h:"שמחה איינלאדונגען,<br><em>שיין און פשוט.</em>",hero_p:"קלייבט א דיזיין, שרייבט די נעמען, דאונלאודט. גרייטע דיזיינס פאר יעדע שמחה, פלוס פרימיום, פרימיום פראו און ווידעא איינלאדונגען.",cta_start:"הייבט אן",cta_ai:"✨ פרובירט AI",t_prem:"עקסטרע הינטערגרונטן, פאנטס און סטיקערס",t_pro:"פאטא-סצענע איינלאדונגען",t_vid:"פראו דיזיינס אלס ווידעאס",t_open:"💳 גרייט אויס אומזיסט. באצאלט נאר ווען איר לאדט אראפ: בילדער פון $4.99, ווידעאס פון $9.99.",pick:"קלייבט אייער שמחה",pick_s:"יעדע געלעגנהייט, אויף ענגליש, אידיש און לשון קודש.",prem_h:"פרימיום און פראו קאלעקציעס",prem_s:"גאלד, בויגן-פענצטער, פאטא-סצענעס און נאך.",ai_h:"✨ AI מאוד",ai_p:"באשרייבט די שמחה, די נעמען און די דאטום. AI שרייבט דעם נוסח און גיט אייך דריי פארטיגע דיזיינס.",ai_go:"מאכט 3 דיזיינס",vid_h:"ווידעא איינלאדונגען",vid_p:"מאכט פון יעדן דיזיין א ווידעא פון 5, 10 אדער 15 סעקונדעס, מיט 18 אנימאציעס און 15 שמחה ניגונים.",f_h:"גרינדונגס מיטגלידער",f_p:"די ערשטע 30 וואס שרייבן זיך איין קענען אראפלאדן אלע פרעמיום דיזיינס אומזיסט, אויף שטענדיג.",f_join:"נעמט מיין פלאץ",how_h:"ווי עס ארבעט",how_s:"דריי טריט. מען דארף נישט קיין דיזיין קענטעניש.",s1:"קלייבט א דיזיין",s1p:"קלייבט אייער שמחה און א דיזיין, אדער הייבט אן ליידיג.",s2:"שרייבט אייערע ווערטער",s2p:"טאפט אויף יעדן טעקסט צו טוישן. ניצט גרייטע נוסחאות אדער די אידישע קלאוויאטור.",s3:"דאונלאודט און שיקט",s3p:"היט אפ א בילד אדער ווידעא, שיקט אויף וואטסעפ אדער דרוקט.",ab_h:"וועגן אונז",ab_p:"Invitely איז דא כדי יעדער זאל קענען מאכן א שיינע איינלאדונג אין עטליכע מינוט, אן א דיזיינער. אידיש, לשון קודש און ענגליש ארבעטן צוזאמען, דער נוסח איז גרייט, און די אומזיסטע ווערסיע איז טאקע אומזיסט.",rv_h:"רעצענזיעס",rv_post:"שיקט",undo:"צוריק",surprise:"איבערראשונג",save:"היטן",download:"דאונלאוד",tb_bg:"הינטערגרונט",tb_text:"טעקסט",tb_ready:"גרייטע טעקסט",tb_el:"עלעמענטן",tb_photo:"בילד",tb_ex:"ביישפילן"},
- he:{nav_designs:"עיצובים",nav_reviews:"ביקורות",nav_ai:"Invitely AI",nav_login:"כניסה",hero_h:"הזמנות לשמחות,<br><em>יפות ופשוטות.</em>",hero_p:"בוחרים עיצוב, מקלידים שמות, מורידים. עיצובים מוכנים לכל שמחה, עם אוספי פרימיום, פרימיום פרו והזמנות וידאו.",cta_start:"להתחיל לעצב",cta_ai:"✨ לנסות AI",t_prem:"רקעים, גופנים ומדבקות נוספים",t_pro:"הזמנות בסצנת צילום",t_vid:"עיצובי פרו כסרטונים",t_open:"💳 העיצוב חינם. משלמים רק בהורדה: תמונות מ-$4.99, סרטונים מ-$9.99.",pick:"בחרו את השמחה",pick_s:"כל אירוע, באנגלית, ביידיש ובעברית.",prem_h:"אוספי פרימיום ופרו",prem_s:"זהב, חלונות קשת, סצנות צילום ועוד.",ai_h:"✨ מצב AI",ai_p:"תארו את השמחה, השמות והתאריך. ה-AI כותב את הנוסח ונותן שלושה עיצובים מוכנים.",ai_go:"צור 3 עיצובים",vid_h:"הזמנות וידאו",vid_p:"הפכו כל עיצוב לסרטון של 5, 10 או 15 שניות, עם 18 אנימציות ו-15 מנגינות.",f_h:"חברים מייסדים",f_p:"30 המצטרפים הראשונים מורידים את כל עיצובי הפרימיום בחינם, לתמיד.",f_join:"שמרו לי מקום",how_h:"איך זה עובד",how_s:"שלושה צעדים. בלי ידע בעיצוב.",s1:"בוחרים עיצוב",s1p:"בוחרים שמחה ועיצוב, או מתחילים מדף ריק.",s2:"מקלידים מילים",s2p:"נוגעים בכל טקסט כדי לשנות. נוסחים מוכנים ומקלדת יידיש.",s3:"מורידים ומשתפים",s3p:"שומרים תמונה או סרטון, שולחים בוואטסאפ או מדפיסים.",ab_h:"אודות",ab_p:"Invitely נועד כדי שכל אחד יוכל לעצב הזמנה יפה בכמה דקות, בלי מעצב. יידיש, עברית ואנגלית עובדות יחד, הנוסח מוכן, והגרסה החינמית באמת חינמית.",rv_h:"ביקורות",rv_post:"פרסום",undo:"בטל",surprise:"הפתעה",save:"שמור",download:"הורדה",tb_bg:"רקע",tb_text:"טקסט",tb_ready:"טקסט מוכן",tb_el:"אלמנטים",tb_photo:"תמונה",tb_ex:"דוגמאות"}
+ yi:{nav_designs:"דיזיינס",nav_reviews:"רעצענזיעס",nav_ai:"Invitely AI",nav_login:"אריינגיין",hero_h:"שמחה איינלאדונגען,<br><em>שיין און פשוט.</em>",hero_p:"קלייבט א דיזיין, שרייבט די נעמען, לאדט אראפ. גרייטע דיזיינס פאר יעדע שמחה, פלוס פרימיום, פרימיום פראו און ווידעא איינלאדונגען.",cta_start:"הייבט אן",cta_ai:"פרובירט AI",t_prem:"עקסטרע הינטערגרונטן, פאנטס און סטיקערס",t_pro:"פאטא-סצענע איינלאדונגען",t_vid:"פראו דיזיינס אלס ווידעאס",t_open:"גרייט אויס אומזיסט. באצאלט נאר ווען איר לאדט אראפ: בילדער פון $4.99, ווידעאס פון $9.99.",pick:"קלייבט אייער שמחה",pick_s:"יעדע געלעגנהייט, אויף ענגליש, אידיש און לשון קודש.",prem_h:"פרימיום און פראו קאלעקציעס",prem_s:"גאלד, בויגן-פענצטער, פאטא-סצענעס און נאך.",ai_h:"AI מאוד",ai_p:"באשרייבט די שמחה, די נעמען און די דאטום. AI שרייבט דעם נוסח און גיט אייך דריי פארטיגע דיזיינס.",ai_go:"מאכט 3 דיזיינס",vid_h:"ווידעא איינלאדונגען",vid_p:"מאכט פון יעדן דיזיין א ווידעא פון 5, 10 אדער 15 סעקונדעס, מיט 18 אנימאציעס און 15 שמחה ניגונים.",f_h:"גרינדונגס מיטגלידער",f_p:"די ערשטע 30 וואס שרייבן זיך איין קענען אראפלאדן אלע פרימיום דיזיינס אומזיסט, אויף שטענדיג.",f_join:"נעמט מיין פלאץ",how_h:"ווי עס ארבעט",how_s:"דריי טריט. מען דארף נישט קיין דיזיין קענטעניש.",s1:"קלייבט א דיזיין",s1p:"קלייבט אייער שמחה און א דיזיין, אדער הייבט אן ליידיג.",s2:"שרייבט אייערע ווערטער",s2p:"טאפט אויף יעדן טעקסט צו טוישן. ניצט גרייטע נוסחאות אדער די אידישע קלאוויאטור.",s3:"לאדט אראפ און שיקט",s3p:"היט אפ א בילד אדער ווידעא, שיקט אויף וואטסעפ אדער דרוקט.",ab_h:"וועגן אונז",ab_p:"Invitely איז דא כדי יעדער זאל קענען מאכן א שיינע איינלאדונג אין עטליכע מינוט, אן א דיזיינער. אידיש, לשון קודש און ענגליש ארבעטן צוזאמען, דער נוסח איז גרייט, און די אומזיסטע ווערסיע איז טאקע אומזיסט.",rv_h:"רעצענזיעס",rv_post:"שיקט",undo:"צוריק",surprise:"איבערראשונג",save:"היטן",download:"אראפלאדן",tb_bg:"הינטערגרונט",tb_text:"טעקסט",tb_ready:"גרייטע טעקסט",tb_el:"עלעמענטן",tb_photo:"בילד",tb_ex:"ביישפילן"},
+ he:{nav_designs:"עיצובים",nav_reviews:"ביקורות",nav_ai:"Invitely AI",nav_login:"כניסה",hero_h:"הזמנות לשמחות,<br><em>יפות ופשוטות.</em>",hero_p:"בוחרים עיצוב, מקלידים שמות, מורידים. עיצובים מוכנים לכל שמחה, עם אוספי פרימיום, פרימיום פרו והזמנות וידאו.",cta_start:"להתחיל לעצב",cta_ai:"לנסות AI",t_prem:"רקעים, גופנים ומדבקות נוספים",t_pro:"הזמנות בסצנת צילום",t_vid:"עיצובי פרו כסרטונים",t_open:"העיצוב חינם. משלמים רק בהורדה: תמונות מ-$4.99, סרטונים מ-$9.99.",pick:"בחרו את השמחה",pick_s:"כל אירוע, באנגלית, ביידיש ובלשון קודש.",prem_h:"אוספי פרימיום ופרו",prem_s:"זהב, חלונות קשת, סצנות צילום ועוד.",ai_h:"מצב AI",ai_p:"תארו את השמחה, השמות והתאריך. ה-AI כותב את הנוסח ונותן שלושה עיצובים מוכנים.",ai_go:"צור 3 עיצובים",vid_h:"הזמנות וידאו",vid_p:"הפכו כל עיצוב לסרטון של 5, 10 או 15 שניות, עם 18 אנימציות ו-15 מנגינות.",f_h:"חברים מייסדים",f_p:"30 המצטרפים הראשונים מורידים את כל עיצובי הפרימיום בחינם, לתמיד.",f_join:"שמרו לי מקום",how_h:"איך זה עובד",how_s:"שלושה צעדים. בלי ידע בעיצוב.",s1:"בוחרים עיצוב",s1p:"בוחרים שמחה ועיצוב, או מתחילים מדף ריק.",s2:"מקלידים מילים",s2p:"נוגעים בכל טקסט כדי לשנות. נוסחים מוכנים ומקלדת יידיש.",s3:"מורידים ומשתפים",s3p:"שומרים תמונה או סרטון, שולחים בוואטסאפ או מדפיסים.",ab_h:"אודות",ab_p:"Invitely נועד כדי שכל אחד יוכל לעצב הזמנה יפה בכמה דקות, בלי מעצב. יידיש, לשון קודש ואנגלית עובדות יחד, הנוסח מוכן, והגרסה החינמית באמת חינמית.",rv_h:"ביקורות",rv_post:"פרסום",undo:"בטל",surprise:"הפתעה",save:"שמור",download:"הורדה",tb_bg:"רקע",tb_text:"טקסט",tb_ready:"טקסט מוכן",tb_el:"אלמנטים",tb_photo:"תמונה",tb_ex:"דוגמאות"}
 };
 const EN={};$$('[data-i]').forEach(e=>EN[e.dataset.i]=e.textContent);$$('[data-ih]').forEach(e=>EN[e.dataset.ih]=e.innerHTML);
 let LANG='en';
@@ -484,8 +524,8 @@ function setLang(l){LANG=l;try{localStorage.setItem('ez_lang',l)}catch(e){}
  const d=l==='en'?{}:I18N[l];document.documentElement.dir=l==='en'?'ltr':'rtl';document.documentElement.lang=l==='yi'?'yi':l;
  $$('[data-i]').forEach(e=>e.textContent=d[e.dataset.i]||EN[e.dataset.i]);
  $$('[data-ih]').forEach(e=>e.innerHTML=d[e.dataset.ih]||EN[e.dataset.ih]);
- $$('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));renderFAQ();}
-$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+ $$('.lang button[data-l]').forEach(b=>b.classList.toggle('on',b.dataset.l===l));const lc=$('#langCur span');if(lc)lc.textContent=l==='en'?'EN':l==='yi'?'אידיש':'לשון קודש';$('#langBox')?.classList.remove('open');renderFAQ();window.applyI18N&&applyI18N();}
+$$('.lang button[data-l]').forEach(b=>b.onclick=()=>setLang(b.dataset.l));$('#langCur').onclick=e=>{e.stopPropagation();$('#langBox').classList.toggle('open')};document.addEventListener('click',e=>{if(!e.target.closest('#langBox'))$('#langBox')?.classList.remove('open')});
 
 /* ---------------- data: categories ---------------- */
 const CATS=[
@@ -504,7 +544,7 @@ const CATS=[
 ['sholomzochor','Sholom Zochor','שלום זכר','🍺','שלום זכר','מיר לאדן אייך איין צום','Please join us for the Sholom Zochor'],
 ['pidyon','Pidyon Haben','פדיון הבן','🪙','פדיון הבן','מיר לאדן אייך איין צו דער סעודת','Please join us for the Pidyon Haben of'],
 ['upsherin','Upsherin','אפשערן','✂️','אפשערן','מיר לאדן אייך איין צום','Please join us for the Upsherin of'],
-['tenaim','Tenaim','תנאים','🍽️','תנאים','מיר לאדן אייך איין צו די','Please join us for the Tenaim of'],
+['tenaim','Tenoyim','תנאים','🍽️','תנאים','מיר לאדן אייך איין צו די','Please join us for the Tenaim of'],
 ['shevabrachos','Sheva Brachos','שבע ברכות','🍾','שבע ברכות','לכבוד החתן והכלה לאדן מיר אייך איין צו','Please join us for Sheva Brachos in honor of'],
 ['tefillin','Hanachas Tefillin','הנחת תפילין','🧿','הנחת תפילין','מיר לאדן אייך איין צו דער','Please join us for the Hanachas Tefillin of'],
 ['aufruf','Aufruf','אויפרוף','📖','אויפרוף','מיר לאדן אייך איין צום','Please join us for the Aufruf of'],
@@ -760,7 +800,7 @@ function drawObj(ctx,o){const bb=measure(ctx,o);o._bb=bb;ctx.save();ctx.translat
  }else if(o.t==='el'){if(o.ch.startsWith('sv:')){const [,id,pk]=o.ch.split(':');const im=svImg(id,pk);if(ctx.canvas)ctx.canvas._hasSv=true;if(im&&im.complete&&im.naturalWidth)ctx.drawImage(im,-bb.w/2,-bb.h/2,bb.w,bb.h)}else if(o.ch[0]===':')drawShape(ctx,o.ch.slice(1),o.size,o.fill==='gold'?goldGrad(ctx,-o.size/2,-o.size/2,o.size/2,o.size/2):(o.color||'#B8892E'));
   else if(o.ch[0]==='@'){ctx.font=`900 ${o.size}px "Frank Ruhl Libre"`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=o.fill==='gold'?goldGrad(ctx,0,-o.size/2,0,o.size/2):(o.color||'#B8892E');ctx.fillText(o.ch.slice(1),0,0)}
   else{ctx.font=`${o.size*.85}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(o.ch,0,o.size*.05)}
- }else if(o.t==='photo'&&!o.src){const w=bb.w,h=bb.h;ctx.fillStyle='rgba(255,255,255,.55)';ctx.strokeStyle='rgba(0,0,0,.25)';ctx.lineWidth=4;ctx.setLineDash([16,12]);if(o.shape==='circle'){ctx.beginPath();ctx.arc(0,0,w/2,0,7)}else roundRect(ctx,-w/2,-h/2,w,h,o.shape==='rounded'?w*.12:4);ctx.fill();ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(0,0,0,.45)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`700 ${Math.max(22,w*.08)}px Heebo,sans-serif`;ctx.fillText('📷 Add photo',0,0)
+ }else if(o.t==='photo'&&!o.src){const w=bb.w,h=bb.h;ctx.fillStyle='rgba(255,255,255,.55)';ctx.strokeStyle='rgba(0,0,0,.25)';ctx.lineWidth=4;ctx.setLineDash([16,12]);if(o.shape==='circle'){ctx.beginPath();ctx.arc(0,0,w/2,0,7)}else roundRect(ctx,-w/2,-h/2,w,h,o.shape==='rounded'?w*.12:4);ctx.fill();ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(0,0,0,.45)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`700 ${Math.max(22,w*.08)}px Heebo,sans-serif`;ctx.fillText('Add photo',0,0)
  }else if(o.t==='photo'){const im=getImg(o.src);if(im.complete&&im.naturalWidth){const w=bb.w,h=bb.h;ctx.save();ctx.globalAlpha=1-(o.fade||0);
   if(o.border){ctx.save();ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=20;ctx.fillStyle='#fff';const b=w*.04;if(o.shape==='circle'){ctx.beginPath();ctx.arc(0,0,w/2+b,0,7)}else roundRect(ctx,-w/2-b,-h/2-b,w+2*b,h+2*b,o.shape==='rounded'?w*.12+b:2);ctx.fill();ctx.restore()}
   if(o.shape==='circle'){ctx.beginPath();ctx.arc(0,0,w/2,0,7)}else roundRect(ctx,-w/2,-h/2,w,h,o.shape==='rounded'?w*.12:0.1);ctx.clip();
@@ -786,14 +826,14 @@ function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*((d.h||(d.land?
 /* ---------------- home rendering ---------------- */
 const CAT_IC={vachnacht:'<img src="ic/cradle.svg" alt="">',vachbris:'<img src="ic/throne.svg" alt=""><em>🍻</em>',barmitzvah:'<img src="ic/tefillin.svg" alt="">',bavarfen:'<img src="ic/shtreimel.svg" alt="">',tenaim:'<img src="ic/plate.svg" alt="">',wedding:'<img src="ic/chuppah.svg" alt="">',sholomzochor:'🥜<em>🍺</em>',pidyon:'<img src="ic/coins.svg" alt="">',kiddush:'🥃'};
 function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${CAT_IC[c[0]]||c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
-function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='★ Example';b.appendChild(s)}else if(d.tier!=='free'){const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':'');s.textContent=d.tier==='pro'?'Pro':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
+function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='Example';b.appendChild(s)}else if(d.tier!=='free'){const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':'');s.textContent=d.tier==='pro'?'Pro':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
 function renderPremium(){const g=$('#premGrid');g.innerHTML='<p class="hint"><span class="spin"></span></p>';const picks=['wedding','barmitzvah','kiddush','vort','bris','lchaim','sholomzochor','shevabrachos'];
  const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const L=(SMP_BY[k]||[]).filter(r=>r[3]!=='free'&&!r[7]&&hasBg(r));const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
 const TPL_PER=19;
 let gL='all',gQ='',gList=[],gShown=0;const PAGE=24;
 function tplLang(i){return i%3===2?'en':'yi'}
-let rcTok=0;async function renderCat(slug,f='all'){const c=CAT[slug];if(!c)return;curCat=slug;const tok=++rcTok;$('#catGrid').innerHTML='<p class="hint"><span class="spin"></span> Loading designs…</p>';await loadCat(slug);if(tok!==rcTok)return;$('#catIcon').textContent=c.icon;$('#catName').textContent=c.en;$('#catHe').textContent=c.he;const g=$('#catGrid');g.innerHTML='';
- if(f==='all'||f==='free'){const b=document.createElement('button');b.className='tpl blank';b.innerHTML='<i>＋</i><span>Start blank</span>';b.onclick=()=>{const d=blankDesign();d.objs[1].text=c.title;d.objs[1].font='Frank Ruhl Libre';openEditor(d)};g.appendChild(b)}
+let rcTok=0;async function renderCat(slug,f='all'){const c=CAT[slug];if(!c)return;curCat=slug;const tok=++rcTok;$('#catGrid').innerHTML='<p class="hint"><span class="spin"></span> Loading designs…</p>';await loadCat(slug);if(tok!==rcTok)return;$('#catIcon').innerHTML=CAT_IC[slug]||'';$('#catName').textContent=c.en;$('#catHe').textContent=c.he;const g=$('#catGrid');g.innerHTML='';
+ if(f==='all'||f==='free'){const b=document.createElement('button');b.className='tpl blank';b.innerHTML='<i>+</i><span>Start blank</span>';b.onclick=()=>{const d=blankDesign();d.objs[1].text=c.title;d.objs[1].font='Frank Ruhl Libre';openEditor(d)};g.appendChild(b)}
  const q=gQ.toLowerCase();gList=catDesigns(slug).filter(fn=>{const m=dMeta(fn);if(f!=='all'&&m.tier!==f)return false;if(gL==='en'&&m.lang!=='en')return false;if(gL==='yi'&&m.lang==='en')return false;if(q&&!(m.text+' '+m.tier).toLowerCase().includes(q))return false;return true});
  gShown=0;$('#gCount').textContent=`${gList.length.toLocaleString()} design${gList.length===1?'':'s'}`;moreCat();if(!gList.length)g.insertAdjacentHTML('beforeend','<p class="hint">No designs match.</p>')}
 function moreCat(){const g=$('#catGrid');gList.slice(gShown,gShown+PAGE).forEach(fn=>g.appendChild(tplButton(fn())));gShown+=PAGE;$('#gMore').style.display=gShown<gList.length?'':'none'}
@@ -807,11 +847,11 @@ function renderStats(){const s=[[SMP.length+CATS.length*TPL_PER,'ready examples'
  $('#stats').innerHTML=s.map(([n,l])=>`<div class="stat"><b>${n.toLocaleString()}</b><small>${l}</small></div>`).join('')}
 const FAQ=[
 ['How do I make a video or an invitation link?','Open any design and tap Video at the top. Pick an animation (envelope, bottle, gold sparkle and 15 more), choose a tune or upload your own music, and tap Make video to download it. Fill in the date, time and address to get a WhatsApp message with Add to Calendar and Open in Maps links for your guests.'],
-['What is AI mode?','Tap ✨ AI mode and tell it your simcha, the names, date and place. It picks matching designs, fills in your details, and opens them ready to edit. It can also suggest wording. It only helps with simcha designs.'],
+['What is AI mode?','Tap AI mode and tell it your simcha, the names, date and place. It picks matching designs, fills in your details, and opens them ready to edit. It can also suggest wording. It only helps with simcha designs.'],
 ['How much does it cost?',"Designing is always free, and free designs download free. Premium and Premium Pro designs are pay-per-download: pictures are $4.99 (Premium) or $8.99 (Premium Pro), and videos are $9.99 or $11.99. You see the price before you pay, and there are no subscriptions. The first 30 members keep every Premium item free, for good."],
 ['Can I get a refund?',"Yes, if you were charged but did not get your download, were charged twice, or the file is broken. Email us within 14 days. Downloads you received successfully are final, but after paying you have 48 hours to fix a typo and download again at no extra charge. See the Refunds page for details."],
-['Can I write in Yiddish or Hebrew?','Yes. Type in any language. Hebrew and Yiddish text goes right-to-left automatically, and there are over 30 Hebrew-letter fonts like Frank Ruhl, David, Suez One and Secular One. Numbers and times like 9:30 stay in the right order. There is also an on-screen Yiddish keyboard.'],
-["I don't know what to write. Can you help?",'Tap Ready text in the editor. There are 860 ready lines and full wordings for every event: openings, invitation lines, date and place lines, blessings and closings, in Yiddish, Hebrew and English. Tap one to add it, then change the names.'],
+['Can I write in Yiddish or Lashon Kodesh?','Yes. Type in any language. Lashon Kodesh and Yiddish text goes right-to-left automatically, and there are over 30 Hebrew-letter fonts like Frank Ruhl, David, Suez One and Secular One. Numbers and times like 9:30 stay in the right order. There is also an on-screen Yiddish keyboard.'],
+["I don't know what to write. Can you help?",'Tap Ready text in the editor. There are 860 ready lines and full wordings for every event: openings, invitation lines, date and place lines, blessings and closings, in Yiddish, Lashon Kodesh and English. Tap one to add it, then change the names.'],
 ['Can I start from an example?','Yes. There are thousands of finished examples. Open one, change the names, date and place, and download. You can also switch the background with one tap and keep your words.'],
 ['Can I add a photo?','Yes. Tap Photo, choose a picture from your phone, then make it round or square and add a white border.'],
 ['How do I send it on WhatsApp?','Tap Download. The picture is saved to your phone. Then share it on WhatsApp, by text or email like any photo.'],
@@ -819,7 +859,7 @@ const FAQ=[
 ['Do I need an account?','No account is needed to design and download. Sign up to save your designs and come back to them on any device.'],
 ['Is my design private?',"Yes. Your saved designs are only shown to you when you're logged in. We don't share them."],
 ['Can I make flyers for my business or shul?','Yes. There are examples for sales, openings, shiurim, gemachs, melava malkas and community events, in Yiddish and English.']];
-function renderFAQ(){$('#faqList').innerHTML='';FAQ.forEach(([q,a])=>{const d=document.createElement('details');d.className='faq';d.innerHTML='<summary></summary><p></p>';d.querySelector('summary').textContent=q;d.querySelector('p').textContent=a;$('#faqList').appendChild(d)})}
+function renderFAQ(){$('#faqList').innerHTML='';const aiOn=document.documentElement.classList.contains('ai-on');FAQ.forEach(([q,a])=>{if(!aiOn&&/AI mode/.test(q))return;const d=document.createElement('details');d.className='faq';d.innerHTML='<summary></summary><p></p>';d.querySelector('summary').textContent=q;d.querySelector('p').textContent=a;$('#faqList').appendChild(d)})}
 
 /* ---------------- routing ---------------- */
 function route(){const h=location.hash.slice(1);if(h==='simple'||h.startsWith('simple-')||h.startsWith('card-')){$('#home').classList.remove('on');$('#catView').classList.remove('on');return}if(h.startsWith('c-')&&CAT[h.slice(2)]){$('#home').classList.remove('on');$('#catView').classList.add('on');$$('#catFilter button').forEach((b,i)=>b.classList.toggle('on',i===0));gQ='';$('#gSearch').value='';renderCat(h.slice(2));scrollTo(0,0);return}
@@ -841,7 +881,7 @@ const SWATCH=['#000000','#ffffff','#2B2320','#7C2D3A','#B8892E','#1F2A44','#0B3D
 function h(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content}
 function selObj(){return D.objs[SEL]}
 function renderPanel(){const P=$('#pbody');P.innerHTML='';const o=selObj();
- if(TAB==='bg'){let f=P._bgf||'all';const CH=[['all','All'],['photo','📷 Photo'],['eleg','Elegant floral'],['classicimg','Simcha classics'],['papercut','Paper-cut 3D'],['jewish','Jewish'],['elegant','Elegant'],['modern','Modern'],['floral','Floral'],['kids','Kids & Upsherin'],['wedding','Wedding & Vort'],['simple','Simple'],['premium','Premium'],['pro','Pro scenes'],['classic','Classic'],['plain','Plain colors'],['custom','Custom']];
+ if(TAB==='bg'){let f=P._bgf||'all';const CH=[['all','All'],['photo','Photo'],['eleg','Elegant floral'],['classicimg','Simcha classics'],['papercut','Paper-cut 3D'],['jewish','Jewish'],['elegant','Elegant'],['modern','Modern'],['floral','Floral'],['kids','Kids & Upsherin'],['wedding','Wedding & Vort'],['simple','Simple'],['premium','Premium'],['pro','Pro scenes'],['classic','Classic'],['plain','Plain colors'],['custom','Custom']];
   P.appendChild(h(`<input id="bgQ" type="search" dir="auto" placeholder="Search: floral, marble, gold, navy, crown…" style="margin-bottom:8px"><div class="chips">${CH.map(([k,n])=>`<button data-f="${k}">${n}</button>`).join('')}</div><p class="hint" id="bgCount"></p>`));
   const g=document.createElement('div');g.className='bggrid';P.appendChild(g);
   const items=()=>{const q=(P._bq||'').toLowerCase();let L=[];
@@ -859,7 +899,10 @@ function renderPanel(){const P=$('#pbody');P.innerHTML='';const o=selObj();
     b.title=x.name;b.onclick=()=>{snap();const old=D.bg;D.bg=JSON.parse(JSON.stringify(x.bg));adaptInk(old);g.querySelectorAll('.on').forEach(y=>y.classList.remove('on'));b.classList.add('on');draw()};g.appendChild(b)});
    if(L.length>(P._bn||160)){const m=document.createElement('button');m.className='btn sm ghost';m.style.cssText='grid-column:1/-1;aspect-ratio:auto';m.textContent='Show more';m.onclick=()=>{P._bn=(P._bn||160)+160;fill()};g.appendChild(m)}};
   P.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{f=P._bgf=b.dataset.f;P._bn=160;fill()});$('#bgQ').value=P._bq||'';$('#bgQ').oninput=e=>{P._bq=e.target.value;if(f==='custom'||f==='plain')f=P._bgf='all';fill()};fill();return}
- if(TAB==='text'){P.appendChild(h(`<button class="btn sm" id="addT" style="width:100%">＋ Add text</button>`));$('#addT').onclick=()=>{snap();D.objs.push(T(LANG==='en'?'New text':'נייער טעקסט',H/2,72,LANG==='en'?'Playfair Display':'Frank Ruhl Libre',{color:bgInk(D.bg)}));SEL=D.objs.length-1;draw();renderPanel();setTimeout(()=>$('#tTxt')&&$('#tTxt').focus(),50)};
+ if(TAB==='text'){P.appendChild(h(`<button class="btn sm" id="addT" style="width:100%">+ Add text</button>`));$('#addT').onclick=()=>{snap();D.objs.push(T(LANG==='en'?'New text':'נייער טעקסט',H/2,72,LANG==='en'?'Playfair Display':'Frank Ruhl Libre',{color:bgInk(D.bg)}));SEL=D.objs.length-1;draw();renderPanel();setTimeout(()=>$('#tTxt')&&$('#tTxt').focus(),50)};
+  P.appendChild(h(`<div class="hdate"><label class="f">Hebrew date and parsha</label><div class="row" style="gap:6px;align-items:center"><input type="date" id="hdD" style="flex:1;min-width:140px"><label class="chk"><input type="checkbox" id="hdA"> After shkiah</label><button class="btn sm" id="hdGo" type="button">${o&&o.t==='text'?'Put in this text':'Add'}</button></div><p class="hint" id="hdOut" dir="rtl" style="min-height:18px;margin:4px 0 0"></p></div>`));
+  {const upd=()=>{const v=$('#hdD').value;$('#hdOut').textContent=v&&window.hebLine?hebLine(v,$('#hdA').checked):''};$('#hdD').oninput=upd;$('#hdA').onchange=upd;
+   $('#hdGo').onclick=()=>{const t=$('#hdOut').textContent;if(!t){toast('Pick a date first');return}snap();if(o&&o.t==='text'){o.text=t}else{D.objs.push(T(t,H*.62,44,'Frank Ruhl Libre',{color:bgInk(D.bg)}));SEL=D.objs.length-1}draw();renderPanel()}}
   if(!o||o.t!=='text'){P.appendChild(h(`<p class="hint">Tap any text on the design to edit it.</p>`));return}
   P.appendChild(h(`<label class="f">Text</label><textarea id="tTxt" rows="3" dir="auto"></textarea>
   <label class="f">Font</label><div class="chips" id="fF"><button data-v="1" class="on">Hebrew letters</button><button data-v="0">English</button></div><div class="fontlist" id="fL"></div>
@@ -900,9 +943,9 @@ function renderPanel(){const P=$('#pbody');P.innerHTML='';const o=selObj();
    $('#eS').onpointerdown=$('#eR').onpointerdown=()=>snap();$('#eS').oninput=e=>{o.size=+e.target.value;draw()};$('#eR').oninput=e=>{o.rot=+e.target.value;draw()};
    if($('#eP')){$$('#eP button').forEach(b=>{b.classList.toggle('on',o.ch.split(':')[2]===b.dataset.k);b.onclick=()=>{snap();const pr=o.ch.split(':');o.ch='sv:'+pr[1]+':'+b.dataset.k;draw();$$('#eP button').forEach(x=>x.classList.toggle('on',x===b))}})}
    if($('#eCp')){$('#eCp').oninput=e=>{o.color=e.target.value;o.fill='solid';draw()};$$('#eF button').forEach(b=>{b.classList.toggle('on',b.dataset.v===(o.fill||'solid'));b.onclick=()=>{snap();o.fill=b.dataset.v;draw();$$('#eF button').forEach(x=>x.classList.toggle('on',x===b))}})}objBtns()}return}
- if(TAB==='photo'){P.appendChild(h(`<label class="btn" style="width:100%">📷 Upload photo<input type="file" accept="image/*" id="pF" hidden></label><p class="hint">Photos stay on your device unless you save the design to your account.</p><div id="pO"></div>`));
+ if(TAB==='photo'){P.appendChild(h(`<label class="btn" style="width:100%">Upload photo<input type="file" accept="image/*" id="pF" hidden></label><p class="hint">Photos stay on your device unless you save the design to your account.</p><div id="pO"></div>`));
   $('#pF').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const m=900,s=Math.min(1,m/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);const src=c.toDataURL('image/jpeg',.85);snap();const ph=D.objs.findIndex(o=>o.t==='photo'&&!o.src);if(ph>=0){D.objs[ph].src=src;SEL=ph}else{D.objs.push({t:'photo',src,x:540,y:560,size:520,shape:'circle',border:true,rot:0});SEL=D.objs.length-1}getImg(src);draw();renderPanel()};im.src=r.result};r.readAsDataURL(f)};
-  if(o&&o.t==='photo'){$('#pO').appendChild(h(`<label class="btn sm ghost" style="margin:8px 0">📷 Change photo / טוישן בילד<input type="file" accept="image/*" id="pC" hidden></label><label class="f">Shape</label><div class="seg" id="pS"><button data-v="square">Square</button><button data-v="rounded">Rounded</button><button data-v="circle">Circle</button><button data-v="free">Original</button></div><label class="f">White border</label><div class="seg" id="pB"><button data-v="1">On</button><button data-v="0">Off</button></div><label class="f">Size</label><input type="range" id="pZ" min="80" max="1080" value="${o.size}"><label class="f">Fade <span id="pOV">${Math.round((o.fade||0)*100)}%</span></label><input type="range" id="pOp" min="0" max="90" value="${Math.round((o.fade||0)*100)}"><label class="f">Rotate</label><input type="range" id="pR" min="-180" max="180" value="${o.rot}">${rotRow()}<div class="row" style="margin-top:12px"><button class="btn sm ghost" id="oDup">Duplicate</button><button class="btn sm ghost" id="oUp">Forward</button><button class="btn sm ghost" id="oDn">Back</button><button class="btn sm" id="oDel" style="background:#A33">Delete</button></div>`));
+  if(o&&o.t==='photo'){$('#pO').appendChild(h(`<label class="btn sm ghost" style="margin:8px 0">Change photo<input type="file" accept="image/*" id="pC" hidden></label><label class="f">Shape</label><div class="seg" id="pS"><button data-v="square">Square</button><button data-v="rounded">Rounded</button><button data-v="circle">Circle</button><button data-v="free">Original</button></div><label class="f">White border</label><div class="seg" id="pB"><button data-v="1">On</button><button data-v="0">Off</button></div><label class="f">Size</label><input type="range" id="pZ" min="80" max="1080" value="${o.size}"><label class="f">Fade <span id="pOV">${Math.round((o.fade||0)*100)}%</span></label><input type="range" id="pOp" min="0" max="90" value="${Math.round((o.fade||0)*100)}"><label class="f">Rotate</label><input type="range" id="pR" min="-180" max="180" value="${o.rot}">${rotRow()}<div class="row" style="margin-top:12px"><button class="btn sm ghost" id="oDup">Duplicate</button><button class="btn sm ghost" id="oUp">Forward</button><button class="btn sm ghost" id="oDn">Back</button><button class="btn sm" id="oDel" style="background:#A33">Delete</button></div>`));
    $('#pC').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const m=900,sc=Math.min(1,m/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*sc;c.height=im.height*sc;c.getContext('2d').drawImage(im,0,0,c.width,c.height);snap();o.src=c.toDataURL('image/jpeg',.85);getImg(o.src);draw()};im.src=r.result};r.readAsDataURL(f)};
    const sg=()=>{$$('#pS button').forEach(b=>b.classList.toggle('on',b.dataset.v===o.shape));$$('#pB button').forEach(b=>b.classList.toggle('on',(b.dataset.v==='1')===!!o.border))};sg();
    $$('#pS button').forEach(b=>b.onclick=()=>{snap();o.shape=b.dataset.v;draw();sg()});$$('#pB button').forEach(b=>b.onclick=()=>{snap();o.border=b.dataset.v==='1';draw();sg()});
@@ -962,14 +1005,30 @@ function cap(n){if(!CAP[n])CAP[n]=(window.INV&&INV.use?INV.use(n):window.claude&
 
 /* ---------------- download / save ---------------- */
 function exportPNG(){const c=document.createElement('canvas');c.width=W;c.height=EH;renderDesign(c.getContext('2d'),D,W,EH,-1);return c}
-async function offerFile(blob,filename,kind){const dl=await cap('downloads');if(dl){try{await dl.save({filename,data:blob});toast('Saved ✔');return}catch(e){if(e&&e.code==='declined')return}}
- const url=URL.createObjectURL(blob);if(!window.claude){const l=document.createElement('a');l.href=url;l.download=filename;document.body.appendChild(l);l.click();l.remove();toast('Downloaded ✔');return}if(kind==='video'){$('#imgOut').style.display='none';const v=$('#vidOut');v.style.display='';v.src=url}else{$('#vidOut').style.display='none';const i=$('#imgOut');i.style.display='';i.src=url}openM('mImg')}
-$('#eDown').onclick=()=>{SEL=-1;draw();(c=>{stampMark(c.getContext('2d'),c.width,c.height);return c})(exportPNG()).toBlob(b=>offerFile(b,`${CAT[curCat]?.slug||'simcha'}-invitation.png`),'image/png')};
+async function offerFile(blob,filename,kind){const dl=await cap('downloads');if(dl){try{await dl.save({filename,data:blob});toast('Saved');return}catch(e){if(e&&e.code==='declined')return}}
+ const url=URL.createObjectURL(blob);if(!/iPhone|iPad|iPod/.test(navigator.userAgent)||kind==='video'){const l=document.createElement('a');l.href=url;l.download=filename;document.body.appendChild(l);l.click();l.remove();toast('Downloaded');return}if(kind==='video'){$('#imgOut').style.display='none';const v=$('#vidOut');v.style.display='';v.src=url}else{$('#vidOut').style.display='none';const i=$('#imgOut');i.style.display='';i.src=url}openM('mImg')}
+/* Download choices: Phone (WhatsApp size), HD / Print (2x), and a letter-size PDF */
+function exportAt(k){const c=document.createElement('canvas');c.width=W*k;c.height=EH*k;renderDesign(c.getContext('2d'),D,c.width,c.height,-1);return c}
+function pdfBlob(cv){const jpg=atob(cv.toDataURL('image/jpeg',.93).split(',')[1]),iw=cv.width,ih=cv.height,land=iw>ih,PW=land?792:612,PH=land?612:792,m=18,sc=Math.min((PW-2*m)/iw,(PH-2*m)/ih),w=(iw*sc).toFixed(2),h=(ih*sc).toFixed(2),x=((PW-iw*sc)/2).toFixed(2),y=((PH-ih*sc)/2).toFixed(2);
+ const cs=`q ${w} 0 0 ${h} ${x} ${y} cm /Im0 Do Q`,o=[],parts=['%PDF-1.4\n'];let len=parts[0].length;const add=t=>{o.push(len);parts.push(t);len+=t.length};
+ add('1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n');add('2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj\n');
+ add(`3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${PW} ${PH}]/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>endobj\n`);
+ add(`4 0 obj<</Type/XObject/Subtype/Image/Width ${iw}/Height ${ih}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${jpg.length}>>stream\n${jpg}\nendstream endobj\n`);
+ add(`5 0 obj<</Length ${cs.length}>>stream\n${cs}\nendstream endobj\n`);
+ const xr=len;let t='xref\n0 6\n0000000000 65535 f \n'+o.map(v=>String(v).padStart(10,'0')+' 00000 n \n').join('')+`trailer<</Size 6/Root 1 0 R>>\nstartxref\n${xr}\n%%EOF`;parts.push(t);
+ const str=parts.join(''),u=new Uint8Array(str.length);for(let i=0;i<str.length;i++)u[i]=str.charCodeAt(i)&255;return new Blob([u],{type:'application/pdf'})}
+window.pdfBlob=pdfBlob;
+window.chooseDownload=function(cb){let m=document.getElementById('mDl');if(!m){m=document.createElement('div');m.className='modal';m.id='mDl';document.body.appendChild(m);m.addEventListener('click',e=>{if(e.target===m||e.target.closest('[data-x]'))m.classList.remove('on')})}
+ m.innerHTML='<div class="sheet" style="max-width:420px"><h3><span>Download</span><button class="x" type="button" data-x aria-label="Close">×</button></h3><div class="dlopts"><button class="btn" data-k="phone"><b>Phone</b><small>Sharp picture for WhatsApp and text</small></button><button class="btn ghost" data-k="hd"><b>HD / Print</b><small>Double size picture for printing</small></button><button class="btn ghost" data-k="pdf"><b>Print PDF</b><small>Letter size page, ready to print</small></button></div></div>';
+ m.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{m.classList.remove('on');cb(b.dataset.k)});m.classList.add('on')};
+function doDownload(k){const c=exportAt(k==='phone'?1:2);stampMark(c.getContext('2d'),c.width,c.height);const base=`${CAT[curCat]?.slug||'simcha'}-invitation`;
+ if(k==='pdf')offerFile(pdfBlob(c),base+'.pdf');else c.toBlob(b=>offerFile(b,base+(k==='hd'?'-hd':'')+'.png'),'image/png')}
+$('#eDown').onclick=()=>{SEL=-1;draw();chooseDownload(k=>(window.payGate||((kind,run)=>run()))('image',()=>doDownload(k)))};
 function localDesigns(){try{return JSON.parse(localStorage.getItem('ez_designs')||'[]')}catch(e){return[]}}
 async function saveDesign(){const id=D.id||('d'+Date.now().toString(36));D.id=id;const rec={id,cat:curCat,at:Date.now(),design:JSON.stringify(D)};
  const u=await cap('user'),db=await cap('db');const uid=u&&await u.id();
- if(db&&uid){try{await db.collection('data/users/'+uid).doc(id).set(rec);toast('Saved to your account ✔');return}catch(e){}}
- try{const L=localDesigns().filter(x=>x.id!==id);L.unshift(rec);localStorage.setItem('ez_designs',JSON.stringify(L.slice(0,30)));toast('Saved on this device ✔')}catch(e){toast('Could not save here')}}
+ if(db&&uid){try{await db.collection('data/users/'+uid).doc(id).set(rec);toast('Saved to your account');return}catch(e){}}
+ try{const L=localDesigns().filter(x=>x.id!==id);L.unshift(rec);localStorage.setItem('ez_designs',JSON.stringify(L.slice(0,30)));toast('Saved on this device')}catch(e){toast('Could not save here')}}
 $('#eSave').onclick=saveDesign;
 
 /* ---------------- modals ---------------- */
@@ -1014,7 +1073,7 @@ function scheduleSong(ac,dest,i,t0,dur){if(i===99){if(!UPRAW)return;ac.decodeAud
  for(let b=0,tt=t0;tt<t0+dur;b++,tt+=spb){const deg=[0,0,4,3][Math.floor(b/P.beats)%4];note(P.root-12+P.sc[deg],tt,spb*.9,'sine',b%P.beats===0?.35:.18);if(b%P.beats)note(P.root+P.sc[deg],tt+spb*.5,spb*.4,'triangle',.06);hit(tt+(b%2?spb/2:0),.08)}}
 
 /* ---------------- video animations ---------------- */
-const ANIMS=[['envelope','✉️','Envelope'],['bottle','🍾','Bottle'],['sparkle','✨','Gold sparkle'],['seal','🔴','Wax seal'],['scroll','📜','Scroll'],['letter','💌','Letter'],['gift','🎁','Gift box'],['curtain','🎭','Curtain'],['sefer','📖','Sefer'],['confetti','🎊','Confetti'],['flowers','🌸','Flowers'],['fade','🌅','Soft fade'],['zoom','🔍','Zoom'],['hearts','💖','Hearts'],['balloons','🎈','Balloons'],['stars','🌟','Stars'],['kenburns','🎥','Slow pan'],['shine','💫','Shine']];
+const ANIMS=[['envelope','','Envelope'],['bottle','','Bottle'],['sparkle','','Gold sparkle'],['seal','','Wax seal'],['scroll','','Scroll'],['letter','','Letter'],['gift','','Gift box'],['curtain','','Curtain'],['sefer','','Sefer'],['confetti','','Confetti'],['flowers','','Flowers'],['fade','','Soft fade'],['zoom','','Zoom'],['hearts','','Hearts'],['balloons','','Balloons'],['stars','','Stars'],['kenburns','','Slow pan'],['shine','','Shine']];
 let VA='envelope',VD=10,VS=0,UPBUF=null,UPRAW=null;
 function particles(n,seed){const R=rng(seed);return Array.from({length:n},()=>({x:R(),y:R(),s:R(),v:.4+R()*.8,r:R()*6.28,c:R()}))}
 const PP={c:particles(140,5),s:particles(90,9),f:particles(46,13),h:particles(30,17)};
@@ -1112,9 +1171,10 @@ function vFrame(ctx,w,h,t,dur,anim,img){const k=w/1080,ip=Math.min(2.6,dur*.38),
  }
  ctx.restore();stageFront(ctx,w,h,t,dur,ip,R);
  ctx.restore()}
+let vRAF=0,vAC=null;
 function stopPreview(){cancelAnimationFrame(vRAF);vRAF=0;if(vAC){vAC.close().catch(()=>{});vAC=null}}
 function designImage(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;if(D.land){const x=c.getContext('2d');x.fillStyle='#14100D';x.fillRect(0,0,w,h);const l=document.createElement('canvas');l.width=w;l.height=Math.round(w*.8);renderDesign(l.getContext('2d'),D,l.width,l.height,-1);x.drawImage(l,0,(h-l.height)/2)}else renderDesign(c.getContext('2d'),D,w,h,-1);return c}
-function buildVideoUI(){const g=$('#vAnims');g.innerHTML='';ANIMS.forEach(([id,ic,n])=>{const b=document.createElement('button');b.innerHTML=`<i>${ic}</i>`;b.append(n);b.classList.toggle('on',id===VA);b.onclick=()=>{VA=id;$$('#vAnims button').forEach(x=>x.classList.toggle('on',x===b));playPreview(false)};g.appendChild(b)});
+function buildVideoUI(){const g=$('#vAnims');g.innerHTML='';ANIMS.forEach(([id,ic,n])=>{const b=document.createElement('button');b.append(n);b.classList.toggle('on',id===VA);b.onclick=()=>{VA=id;$$('#vAnims button').forEach(x=>x.classList.toggle('on',x===b));playPreview(false)};g.appendChild(b)});
  const s=$('#vSong');s.innerHTML='<option value="-1">No music</option>'+SONGS.map((n,i)=>`<option value="${i}">${n}</option>`).join('')+(UPRAW?'<option value="99">My uploaded music</option>':'');s.value=VS;s.onchange=()=>{VS=+s.value;playPreview(true)};
  $$('#vDur button').forEach(b=>{b.classList.toggle('on',+b.dataset.d===VD);b.onclick=()=>{VD=+b.dataset.d;$$('#vDur button').forEach(x=>x.classList.toggle('on',x===b))}});
  const c=CAT[curCat]||CAT['barmitzvah'];if(!$('#evTitle').value)$('#evTitle').value=c.en;updateEvent()}
@@ -1127,14 +1187,14 @@ $('#vUp').onchange=async e=>{const f=e.target.files[0];if(!f)return;UPRAW=await 
 $('#vRec').onclick=async()=>{if(typeof MediaRecorder==='undefined'){$('#vStatus').textContent='Video recording is not supported in this browser.';return}stopPreview();
  const vc=$('#vcv'),ctx=vc.getContext('2d'),img=designImage(vc.width,vc.height);stampMark(img.getContext('2d'),img.width,img.height);const stream=vc.captureStream(30);let ac=null;
  if(VS>=0){try{ac=new AudioContext();const dst=ac.createMediaStreamDestination();scheduleSong(ac,dst,VS,ac.currentTime+.1,VD);dst.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}catch(e){}}
- const types=['video/mp4;codecs=avc1,mp4a','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];const mt=types.find(t=>MediaRecorder.isTypeSupported(t))||'';const rec=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:5e6}:{});const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+ const types=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4;codecs=avc1.4D401F,mp4a.40.2','video/mp4;codecs=avc1,mp4a','video/mp4;codecs=avc1','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'];/* H.264 MP4 plays everywhere; otherwise WebM, named .webm */const mt=types.find(t=>MediaRecorder.isTypeSupported(t))||'';const rec=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:5e6}:{});const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
  const btn=$('#vRec');btn.disabled=true;rec.start(250);const t0=performance.now();
  await new Promise(res=>{const step=()=>{const t=(performance.now()-t0)/1000;vFrame(ctx,vc.width,vc.height,Math.min(t,VD),VD,VA,img);$('#vStatus').textContent=`Recording… ${Math.min(VD,Math.ceil(t))}/${VD}s (keep this window open)`;if(t<VD+.15)requestAnimationFrame(step);else res()};step()});
  rec.stop();await new Promise(r=>rec.onstop=r);if(ac)ac.close();btn.disabled=false;const ext=(rec.mimeType||mt).includes('mp4')?'mp4':'webm';const blob=new Blob(chunks,{type:rec.mimeType||'video/webm'});$('#vStatus').textContent=`Done · ${(blob.size/1e6).toFixed(1)} MB ${ext.toUpperCase()}`;offerFile(blob,`${curCat}-video-invitation.${ext}`,'video')};
 /* event link */
 function evParts(){const d=$('#evDate').value,tm=$('#evTime').value||'19:00';if(!d)return null;const s=new Date(d+'T'+tm);const e=new Date(s.getTime()+3*3600e3);const f=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');return{s,e,fs:f(s),fe:f(e)}}
 function updateEvent(){const p=evParts(),title=$('#evTitle').value||'Simcha',loc=$('#evLoc').value;const g=p?`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${p.fs}/${p.fe}&location=${encodeURIComponent(loc)}`:'#';$('#evG').href=g;
- $('#evM').href=loc?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc):'#';const mapsL=loc?'\n🗺️ '+$('#evM').href:'';const when=p?p.s.toLocaleString(undefined,{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'}):'';const msg=`You're invited! ${title}${when?'\n📅 '+when:''}${loc?'\n📍 '+loc:''}${mapsL}${p?'\n\nAdd to calendar: '+g:''}`;$('#evWa').href='https://wa.me/?text='+encodeURIComponent(msg)}
+ $('#evM').href=loc?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc):'#';const mapsL=loc?'\nMap: '+$('#evM').href:'';const when=p?p.s.toLocaleString(undefined,{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'}):'';const msg=`You're invited! ${title}${when?'\nWhen: '+when:''}${loc?'\nWhere: '+loc:''}${mapsL}${p?'\n\nAdd to calendar: '+g:''}`;$('#evWa').href='https://wa.me/?text='+encodeURIComponent(msg)}
 ['#evTitle','#evDate','#evTime','#evLoc'].forEach(s=>$(s).addEventListener('input',updateEvent));
 $('#evG').onclick=e=>{if(!evParts()){e.preventDefault();toast('Pick a date first')}};
 /* demo animation on home */
@@ -1150,38 +1210,41 @@ async function initShared(){const u=await cap('user'),db=await cap('db');const u
  let to=setTimeout(()=>{$('#rvNote').textContent='Reviews can\'t be reached right now.'},10000);
  db.collection('reviews').onSnapshot(async s=>{clearTimeout(to);const rows=s.docs.map(d=>d.data()).filter(r=>r&&r.stars).sort((a,b)=>(b.at||0)-(a.at||0));
    const avg=rows.length?(rows.reduce((a,r)=>a+(+r.stars||0),0)/rows.length):0;$('#rvAvg').textContent=rows.length?`${'★'.repeat(Math.round(avg))} ${avg.toFixed(1)} · ${rows.length} review${rows.length>1?'s':''}`:'No reviews yet. Be the first.';
-   const ps=u?await u.profiles(rows.map(r=>r.uid).filter(Boolean)):{};$('#rvList').innerHTML='';rows.forEach(r=>{const el=document.createElement('div');el.className='rev';el.innerHTML='<div class="stars"></div><p style="margin:6px 0"></p><small class="muted"></small>';el.querySelector('.stars').textContent='★'.repeat(clamp(+r.stars,1,5))+'☆'.repeat(5-clamp(+r.stars,1,5));el.querySelector('p').textContent=String(r.text||'').slice(0,600);el.querySelector('small').textContent=(String(r.name||'').slice(0,40)||ps[r.uid]?.name||'Someone')+' · '+new Date(r.at||Date.now()).toLocaleDateString();$('#rvList').appendChild(el)})},
+   const ps=u?await u.profiles(rows.map(r=>r.uid).filter(Boolean)):{};$('#rvList').innerHTML='';rows.forEach(r=>{const el=document.createElement('div');el.className='rev';el.innerHTML='<div class="stars"></div><p style="margin:6px 0"></p><small class="muted"></small>';el.querySelector('.stars').textContent='★'.repeat(clamp(+r.stars,1,5))+'☆'.repeat(5-clamp(+r.stars,1,5));el.querySelector('p').textContent=String(r.text||'').slice(0,600).replace(/\btemples\b/gi,'templates');el.querySelector('small').textContent=(String(r.name||'').slice(0,40)||ps[r.uid]?.name||'Someone')+' · '+new Date(r.at||Date.now()).toLocaleDateString();$('#rvList').appendChild(el)})},
   ()=>{clearTimeout(to);$('#rvNote').textContent='Reviews can\'t be reached right now.'});
- db.collection('members').onSnapshot(s=>{const n=s.size;$('#fMeter').style.width=Math.min(100,n/30*100)+'%';$('#fCount').textContent=n>=30?'All 30 founding spots are taken':`${30-n} of 30 spots left.`;const mine=uid&&s.docs.some(d=>d.id===uid);$('#joinBtn').textContent=mine?'✔ You\'re a founding member':(I18N[LANG]?.f_join||EN.f_join);$('#joinBtn').disabled=!!mine||n>=30},()=>{});
+ db.collection('members').onSnapshot(s=>{const n=s.size;$('#fMeter').style.width=Math.min(100,n/30*100)+'%';$('#fCount').textContent=n>=30?'All 30 founding spots are taken':n===0?'All 30 spots are open.':`${30-n} of 30 spots left.`;const mine=uid&&s.docs.some(d=>d.id===uid);$('#joinBtn').textContent=mine?'You\'re a founding member':(I18N[LANG]?.f_join||EN.f_join);$('#joinBtn').disabled=!!mine||n>=30},()=>{});
 }
 $('#rvPost').onclick=async()=>{const t=$('#rvText').value.trim();if(!ME||!ME.db||!ME.uid){toast('Log in to post a review');openAccount();return}if(t.length<3){toast('Write a few words first');return}
  try{await ME.db.doc('reviews/'+ME.uid).set({uid:ME.uid,name:$('#rvName').value.trim().slice(0,40),stars:myStars,text:t.slice(0,600),at:Date.now()});$('#rvText').value='';toast('Thanks for your review!')}catch(e){toast(e&&e.code==='invalid_argument'?'Write a few words and pick your stars':e&&e.code==='login'?'Log in to post a review':'Could not post right now')}};
-async function joinFounders(){if(!ME||!ME.db||!ME.uid){toast('Log in to join');openAccount();return}try{await ME.db.doc('members/'+ME.uid).set({uid:ME.uid,at:Date.now()});toast('Welcome, founding member! 🎉')}catch(e){toast(e&&e.code==='full'?'All 30 founding spots are taken':e&&e.code==='login'?'Log in to join':'Could not join right now')}}
+async function joinFounders(){if(!ME||!ME.db||!ME.uid){toast('Log in to join');openAccount();return}try{await ME.db.doc('members/'+ME.uid).set({uid:ME.uid,at:Date.now()});toast('Welcome, founding member!')}catch(e){toast(e&&e.code==='full'?'All 30 founding spots are taken':e&&e.code==='login'?'Log in to join':'Could not join right now')}}
 $('#joinBtn').onclick=joinFounders;$('#joinBtn2').onclick=joinFounders;
 async function openAccount(){openM('mAcct');const b=$('#acBody');b.innerHTML='<span class="spin"></span>';const u=ME?.u,me=u?await u.me():null;
  const list=[];if(ME?.db&&ME.uid){try{const s=await ME.db.collection('data/users/'+ME.uid).get();s.docs.forEach(d=>list.push(d.data()))}catch(e){}}localDesigns().forEach(r=>list.push({...r,local:1}));list.sort((a,b)=>(b.at||0)-(a.at||0));
  b.innerHTML='';if(me&&me.id){b.appendChild(h(`<div class="row" style="flex:none;gap:10px"><img src="" id="acAv" style="width:44px;height:44px;border-radius:50%;flex:none"><div><b id="acNm"></b><div class="hint" id="acEm"></div></div><button class="btn sm ghost" id="acOut" style="margin-left:auto">Log out</button></div>`));$('#acAv').src=me.avatarUrl;$('#acNm').textContent=me.name||'You';$('#acEm').textContent=me.email||'';$('#acOut').onclick=async()=>{try{await u.logout()}catch(e){}location.reload()}}
- else{b.appendChild(h(`<div id="acForm"><p class="muted" style="margin:0 0 10px">Log in to save designs to your account, post a review and join the founding members. You can also keep designing as a guest.</p><input id="auName" placeholder="Your name (for a new account)" maxlength="40" style="width:100%;margin-bottom:8px"><input id="auEmail" type="email" placeholder="Email" autocomplete="email" style="width:100%;margin-bottom:8px"><input id="auPw" type="password" placeholder="Password (8+ characters)" autocomplete="current-password" style="width:100%;margin-bottom:8px"><div class="row" style="gap:8px"><button class="btn gold" id="auIn" style="flex:1">Log in</button><button class="btn ghost" id="auUp" style="flex:1">Create account</button></div><p class="hint" id="auErr" style="color:#A33;min-height:18px;margin:8px 0 0"></p></div>`));
+ else{b.appendChild(h(`<div id="acForm"><p class="muted" style="margin:0 0 10px">Log in to save designs to your account, post a review and join the founding members. You can also keep designing as a guest.</p><input id="auName" placeholder="Your name (for a new account)" maxlength="40" style="width:100%;margin-bottom:8px"><input id="auEmail" type="email" placeholder="Email" autocomplete="email" style="width:100%;margin-bottom:8px"><input id="auPw" type="password" placeholder="Password (8+ characters)" autocomplete="current-password" style="width:100%;margin-bottom:8px"><div class="row" style="gap:8px"><button class="btn gold" id="auIn" style="flex:1">Log in</button><button class="btn ghost" id="auUp" style="flex:1">Create account</button></div><p class="hint" id="auErr" style="color:#A33;min-height:18px;margin:8px 0 0"></p><p class="hint" style="margin:4px 0 0"><a href="#" id="auForgot">Forgot password?</a></p><p class="hint" id="auForgotTxt" style="display:none;margin:6px 0 0">Email <a href="mailto:zliblich@gmail.com?subject=Invitely%20password%20reset">zliblich@gmail.com</a> from the email on your account and we will reset your password, usually within one business day.</p></div>`));
+  $('#auForgot').onclick=e=>{e.preventDefault();$('#auForgotTxt').style.display=''};
   const ERR={bad_email:'That email doesn\'t look right.',short_password:'Use a password with at least 8 characters.',email_taken:'That email already has an account. Tap Log in.',bad_login:'Wrong email or password.',rate_limited:'Too many tries. Wait a bit and try again.',not_configured:'Accounts are not switched on yet.'};
   const go=async up=>{const e=$('#auEmail').value.trim(),pw=$('#auPw').value;$('#auErr').textContent='';$('#auIn').disabled=$('#auUp').disabled=true;try{if(up)await u.signup($('#auName').value.trim(),e,pw);else await u.login(e,pw);location.reload()}catch(x){$('#auErr').textContent=ERR[x.code]||'Something went wrong. Try again.';$('#auIn').disabled=$('#auUp').disabled=false}};
   $('#auIn').onclick=()=>go(false);$('#auUp').onclick=()=>go(true)}
  b.appendChild(h(`<h4 style="margin:18px 0 8px">My designs</h4><div class="grid" id="acG" style="grid-template-columns:repeat(3,1fr);gap:8px"></div>`));
- if(!list.length)$('#acG').innerHTML='<p class="hint" style="grid-column:1/-1">Nothing saved yet. Tap 💾 Save in the editor.</p>';
+ if(!list.length)$('#acG').innerHTML='<p class="hint" style="grid-column:1/-1">Nothing saved yet. Tap Save in the editor.</p>';
  list.forEach(r=>{let d;try{d=JSON.parse(r.design)}catch(e){return}const bt=tplButton(d);bt.onclick=()=>{$('#mAcct').classList.remove('on');openEditor(d)};$('#acG').appendChild(bt)});
  if(me&&me.id)b.appendChild(h(`<div style="margin-top:22px;border-top:1px solid var(--line);padding-top:14px"><button class="btn sm ghost" id="acDel" style="color:#A33">Delete my account</button><p class="hint" id="acDelNote">Removes your saved designs, review and founding-member spot.</p></div>`));
  const del=$('#acDel');if(del){let armed=false;del.onclick=async()=>{if(!armed){armed=true;del.textContent='Tap again to confirm delete';return}del.disabled=true;
   try{for(const r of list.filter(x=>!x.local))await ME.db.collection('data/users/'+ME.uid).doc(r.id).delete();await ME.db.doc('reviews/'+ME.uid).delete();await ME.db.doc('members/'+ME.uid).delete();if(ME.u.deleteAccount)await ME.u.deleteAccount();localStorage.removeItem('ez_designs');toast('Your account was deleted');$('#mAcct').classList.remove('on');setTimeout(()=>location.reload(),900)}catch(e){toast('Some data could not be deleted');del.disabled=false}}}}
 $('#loginBtn').onclick=openAccount;
-$$('.tb').forEach(b=>b.onclick=()=>{toast('Premium is open to everyone right now. Pick any design!');document.getElementById(b.dataset.tier==='vid'?'video':'premium').scrollIntoView({behavior:'smooth'})});
+$$('.tb').forEach(b=>b.onclick=()=>{toast('Free to design. You pay only when you download.');document.getElementById(b.dataset.tier==='vid'?'video':'premium').scrollIntoView({behavior:'smooth'})});
 
 /* ---------------- boot ---------------- */
 renderCats();renderPremium();renderStats();renderStarPick();
 try{const l=localStorage.getItem('ez_lang');if(l&&l!=='en')setLang(l);else renderFAQ()}catch(e){renderFAQ()}
-route();initShared();
+route();initShared();const setHH=()=>document.documentElement.style.setProperty('--hh',(document.querySelector('header.top')?.offsetHeight||58)+'px');setHH();addEventListener('resize',setHH);
 ['Frank Ruhl Libre','Suez One','Playfair Display','Great Vibes'].forEach(f=>loadFont(f));
 document.fonts.ready.then(()=>{$$('canvas').forEach(c=>{if(c._draw&&c.isConnected&&c.getBoundingClientRect().top<innerHeight*2)queueThumb(c,c._draw)})});
 </script>
 <script src="simple.js"></script>
 <script src="pay.js"></script>
+<script src="i18n-dict.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

@@ -45,5 +45,8 @@
   const db = { collection, doc: docRef };
   const sample = { json: async prompt => { const r = await J('/api/ai', { prompt }); return r.json } };
 
+  // Show AI mode only when the server has an AI key; otherwise hide it everywhere.
+  fetch('/api/status').then(r => r.json()).then(j => { if (j.ai) { document.documentElement.classList.add('ai-on'); window.renderFAQ && renderFAQ() } }).catch(() => {});
+
   window.INV = { use: async name => name === 'user' ? user : name === 'db' ? db : name === 'sample' ? sample : null, user };
 })();
