@@ -2,8 +2,8 @@ const L = require('./_lib');
 
 // Prices in cents. Change here (or with Vercel env vars) to update what customers pay.
 const PRICE = {
-  image: { premium: +process.env.PRICE_IMAGE_PREMIUM || 500, pro: +process.env.PRICE_IMAGE_PRO || 1000 },
-  video: { premium: +process.env.PRICE_VIDEO_PREMIUM || 1000, pro: +process.env.PRICE_VIDEO_PRO || 1500 }
+  image: { premium: +process.env.PRICE_IMAGE_PREMIUM || 499, pro: +process.env.PRICE_IMAGE_PRO || 899 },
+  video: { premium: +process.env.PRICE_VIDEO_PREMIUM || 999, pro: +process.env.PRICE_VIDEO_PRO || 1199 }
 };
 const NAMES = { premium: 'Premium', pro: 'Premium Pro' };
 const VALID_MS = 48 * 3600e3; // a paid download stays usable for 48 hours (in case the video needs redoing)
