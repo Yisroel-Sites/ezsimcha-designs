@@ -1,12 +1,24 @@
 /* Invitely color themes. Pick one with the 🎨 button. The choice is remembered on this device. */
 (function () {
+  const mix = (a, b, f) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - f) + parseInt(b.substr(i, 2), 16) * f).toString(16).padStart(2, '0')).join('');
+  const lum = h => [1, 3, 5].reduce((s, i, k) => s + parseInt(h.substr(i, 2), 16) * [.2126, .7152, .0722][k], 0) / 255;
+  const mk = (id, name, note, brand, ac, deep) => {
+    if (lum(deep) > .8) deep = mix(brand, '#000000', .45);
+    return { id, name, note, bg: '#FFFFFF', paper: '#FFFFFF', ink: mix(brand, '#111111', .75), muted: '#5f6670',
+      line: mix(brand, '#FFFFFF', .82), tint: mix(brand, '#FFFFFF', .92), brand, deep, ac,
+      acl: mix(ac, '#FFFFFF', .45), acd: lum(ac) > .55 ? mix(ac, '#000000', .45) : mix(ac, '#000000', .2) };
+  };
   const T = [
-    { id: 'navy', name: 'Royal Navy & Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#14203a', muted: '#5d6475', line: '#D6DEEC', brand: '#0B3D91', deep: '#0B2A63', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#E4EBF8' },
-    { id: 'emerald', name: 'Emerald & Champagne', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#1b2b23', muted: '#5b6a62', line: '#CFE0D7', brand: '#1F5C45', deep: '#123A2B', ac: '#B8923A', acl: '#EBD79A', acd: '#8A6A1E', tint: '#E2EEE8' },
-    { id: 'burgundy', name: 'Burgundy & Rose Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#34202a', muted: '#75616a', line: '#EBD3D8', brand: '#7C2D3A', deep: '#4A1822', ac: '#B9805A', acl: '#E9C6A8', acd: '#8B5A3C', tint: '#F6E4E6' },
-    { id: 'plum', name: 'Plum & Gold', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#2b1f36', muted: '#6d6178', line: '#E0D2EA', brand: '#5B2E7A', deep: '#3A1B50', ac: '#C99A3A', acl: '#F0D58A', acd: '#8F6A17', tint: '#EEE3F5' },
-    { id: 'charcoal', name: 'Charcoal & Brass', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#1f2124', muted: '#666a70', line: '#DADCDF', brand: '#2E3238', deep: '#1A1D21', ac: '#B08D57', acl: '#E3CFA3', acd: '#7F6334', tint: '#E8E6E1' },
-    { id: 'sky', name: 'Sky Blue & Silver', bg: '#FFFFFF', paper: '#FFFFFF', ink: '#182a3d', muted: '#5a6b7d', line: '#D5E0EC', brand: '#2A6FB7', deep: '#1B4A7E', ac: '#8795A5', acl: '#D3DCE6', acd: '#5E6E80', tint: '#E1ECF8' }
+    mk('emerald', '1. Emerald & Champagne Gold', 'Luxury and exclusivity', '#064E3B', '#D4AF37', '#111111'),
+    mk('midnight', '2. Midnight Blue & Silver', 'Royal and sophisticated', '#101D3A', '#AEB8C7', '#FFFFFF'),
+    mk('burgundy', '3. Burgundy & Rose Gold', 'Rich and romantic', '#641E32', '#B76E79', '#171717'),
+    mk('electric', '4. Black & Electric Blue', 'Modern and premium', '#111111', '#246BFD', '#000000'),
+    mk('forest', '5. Forest Green & Copper', 'Distinctive and upscale', '#174734', '#B87345', '#252525'),
+    mk('purple', '6. Royal Purple & Silver', 'Elegant and bold', '#512477', '#BEC3D0', '#171717'),
+    mk('teal', '7. Deep Teal & Gold', 'Fresh and luxurious', '#075B62', '#D6AE48', '#FFFFFF'),
+    mk('ruby', '8. Black & Ruby Red', 'Dramatic and striking', '#111111', '#A71930', '#000000'),
+    mk('chocolate', '9. Chocolate & Copper', 'Warm and expensive', '#493126', '#B77A50', '#171717'),
+    mk('pink', '10. Midnight Purple & Hot Pink', 'Bold and fun', '#2E1A47', '#FF2E88', '#111111')
   ];
   const shade = (hex, f) => '#' + [1, 3, 5].map(i => Math.round(parseInt(hex.substr(i, 2), 16) * (1 - f)).toString(16).padStart(2, '0')).join('');
   function css(t) {
@@ -60,13 +72,13 @@ footer{background:${t.deep};color:rgba(255,255,255,.8);border-top:0;margin-top:0
   }
   const st = document.createElement('style'); st.id = 'themeCss'; document.head.appendChild(st);
   function apply(id) {
-    const t = T.find(x => x.id === id) || T.find(x => x.id === DEF); cur = t.id;
+    const t = T.find(x => x.id === id) || T.find(x => x.id === DEF); if (!T.find(x => x.id === id)) id = DEF; cur = t.id;
     st.textContent = css(t);
     const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t.brand;
     try { localStorage.setItem('inv_theme', t.id) } catch (e) {}
     document.querySelectorAll('.thOpt').forEach(b => b.classList.toggle('on', b.dataset.id === t.id));
   }
-  const DEF = 'navy';
+  const DEF = 'emerald';
   let cur = DEF, saved = null; try { saved = new URLSearchParams(location.search).get('theme') || localStorage.getItem('inv_theme') } catch (e) {}
   apply(saved || DEF);
 
