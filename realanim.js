@@ -2,16 +2,20 @@
    The clip's own light and shadow are kept, and anything in front of the card (the envelope pocket) stays in front. */
 (function () {
   const VS = 'attribute vec2 a;varying vec2 v;void main(){v=vec2((a.x+1.)*.5,(1.-a.y)*.5);gl_Position=vec4(a,0.,1.);}';
-  const FS = `precision mediump float;varying vec2 v;uniform sampler2D uV,uD;uniform vec4 uR;uniform float uDH,uG,uHave;uniform vec3 uEdge;
+  const FS = `precision mediump float;varying vec2 v;uniform sampler2D uV,uD;uniform mat3 uH;uniform float uDH,uG,uHave,uRefl;uniform vec3 uEdge;
+  vec3 face(vec2 uv){float m=(1.-uDH)*.5;float dv=(uv.y-m)/uDH;return (dv<0.||dv>1.)?uEdge:texture2D(uD,vec2(clamp(uv.x,0.,1.),clamp(dv,0.,1.))).rgb;}
   void main(){vec3 p=texture2D(uV,v).rgb;float mx=max(p.r,p.b);
    float k=clamp((p.g-mx-.06)/.12,0.,1.);
-   vec2 uv=(v-uR.xy)/uR.zw;float ins=step(-.01,uv.x)*step(uv.x,1.01)*step(-.01,uv.y)*step(uv.y,1.01)*uHave;k*=ins;
+   vec3 q=uH*vec3(v,1.);vec2 uv=q.xy/q.z;
+   float ins=step(-.01,uv.x)*step(uv.x,1.01)*step(-.01,uv.y)*step(uv.y,1.01)*uHave;k*=ins;
    vec3 sp=vec3(p.r,min(p.g,mx),p.b);
-   if(p.g>p.r*.85&&p.b<p.r*.72){float q=max(p.r,p.g);sp=vec3(q*1.12,q*.84,p.b*.9);}
-   float m=(1.-uDH)*.5;float dv=(uv.y-m)/uDH;
-   vec3 face=(dv<0.||dv>1.)?uEdge:texture2D(uD,vec2(clamp(uv.x,0.,1.),clamp(dv,0.,1.))).rgb;
+   if(p.g>p.r*.85&&p.b<p.r*.72){float qq=max(p.r,p.g);sp=vec3(qq*1.12,qq*.84,p.b*.9);}
+   if(uRefl>0.&&ins<.5&&uv.y>1.){vec2 ur=vec2(uv.x,2.-uv.y);float inR=step(0.,ur.x)*step(ur.x,1.)*step(0.,ur.y)*step(ur.y,1.);
+     float ex=max(p.g-p.r*.18,0.);float kr=clamp(ex/(.35*max(p.r,.05)),0.,1.)*inR*(1.-smoothstep(.06,.12,p.b));
+     vec3 wood=vec3(p.r,p.r*.18,p.b);sp=mix(sp,wood+face(ur)*ex*1.5,kr);}
+   float near=step(-.03,uv.x)*step(uv.x,1.03)*step(-.03,uv.y)*step(uv.y,1.03)*uHave;float gs=clamp((p.g-mx)/.08,0.,1.)*near;sp=mix(sp,vec3(dot(p,vec3(.3,.45,.25)))*vec3(1.,.97,.92),gs);
    float sh=clamp(p.g/max(uG,.01),.55,1.3);
-   gl_FragColor=vec4(mix(sp,face*sh,k),1.);}`;
+   gl_FragColor=vec4(mix(sp,face(uv)*sh,k),1.);}`;
   const S = {};
   function setup(id, w, h) {
     const C = window.REAL_CLIPS && REAL_CLIPS[id]; if (!C) return null;
@@ -54,7 +58,8 @@
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, s.tV); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);
     const mt = video.requestVideoFrameCallback && s.mt ? s.mt : video.currentTime;
     const fi = Math.max(0, Math.min(C.frames.length - 1, Math.round(mt * C.fps))), r = C.frames[fi];
-    gl.uniform4f(s.u('uR'), ...(r || [0, 0, 1, 1])); gl.uniform1f(s.u('uHave'), r ? 1 : 0); gl.uniform1f(s.u('uG'), C.gref[fi] || .6);
+    const Hm = r && r.length === 9 ? r : r ? [1 / r[2], 0, -r[0] / r[2], 0, 1 / r[3], -r[1] / r[3], 0, 0, 1] : [1, 0, 0, 0, 1, 0, 0, 0, 1];
+    gl.uniformMatrix3fv(s.u('uH'), false, [Hm[0], Hm[3], Hm[6], Hm[1], Hm[4], Hm[7], Hm[2], Hm[5], Hm[8]]); gl.uniform1f(s.u('uRefl'), C.refl ? 1 : 0); gl.uniform1f(s.u('uHave'), r ? 1 : 0); gl.uniform1f(s.u('uG'), C.gref[fi] || .6);
     gl.uniform1f(s.u('uDH'), Math.min(1, C.aspect / (img.width / img.height))); gl.uniform3f(s.u('uEdge'), ...s.edge);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     ctx.drawImage(s.canvas, 0, 0, w, h);

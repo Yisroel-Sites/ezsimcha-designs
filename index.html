@@ -1073,7 +1073,7 @@ function scheduleSong(ac,dest,i,t0,dur){if(i===99){if(!UPRAW)return;ac.decodeAud
  for(let b=0,tt=t0;tt<t0+dur;b++,tt+=spb){const deg=[0,0,4,3][Math.floor(b/P.beats)%4];note(P.root-12+P.sc[deg],tt,spb*.9,'sine',b%P.beats===0?.35:.18);if(b%P.beats)note(P.root+P.sc[deg],tt+spb*.5,spb*.4,'triangle',.06);hit(tt+(b%2?spb/2:0),.08)}}
 
 /* ---------------- video animations ---------------- */
-const ANIMS=[['realenv','','Real envelope'],['realseal','','Real wax seal'],['envelope','','Envelope'],['bottle','','Bottle'],['sparkle','','Gold sparkle'],['seal','','Wax seal'],['scroll','','Scroll'],['letter','','Letter'],['gift','','Gift box'],['curtain','','Curtain'],['sefer','','Sefer'],['confetti','','Confetti'],['flowers','','Flowers'],['fade','','Soft fade'],['zoom','','Zoom'],['hearts','','Hearts'],['balloons','','Balloons'],['stars','','Stars'],['kenburns','','Slow pan'],['shine','','Shine']];
+const ANIMS=[['realenv','','Real envelope'],['realseal','','Real wax seal'],['realsefer','','Real sefer'],['envelope','','Envelope'],['bottle','','Bottle'],['sparkle','','Gold sparkle'],['seal','','Wax seal'],['scroll','','Scroll'],['letter','','Letter'],['gift','','Gift box'],['curtain','','Curtain'],['sefer','','Sefer'],['confetti','','Confetti'],['flowers','','Flowers'],['fade','','Soft fade'],['zoom','','Zoom'],['hearts','','Hearts'],['balloons','','Balloons'],['stars','','Stars'],['kenburns','','Slow pan'],['shine','','Shine']];
 let VA='realenv',VD=10,VS=0,UPBUF=null,UPRAW=null;
 function particles(n,seed){const R=rng(seed);return Array.from({length:n},()=>({x:R(),y:R(),s:R(),v:.4+R()*.8,r:R()*6.28,c:R()}))}
 const PP={c:particles(140,5),s:particles(90,9),f:particles(46,13),h:particles(30,17)};
@@ -1178,14 +1178,14 @@ function buildVideoUI(){const g=$('#vAnims');g.innerHTML='';ANIMS.forEach(([id,i
  const s=$('#vSong');s.innerHTML='<option value="-1">No music</option>'+SONGS.map((n,i)=>`<option value="${i}">${n}</option>`).join('')+(UPRAW?'<option value="99">My uploaded music</option>':'');s.value=VS;s.onchange=()=>{VS=+s.value;playPreview(true)};
  $$('#vDur button').forEach(b=>{b.classList.toggle('on',+b.dataset.d===VD);b.onclick=()=>{VD=+b.dataset.d;$$('#vDur button').forEach(x=>x.classList.toggle('on',x===b))}});
  const c=CAT[curCat]||CAT['barmitzvah'];if(!$('#evTitle').value)$('#evTitle').value=c.en;updateEvent()}
-const isReal=()=>VA.startsWith('real');const REALID={realenv:'envelope',realseal:'seal'};
+const isReal=()=>VA.startsWith('real');const REALID={realenv:'envelope',realseal:'seal',realsefer:'sefer'};
 function sizeVC(){const vc=$('#vcv'),h=isReal()?1280:900;if(vc.width!==720||vc.height!==h){vc.width=720;vc.height=h}return vc}
 function vImg(vc){return isReal()?designImage(1080,1350):designImage(vc.width,vc.height)}
 const vDur=()=>isReal()?Math.max(VD,(window.REAL_CLIPS&&REAL_CLIPS[REALID[VA]]||{dur:10}).dur):VD;
 function playPreview(sound=true){stopPreview();const vc=sizeVC(),ctx=vc.getContext('2d'),img=vImg(vc),t0=performance.now(),VD=vDur();
  if(sound&&VS>=0){try{vAC=new AudioContext();scheduleSong(vAC,vAC.destination,VS,vAC.currentTime+.05,VD)}catch(e){}}
  const step=()=>{const t=(performance.now()-t0)/1000;vFrame(ctx,vc.width,vc.height,Math.min(t,VD),VD,VA,img);if(t<VD)vRAF=requestAnimationFrame(step);else{vRAF=0}};step()}
-$('#eVideo').onclick=()=>{window.preloadReal&&(preloadReal('envelope'),preloadReal('seal'));$('#kbd').classList.remove('on');SEL=-1;draw();buildVideoUI();openM('mVideo');playPreview(false)};
+$('#eVideo').onclick=()=>{window.preloadReal&&['envelope','seal','sefer'].forEach(preloadReal);$('#kbd').classList.remove('on');SEL=-1;draw();buildVideoUI();openM('mVideo');playPreview(false)};
 $('#vPlay').onclick=()=>playPreview(true);
 $('#vUp').onchange=async e=>{const f=e.target.files[0];if(!f)return;UPRAW=await f.arrayBuffer();VS=99;$('#vUpN').textContent=' '+f.name;buildVideoUI();playPreview(true)};
 $('#vRec').onclick=async()=>{if(typeof MediaRecorder==='undefined'){$('#vStatus').textContent='Video recording is not supported in this browser.';return}stopPreview();
