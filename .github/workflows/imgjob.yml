@@ -1,0 +1,18 @@
+name: imgjob
+on:
+  push:
+    branches: [imgjob]
+    paths: ['_imgjob/**']
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 _imgjob/fetch.py
+      - run: |
+          git config user.name imgjob
+          git config user.email imgjob@users.noreply.github.com
+          git add _cand
+          git commit -m "candidates" && git push
