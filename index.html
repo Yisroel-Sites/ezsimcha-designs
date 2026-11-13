@@ -149,20 +149,12 @@ label.f{display:block;font-weight:700;font-size:13px;margin:10px 0 4px;color:var
 /* editor */
 #editor{position:fixed;inset:0;z-index:60;background:#E9EBEF;display:none;flex-direction:column}
 #editor.on{display:flex}
-.etop{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;flex-shrink:0}
-.etop button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;font-weight:700;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;min-height:38px}
+
+
 svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-@media (max-width:480px){
- .etop{gap:4px;padding:6px 8px}
- .etop button{padding:7px 9px}
- .etop button .lb{display:none}
- .etop #eDown{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:60;justify-content:center;font-size:17px;padding:14px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
- #editor .ebody{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
- .etabs{flex-wrap:wrap;overflow:visible}
- .etabs button{flex:1 1 33%;padding:9px 4px}
-}
-.etop button.pri{background:#605643;color:#fff;border-color:#605643}
-.etop button.gold{background:#2d4939;color:#fff;border-color:#2d4939}
+
+
+
 .estage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:10px;position:relative}
 .zbar{position:absolute;top:10px;right:10px;z-index:5;display:flex;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.15);overflow:hidden}
 .zbar button{border:0;background:none;width:40px;height:38px;font:700 22px system-ui,sans-serif;color:var(--ink);cursor:pointer}.zbar button:active{background:var(--line)}
@@ -171,12 +163,12 @@ svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .szoom{position:relative}.szoom .zbar{top:10px;right:10px}.szoom .sscroll{overflow:auto;border-radius:6px;max-height:80vh}.szoom.zoomed #sCanvas{max-width:none}
 #cv{max-width:100%;max-height:100%;box-shadow:0 10px 30px rgba(0,0,0,.18);touch-action:none;background:#fff;border-radius:4px}
 .ebody{display:flex;flex:1;min-height:0}
-.epanel{width:380px;background:var(--paper);border-inline-start:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
-.etabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--line);flex-shrink:0}
-.etabs button{flex:1;border:0;background:none;padding:10px 8px;font-weight:700;font-size:13px;white-space:nowrap;border-bottom:3px solid transparent;color:var(--muted)}
-.etabs button.on{color:var(--ink);border-color:var(--gold)}
+
+
+
+
 .pbody{overflow:auto;padding:12px;flex:1}
-@media(max-width:820px){.ebody{flex-direction:column}.epanel{width:100%;height:44vh;border-inline-start:0;border-top:1px solid var(--line)}.estage{padding:6px}}
+
 .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px}
 .chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:13px;font-weight:700;white-space:nowrap}
 .chips button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -255,6 +247,88 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 .dlopts{display:grid;gap:8px}.dlopts .btn{display:flex;flex-direction:column;align-items:flex-start;text-align:start;padding:12px 14px}.dlopts small{font-weight:500;opacity:.8;font-size:13px}
 .door i,.tb .ti{color:var(--logo)}
 @media (max-width:480px){nav.main a[href="#events"]{display:none}nav.main a,nav.main button{padding:8px 7px}nav.main{gap:2px}}
+
+/* ---------- Home (2026 redesign) ---------- */
+.hero{padding:44px 0 40px!important}
+.hero .eyebrow{letter-spacing:.08em;font-weight:700;font-size:13px;opacity:.75;margin:0 0 10px}
+.hero h1{margin:0 0 10px}
+.hero .lead{font-size:18px;opacity:.9;margin:0 auto 22px;max-width:520px}
+.hsearch{display:flex;align-items:center;gap:8px;max-width:560px;margin:0 auto 16px;background:#fff;border-radius:999px;padding:6px 6px 6px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hsearch svg{width:20px;height:20px;color:#777;flex:none}
+.hsearch input{flex:1;border:0!important;background:none!important;box-shadow:none!important;font-size:16px;padding:10px 4px!important;min-width:0;color:#111}
+.hsearch .btn{border-radius:999px;padding:10px 18px}
+.hbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.cats.short>:nth-child(n+13){display:none}
+section{padding-top:36px!important;padding-bottom:36px!important}
+#how,#about{display:none!important}
+.vband{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;max-width:860px;margin:0 auto}
+.vteaser{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;background:#111;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.h2s{font-family:'Playfair Display',serif;font-size:30px;margin:8px 0}
+.vband p{font-size:17px}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1000px;margin:0 auto}
+.plans .tierbox{display:contents}
+.plan.free{display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}
+.plan.free b{font-size:17px}.plan.free .pp{font-weight:800;font-size:20px}.plan.free small{color:var(--muted)}
+.founders.sm{margin:18px auto 0;max-width:1000px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:center;text-align:start}
+.founders.sm h2{font-size:20px;margin:0}.founders.sm p{margin:0}.founders.sm .meter{grid-column:1}.founders.sm #joinBtn{grid-row:1/span 4;grid-column:2}
+details.rvform{text-align:center;margin:0 auto 18px}details.rvform summary{list-style:none;display:inline-flex;cursor:pointer}details.rvform summary::-webkit-details-marker{display:none}
+details.rvform[open] summary{display:none}
+@media (max-width:720px){
+ .hero{padding:30px 0 28px!important}.hero .lead{font-size:16px}
+ .vband{grid-template-columns:120px 1fr;gap:14px;padding:14px}.h2s{font-size:22px}.vband p{font-size:15px}
+ .plans{grid-template-columns:1fr 1fr}
+ .founders.sm{grid-template-columns:1fr}.founders.sm #joinBtn{grid-row:auto;grid-column:1}
+ .cats.short>:nth-child(n+9){display:none}
+}
+
+/* ---------- Editor (Canva-style layout) ---------- */
+.etop{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--paper);border-bottom:1px solid var(--line);flex-shrink:0;position:relative;z-index:20}
+.etop button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--ink)}
+.etop .ib{padding:8px;min-width:40px;justify-content:center;border-color:transparent;background:transparent}
+.etop .ib:hover{background:var(--line)}
+.etitle{font-weight:800;font-size:15px;margin-inline-start:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30vw}
+.esp{flex:1}
+.etop button.pri{background:var(--ink,#111);color:#fff;border-color:transparent;padding:8px 16px}
+.etop button.vid{background:transparent}
+.emore{position:relative}
+.emenu{display:none;position:absolute;top:46px;inset-inline-end:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.18);padding:6px;min-width:210px;z-index:30}
+.emenu.on{display:block}
+.emenu button{display:flex;width:100%;border:0;background:none;padding:10px 12px;border-radius:10px;justify-content:flex-start;min-height:0}
+.emenu button:hover{background:var(--line)}
+.ebody{display:grid;grid-template-columns:84px 360px 1fr;flex:1;min-height:0}
+.erail{display:flex;flex-direction:column;gap:2px;padding:8px 6px;background:var(--paper);border-inline-end:1px solid var(--line);overflow:auto}
+.erail button{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;padding:10px 4px;border-radius:12px;font-weight:700;font-size:11.5px;color:var(--muted);line-height:1.15;text-align:center}
+.erail button svg.ic{width:22px;height:22px}
+.erail button.on{background:var(--line);color:var(--ink)}
+.epanel{display:flex;flex-direction:column;min-height:0;background:var(--paper);border-inline-end:1px solid var(--line)}
+.phead{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 0}
+.phead b{font-size:16px}
+.phead .ib{border:0;background:none;padding:6px;border-radius:8px;display:none}
+.pbody{overflow:auto;padding:12px;flex:1}
+.estage{position:relative;min-height:0;display:flex;align-items:center;justify-content:center;padding:14px}
+.ehint{position:absolute;bottom:6px;left:0;right:0;text-align:center;margin:0;font-size:13px;color:var(--muted);pointer-events:none}
+.zbar{top:auto!important;bottom:30px;right:14px}
+@media (max-width:900px){
+ .etitle{display:none}
+ .etop{gap:2px;padding:6px 6px}
+ .etop button.vid .lb{display:none}
+ .etop button.vid{padding:8px;border-color:transparent}
+ .ebody{display:flex;flex-direction:column;position:relative}
+ .estage{flex:1;padding:8px 8px 4px}
+ .erail{order:3;flex-direction:row;justify-content:space-around;padding:4px 4px calc(4px + env(safe-area-inset-bottom));border:0;border-top:1px solid var(--line);overflow-x:auto;flex-shrink:0}
+ .erail button{flex:1;min-width:58px;padding:7px 2px;font-size:11px}
+ .epanel{order:2;display:none;height:46vh;border:0;border-top:1px solid var(--line);border-radius:18px 18px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.12);flex-shrink:0}
+ #editor.psheet .epanel{display:flex}
+ .phead .ib{display:inline-flex}
+ .erail button.on{background:none;color:var(--ink)}
+ #editor.psheet .erail button.on{background:var(--line)}
+ .zbar{bottom:8px;right:8px;transform:scale(.85);transform-origin:bottom right}
+ .ehint{bottom:2px;font-size:12px}
+}
+#premGrid{grid-template-columns:repeat(4,1fr)!important;max-width:1000px;margin:0 auto}
+@media (max-width:720px){#premGrid{grid-template-columns:repeat(2,1fr)!important}}
+.plans .tb{padding:14px!important}
 </style>
 <script src="theme.js"></script>
 </head>
@@ -264,7 +338,8 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
   <a class="logo" href="#home"><svg viewBox="0 0 100 100" aria-hidden="true"><path style="fill:var(--logo)" d="M97.56,50.00 L98.46,51.69 L98.86,53.42 L98.69,55.12 L98.03,56.75 L97.06,58.30 L96.00,59.78 L95.04,61.23 L94.30,62.70 L93.81,64.24 L93.48,65.83 L93.16,67.44 L92.70,69.01 L91.98,70.48 L90.98,71.79 L89.76,72.95 L88.42,74.01 L87.09,75.02 L85.86,76.06 L84.78,77.18 L83.83,78.38 L82.92,79.64 L81.99,80.90 L80.98,82.08 L79.88,83.18 L78.73,84.23 L77.59,85.31 L76.53,86.52 L75.58,87.93 L74.72,89.57 L73.87,91.35 L72.93,93.13 L71.79,94.69 L70.40,95.82 L68.74,96.39 L66.88,96.37 L64.89,95.83 L62.90,94.99 L60.99,94.07 L59.20,93.30 L57.56,92.86 L56.01,92.77 L54.52,92.99 L53.03,93.40 L51.53,93.83 L50.00,94.19 L48.45,94.42 L46.88,94.56 L45.31,94.66 L43.70,94.82 L42.05,95.07 L40.36,95.37 L38.62,95.64 L36.88,95.75 L35.19,95.58 L33.60,95.05 L32.14,94.20 L30.80,93.12 L29.53,91.97 L28.26,90.89 L26.91,90.00 L25.44,89.31 L23.86,88.75 L22.25,88.19 L20.74,87.46 L19.43,86.43 L18.44,85.05 L17.78,83.37 L17.40,81.49 L17.15,79.58 L16.87,77.80 L16.40,76.25 L15.62,74.98 L14.52,73.93 L13.16,73.02 L11.65,72.14 L10.14,71.20 L8.72,70.13 L7.45,68.95 L6.31,67.65 L5.27,66.28 L4.27,64.86 L3.32,63.39 L2.46,61.85 L1.81,60.24 L1.49,58.55 L1.61,56.80 L2.20,55.02 L3.17,53.27 L4.37,51.59 L5.56,50.00 L6.52,48.48 L7.08,47.00 L7.19,45.50 L6.93,43.95 L6.46,42.32 L6.01,40.65 L5.77,38.97 L5.87,37.35 L6.32,35.81 L7.03,34.36 L7.86,32.97 L8.65,31.59 L9.29,30.14 L9.75,28.60 L10.08,26.95 L10.40,25.25 L10.82,23.57 L11.43,21.98 L12.29,20.54 L13.35,19.25 L14.55,18.08 L15.81,16.99 L17.07,15.90 L18.32,14.81 L19.59,13.76 L20.95,12.81 L22.46,12.09 L24.14,11.66 L25.97,11.55 L27.87,11.68 L29.74,11.90 L31.46,12.00 L32.98,11.78 L34.28,11.09 L35.41,9.92 L36.46,8.34 L37.54,6.55 L38.73,4.80 L40.08,3.31 L41.58,2.25 L43.21,1.67 L44.90,1.50 L46.62,1.62 L48.32,1.89 L50.00,2.19 L51.66,2.48 L53.30,2.78 L54.92,3.17 L56.50,3.72 L58.03,4.47 L59.48,5.38 L60.88,6.38 L62.24,7.32 L63.62,8.08 L65.07,8.60 L66.60,8.90 L68.22,9.08 L69.86,9.28 L71.45,9.66 L72.91,10.32 L74.19,11.29 L75.31,12.48 L76.33,13.76 L77.38,14.96 L78.57,15.95 L80.00,16.68 L81.69,17.19 L83.57,17.58 L85.52,18.02 L87.35,18.66 L88.89,19.61 L90.05,20.90 L90.79,22.48 L91.18,24.27 L91.33,26.14 L91.37,28.00 L91.41,29.80 L91.49,31.53 L91.61,33.19 L91.72,34.82 L91.77,36.43 L91.75,38.03 L91.73,39.60 L91.80,41.12 L92.09,42.58 L92.72,44.00 L93.69,45.41 L94.95,46.86 L96.32,48.38Z" /><circle cx="50" cy="50" r="36" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><circle cx="50" cy="50" r="33" fill="none" stroke="#FFFFFF" stroke-width=".9"/><text x="50" y="51" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond,Cinzel,Georgia,serif" font-weight="700" font-size="44" fill="#FFFFFF">I</text></svg><span class="wm">INVITELY</span></a>
   <nav class="main">
     <a href="#events" data-i="nav_designs">Designs</a>
-    <a href="#reviews" class="hide-sm" data-i="nav_reviews">Reviews</a>
+    <a href="#video" class="hide-sm">Video</a>
+    <a href="#plans" class="hide-sm">Pricing</a>
     <a href="#ai" class="hide-sm" data-i="nav_ai" style="border:1px solid var(--line);background:#fff;border-radius:999px">Invitely AI</a>
     <button id="loginBtn" data-i="nav_login">Log in</button>
     <div class="lang" id="langBox"><button type="button" class="lang-cur" id="langCur" aria-label="Language" aria-haspopup="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>EN</span></button><button data-l="en" class="on">English</button><button data-l="yi">אידיש</button><button data-l="he">לשון קודש</button></div>
@@ -274,37 +349,55 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <main id="home" class="view on">
   <div class="wrap">
     <div class="hero">
-      <p class="hint" style="letter-spacing:.08em;font-weight:700;margin-bottom:10px">English · אידיש · לשון קודש</p>
+      <p class="eyebrow">English · אידיש · לשון קודש</p>
       <h1 data-ih="hero_h">Simcha invitations,<br><em>beautifully simple.</em></h1>
-      <p data-i="hero_p">Choose a design, type your names, download. Ready designs for every simcha, plus Premium and Premium Pro collections (photo-scene invitations, new ideas, envelope styles and more) and video invitations.</p>
-      <div class="choose">
-        <a class="door inv-door" href="#simple"><i><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L16 8M14 4v3M20 10h-3M18 4l-2 2M9 3l1 2M21 13l-2 1"/></svg></i><b>Simple</b><span>Pick a design, fill in the names, download. Done in a minute.</span></a>
-        <a class="door" href="#events"><i><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.5 0-1.2-1-1.5-1-2.5S13.3 15 14.5 15H17a4 4 0 004-4c0-4.4-4-8-9-8zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01"/></svg></i><b>Custom</b><span>Full editor: fonts, backgrounds, elements, effects and video.</span></a>
-      </div>
-      <p style="margin-top:16px"><a href="#events" style="font-weight:700">Pick your simcha</a></p>
+      <p class="lead" data-i="hero_p">Pick a design, type your names, download. Ready in minutes.</p>
+      <form class="hsearch" id="hSearch" role="search"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5"/></svg><input id="hQ" type="search" dir="auto" placeholder="Search: Bar Mitzvah, Kiddush, Vort, Bris…" aria-label="Search designs"><button class="btn" type="submit">Search</button></form>
+      <div class="hbtns"><a class="btn" href="#events">Browse designs</a><a class="btn ghost" href="#simple">Quick and simple</a></div>
     </div>
   </div>
 
   <section id="events"><div class="wrap">
-    <div class="tierbox">
+    
+    <h2 class="sec" data-i="pick">Pick your simcha</h2>
+    <p class="sub" data-i="pick_s">Tap a simcha to see all of its designs.</p>
+    <div class="cats short" id="cats"></div>
+    <div style="text-align:center;margin-top:16px"><button class="btn ghost" type="button" id="catMore">Show all simchas</button></div>
+  </div></section>
+
+  <section id="premium"><div class="wrap">
+    <h2 class="sec" data-i="prem_h">Popular designs</h2>
+    <p class="sub" data-i="prem_s">Tap one to make it yours.</p>
+    <div class="grid" id="premGrid"></div>
+  </div></section>
+
+  
+
+  <section id="video"><div class="wrap">
+    <div class="vband">
+      <video class="vteaser" src="vid/teaser.mp4" poster="vid/teaser.jpg" muted autoplay loop playsinline preload="metadata" aria-label="Sample video invitation"></video>
+      <div id="vidDemo" hidden><canvas id="demoCv" width="432" height="540"></canvas></div>
+      <div>
+        <span class="badge vid">Video</span>
+        <h2 class="h2s" data-i="vid_h">Video invitations</h2>
+        <p class="muted" data-i="vid_p">Your invitation inside a real filmed envelope, wax seal or sefer, plus 18 animations and simcha music. Open any design and tap Video.</p>
+        <a class="btn" href="#events" data-i="cta_start">Make a video</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="plans"><div class="wrap">
+    <h2 class="sec">Pricing</h2>
+    <p class="sub">Designing is always free. You pay only when you download a Premium design.</p>
+    <div class="plans">
+      <div class="plan free"><b>Free</b><span class="pp">$0</span><small>Free designs, fonts, stickers, ready text and examples</small></div>
+      <div class="tierbox">
       <button class="tb t-green" data-tier="premium"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span><b>Premium <span class="pr">$4.99</span></b><span class="yi">פרימיום</span><small>Gold foil, arch windows, starry night, watercolor, marble and more</small></span><span class="go">›</span></button>
       <button class="tb t-blue" data-tier="pro"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9zM2 9h20M9 3l3 18 3-18"/></svg></span><span><b>Premium Pro <span class="pr">$8.99</span></b><span class="yi">פרימיום פראו</span><small>Photo scene invitations</small></span><span class="go">›</span></button>
       <button class="tb t-purple" data-tier="vid"><span class="ti"><svg class="ic big" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></span><span><b>Premium Vid <span class="pr">from $9.99</span></b><span class="yi">פרימיום ווידעא</span><small>Every Pro design as a 10-second video</small></span><span class="go">›</span></button>
     </div>
-    <p class="hint" style="text-align:center;margin:-4px 0 22px" data-i="t_open">Free to design. Pay only when you download: pictures from $4.99, videos from $9.99.</p>
-    <h2 class="sec" data-i="pick">Pick your simcha</h2>
-    <p class="sub" data-i="pick_s">Tap a simcha to see all of its designs.</p>
-    <div class="cats" id="cats"></div>
-  </div></section>
-
-  <section id="premium"><div class="wrap">
-    <h2 class="sec" data-i="prem_h">Premium & Pro collections</h2>
-    <p class="sub" data-i="prem_s">Gold foil, arch windows, photo-scene invitations and more.</p>
-    <div class="grid" id="premGrid"></div>
-  </div></section>
-
-  <section><div class="wrap">
-    <div class="founders">
+    </div>
+    <div class="founders sm">
       <h2 data-i="f_h">Founding members</h2>
       <p data-i="f_p">The first 30 people to join download every Premium and Premium Pro design free, forever.</p>
       <div class="meter"><i id="fMeter" style="width:0%"></i></div>
@@ -328,17 +421,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     <div class="aires" id="aiHomeRes"></div>
   </div></section>
 
-  <section id="video"><div class="wrap">
-    <div class="card two">
-      <div id="vidDemo" style="aspect-ratio:4/5;max-width:300px;margin:auto;width:100%"><canvas id="demoCv" width="432" height="540" style="width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.2)"></canvas></div>
-      <div>
-        <span class="badge vid">Video</span>
-        <h2 style="font-family:'Playfair Display',serif;font-size:34px;margin:8px 0" data-i="vid_h">New: Video invitations + link</h2>
-        <p class="muted" style="font-size:17px" data-i="vid_p">Turn any design into a 5, 10 or 15-second video with 18 animations (envelopes, wax seal, scroll, letter, gift box, curtain, sefer, confetti, flowers and more) and 15 simcha tunes, or upload your own music. Download it, or send it with an “Add to Calendar” link.</p>
-        <a class="btn" href="#events" data-i="cta_start">Start designing</a>
-      </div>
-    </div>
-  </div></section>
+  
 
   <section id="how"><div class="wrap">
     <h2 class="sec" data-i="how_h">How it works</h2>
@@ -354,12 +437,11 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
   <section id="reviews"><div class="wrap">
     <h2 class="sec" data-i="rv_h">Reviews</h2>
     <p class="sub" id="rvAvg">&nbsp;</p>
-    <div class="card" style="max-width:620px;margin:0 auto 20px">
-      <h3 style="margin:0 0 6px;font-family:'Playfair Display',serif">Leave a review</h3><div class="starpick" id="starPick"></div><input id="rvName" maxlength="40" placeholder="Your name" style="margin-bottom:8px">
+    <details class="rvform"><summary class="btn ghost">Write a review</summary><div class="card" style="max-width:620px;margin:12px auto 20px"><div class="starpick" id="starPick"></div><input id="rvName" maxlength="40" placeholder="Your name" style="margin-bottom:8px">
       <textarea id="rvText" rows="3" placeholder="What did you make? How was it?" dir="auto"></textarea>
       <button class="btn" style="margin-top:10px" id="rvPost" data-i="rv_post">Post review</button>
       <p class="hint" id="rvNote"></p>
-    </div>
+    </div></details>
     <div class="reviews" id="rvList"></div>
   </div></section>
 
@@ -381,11 +463,13 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
     </div>
   </div></div></section>
 
-  <footer><div class="wrap"><div style="margin-bottom:8px"><svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><path d="M97.56,50.00 L98.46,51.69 L98.86,53.42 L98.69,55.12 L98.03,56.75 L97.06,58.30 L96.00,59.78 L95.04,61.23 L94.30,62.70 L93.81,64.24 L93.48,65.83 L93.16,67.44 L92.70,69.01 L91.98,70.48 L90.98,71.79 L89.76,72.95 L88.42,74.01 L87.09,75.02 L85.86,76.06 L84.78,77.18 L83.83,78.38 L82.92,79.64 L81.99,80.90 L80.98,82.08 L79.88,83.18 L78.73,84.23 L77.59,85.31 L76.53,86.52 L75.58,87.93 L74.72,89.57 L73.87,91.35 L72.93,93.13 L71.79,94.69 L70.40,95.82 L68.74,96.39 L66.88,96.37 L64.89,95.83 L62.90,94.99 L60.99,94.07 L59.20,93.30 L57.56,92.86 L56.01,92.77 L54.52,92.99 L53.03,93.40 L51.53,93.83 L50.00,94.19 L48.45,94.42 L46.88,94.56 L45.31,94.66 L43.70,94.82 L42.05,95.07 L40.36,95.37 L38.62,95.64 L36.88,95.75 L35.19,95.58 L33.60,95.05 L32.14,94.20 L30.80,93.12 L29.53,91.97 L28.26,90.89 L26.91,90.00 L25.44,89.31 L23.86,88.75 L22.25,88.19 L20.74,87.46 L19.43,86.43 L18.44,85.05 L17.78,83.37 L17.40,81.49 L17.15,79.58 L16.87,77.80 L16.40,76.25 L15.62,74.98 L14.52,73.93 L13.16,73.02 L11.65,72.14 L10.14,71.20 L8.72,70.13 L7.45,68.95 L6.31,67.65 L5.27,66.28 L4.27,64.86 L3.32,63.39 L2.46,61.85 L1.81,60.24 L1.49,58.55 L1.61,56.80 L2.20,55.02 L3.17,53.27 L4.37,51.59 L5.56,50.00 L6.52,48.48 L7.08,47.00 L7.19,45.50 L6.93,43.95 L6.46,42.32 L6.01,40.65 L5.77,38.97 L5.87,37.35 L6.32,35.81 L7.03,34.36 L7.86,32.97 L8.65,31.59 L9.29,30.14 L9.75,28.60 L10.08,26.95 L10.40,25.25 L10.82,23.57 L11.43,21.98 L12.29,20.54 L13.35,19.25 L14.55,18.08 L15.81,16.99 L17.07,15.90 L18.32,14.81 L19.59,13.76 L20.95,12.81 L22.46,12.09 L24.14,11.66 L25.97,11.55 L27.87,11.68 L29.74,11.90 L31.46,12.00 L32.98,11.78 L34.28,11.09 L35.41,9.92 L36.46,8.34 L37.54,6.55 L38.73,4.80 L40.08,3.31 L41.58,2.25 L43.21,1.67 L44.90,1.50 L46.62,1.62 L48.32,1.89 L50.00,2.19 L51.66,2.48 L53.30,2.78 L54.92,3.17 L56.50,3.72 L58.03,4.47 L59.48,5.38 L60.88,6.38 L62.24,7.32 L63.62,8.08 L65.07,8.60 L66.60,8.90 L68.22,9.08 L69.86,9.28 L71.45,9.66 L72.91,10.32 L74.19,11.29 L75.31,12.48 L76.33,13.76 L77.38,14.96 L78.57,15.95 L80.00,16.68 L81.69,17.19 L83.57,17.58 L85.52,18.02 L87.35,18.66 L88.89,19.61 L90.05,20.90 L90.79,22.48 L91.18,24.27 L91.33,26.14 L91.37,28.00 L91.41,29.80 L91.49,31.53 L91.61,33.19 L91.72,34.82 L91.77,36.43 L91.75,38.03 L91.73,39.60 L91.80,41.12 L92.09,42.58 L92.72,44.00 L93.69,45.41 L94.95,46.86 L96.32,48.38Z" fill="#1252B8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><circle cx="50" cy="50" r="33" fill="none" stroke="#FFFFFF" stroke-width=".9"/><text x="50" y="51" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond,Cinzel,Georgia,serif" font-weight="700" font-size="44" fill="#FFFFFF">I</text></svg></div>© 2026 Invitely · Simcha invitations &amp; graphics<div style="margin-top:8px;font-size:14px"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refunds">Refunds</a> · <a href="/contact">Contact</a></div></div></footer>
   <section id="faq"><div class="wrap" style="max-width:820px">
     <h2 class="sec">Questions</h2>
     <div id="faqList" style="margin-top:20px"></div>
   </div></section>
+
+  <footer><div class="wrap"><div style="margin-bottom:8px"><svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><path d="M97.56,50.00 L98.46,51.69 L98.86,53.42 L98.69,55.12 L98.03,56.75 L97.06,58.30 L96.00,59.78 L95.04,61.23 L94.30,62.70 L93.81,64.24 L93.48,65.83 L93.16,67.44 L92.70,69.01 L91.98,70.48 L90.98,71.79 L89.76,72.95 L88.42,74.01 L87.09,75.02 L85.86,76.06 L84.78,77.18 L83.83,78.38 L82.92,79.64 L81.99,80.90 L80.98,82.08 L79.88,83.18 L78.73,84.23 L77.59,85.31 L76.53,86.52 L75.58,87.93 L74.72,89.57 L73.87,91.35 L72.93,93.13 L71.79,94.69 L70.40,95.82 L68.74,96.39 L66.88,96.37 L64.89,95.83 L62.90,94.99 L60.99,94.07 L59.20,93.30 L57.56,92.86 L56.01,92.77 L54.52,92.99 L53.03,93.40 L51.53,93.83 L50.00,94.19 L48.45,94.42 L46.88,94.56 L45.31,94.66 L43.70,94.82 L42.05,95.07 L40.36,95.37 L38.62,95.64 L36.88,95.75 L35.19,95.58 L33.60,95.05 L32.14,94.20 L30.80,93.12 L29.53,91.97 L28.26,90.89 L26.91,90.00 L25.44,89.31 L23.86,88.75 L22.25,88.19 L20.74,87.46 L19.43,86.43 L18.44,85.05 L17.78,83.37 L17.40,81.49 L17.15,79.58 L16.87,77.80 L16.40,76.25 L15.62,74.98 L14.52,73.93 L13.16,73.02 L11.65,72.14 L10.14,71.20 L8.72,70.13 L7.45,68.95 L6.31,67.65 L5.27,66.28 L4.27,64.86 L3.32,63.39 L2.46,61.85 L1.81,60.24 L1.49,58.55 L1.61,56.80 L2.20,55.02 L3.17,53.27 L4.37,51.59 L5.56,50.00 L6.52,48.48 L7.08,47.00 L7.19,45.50 L6.93,43.95 L6.46,42.32 L6.01,40.65 L5.77,38.97 L5.87,37.35 L6.32,35.81 L7.03,34.36 L7.86,32.97 L8.65,31.59 L9.29,30.14 L9.75,28.60 L10.08,26.95 L10.40,25.25 L10.82,23.57 L11.43,21.98 L12.29,20.54 L13.35,19.25 L14.55,18.08 L15.81,16.99 L17.07,15.90 L18.32,14.81 L19.59,13.76 L20.95,12.81 L22.46,12.09 L24.14,11.66 L25.97,11.55 L27.87,11.68 L29.74,11.90 L31.46,12.00 L32.98,11.78 L34.28,11.09 L35.41,9.92 L36.46,8.34 L37.54,6.55 L38.73,4.80 L40.08,3.31 L41.58,2.25 L43.21,1.67 L44.90,1.50 L46.62,1.62 L48.32,1.89 L50.00,2.19 L51.66,2.48 L53.30,2.78 L54.92,3.17 L56.50,3.72 L58.03,4.47 L59.48,5.38 L60.88,6.38 L62.24,7.32 L63.62,8.08 L65.07,8.60 L66.60,8.90 L68.22,9.08 L69.86,9.28 L71.45,9.66 L72.91,10.32 L74.19,11.29 L75.31,12.48 L76.33,13.76 L77.38,14.96 L78.57,15.95 L80.00,16.68 L81.69,17.19 L83.57,17.58 L85.52,18.02 L87.35,18.66 L88.89,19.61 L90.05,20.90 L90.79,22.48 L91.18,24.27 L91.33,26.14 L91.37,28.00 L91.41,29.80 L91.49,31.53 L91.61,33.19 L91.72,34.82 L91.77,36.43 L91.75,38.03 L91.73,39.60 L91.80,41.12 L92.09,42.58 L92.72,44.00 L93.69,45.41 L94.95,46.86 L96.32,48.38Z" fill="#1252B8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><circle cx="50" cy="50" r="33" fill="none" stroke="#FFFFFF" stroke-width=".9"/><text x="50" y="51" text-anchor="middle" dominant-baseline="central" font-family="Cormorant Garamond,Cinzel,Georgia,serif" font-weight="700" font-size="44" fill="#FFFFFF">I</text></svg></div>© 2026 Invitely · Simcha invitations &amp; graphics<div style="margin-top:8px;font-size:14px"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refunds">Refunds</a> · <a href="/contact">Contact</a></div></div></footer>
+  
 
 </main>
 
@@ -428,29 +512,25 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <!-- EDITOR -->
 <div id="editor">
   <div class="etop">
-    <button id="eClose" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <button id="eUndo" aria-label="Undo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7L4 12l5 5M4 12h11a5 5 0 010 10h-2"/></svg><span class="lb" data-i="undo">Undo</span></button>
-    <button id="eRedo" aria-label="Redo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 5-5 5M20 12H9a5 5 0 000 10h2"/></svg></button>
-    <button id="eSurprise" aria-label="Surprise"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg><span class="lb" data-i="surprise">Surprise</span></button>
-    <button id="eAI" aria-label="AI"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM19 3v4M17 5h4"/></svg><span class="lb">AI</span></button>
-    <button id="eKbd" aria-label="Yiddish keyboard" title="Yiddish keyboard / אידיש קלאוויאטור"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM7 10h1M11 10h1M15 10h1M7 14h10"/></svg><span class="lb" data-i="kbd">Yiddish keyboard</span></button>
-    <button id="eSave" aria-label="Save"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="lb" data-i="save">Save</span></button>
-    <button id="eVideo" class="gold" aria-label="Video"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h11v12H4zM15 10l5-3v10l-5-3"/></svg><span class="lb" data-i="video">Video</span></button>
+    <button id="eClose" class="ib" aria-label="Back to designs"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="etitle" id="eTitle"></span>
+    <button id="eUndo" class="ib" aria-label="Undo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7L4 12l5 5M4 12h11a5 5 0 010 10h-2"/></svg></button>
+    <button id="eRedo" class="ib" aria-label="Redo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7l5 5-5 5M20 12H9a5 5 0 000 10h2"/></svg></button>
+    <span class="esp"></span>
+    <div class="emore"><button id="eMoreBtn" class="ib" aria-label="More" aria-haspopup="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg></button>
+      <div class="emenu" id="eMenu">
+        <button id="eSurprise"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/></svg><span data-i="surprise">Surprise me</span></button>
+        <button id="eAI"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><span>AI</span></button>
+        <button id="eKbd" title="Yiddish keyboard / אידיש קלאוויאטור"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM7 10h1M11 10h1M15 10h1M7 14h10"/></svg><span data-i="kbd">Yiddish keyboard</span></button>
+        <button id="eSave"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span data-i="save">Save</span></button>
+      </div></div>
+    <button id="eVideo" class="vid"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h11v12H4zM15 10l5-3v10l-5-3"/></svg><span class="lb" data-i="video">Video</span></button>
     <button id="eDown" class="pri"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i="download">Download</span></button>
   </div>
   <div class="ebody">
-    <div class="estage" id="stage"><div class="escroll" id="eScroll"><canvas id="cv" width="1080" height="1350"></canvas></div><div class="zbar" id="eZoom"><button type="button" data-z="-" aria-label="Zoom out">−</button><span>100%</span><button type="button" data-z="+" aria-label="Zoom in">+</button></div><p class="hint" style="position:absolute;bottom:2px;left:0;right:0;text-align:center;margin:0">Tap words to change them · drag to move</p></div>
-    <div class="epanel">
-      <div class="etabs" id="etabs">
-        <button data-t="bg" class="on" data-i="tb_bg">Background</button>
-        <button data-t="text" data-i="tb_text">Text</button>
-        <button data-t="ready" data-i="tb_ready">Ready text</button>
-        <button data-t="el" data-i="tb_el">Elements</button>
-        <button data-t="photo" data-i="tb_photo">Photo</button>
-        <button data-t="ex" data-i="tb_ex">Examples</button>
-      </div>
-      <div class="pbody" id="pbody"></div>
-    </div>
+    <nav class="erail" id="etabs"><button data-t="text" class="on"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6V4h14v2M12 4v16M9 20h6"/></svg><span data-i="tb_text">Text</span></button><button data-t="ready"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/></svg><span data-i="tb_ready">Ready text</span></button><button data-t="photo"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4M15 9h.01"/></svg><span data-i="tb_photo">Photo</span></button><button data-t="el"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2 8 12.7 4 8.8 9.5 8z"/></svg><span data-i="tb_el">Elements</span></button><button data-t="bg"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 14l4-4 5 5 3-3 4 4"/></svg><span data-i="tb_bg">Background</span></button><button data-t="ex"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span data-i="tb_ex">Examples</span></button></nav>
+    <div class="epanel"><div class="phead"><b id="pTitle">Text</b><button class="ib" id="pClose" aria-label="Close"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="pbody" id="pbody"></div></div>
+    <div class="estage" id="stage"><div class="escroll" id="eScroll"><canvas id="cv" width="1080" height="1350"></canvas></div><div class="zbar" id="eZoom"><button type="button" data-z="-" aria-label="Zoom out">−</button><span>100%</span><button type="button" data-z="+" aria-label="Zoom in">+</button></div><p class="ehint">Tap words to change them · drag to move</p></div>
   </div>
 </div>
 
@@ -515,8 +595,8 @@ function shade(h,f){const n=parseInt(h.slice(1),16);let r=n>>16&255,g=n>>8&255,b
 
 /* ---------------- i18n ---------------- */
 const I18N={
- yi:{nav_designs:"דיזיינס",nav_reviews:"רעצענזיעס",nav_ai:"Invitely AI",nav_login:"אריינגיין",hero_h:"שמחה איינלאדונגען,<br><em>שיין און פשוט.</em>",hero_p:"קלייבט א דיזיין, שרייבט די נעמען, לאדט אראפ. גרייטע דיזיינס פאר יעדע שמחה, פלוס פרימיום, פרימיום פראו און ווידעא איינלאדונגען.",cta_start:"הייבט אן",cta_ai:"פרובירט AI",t_prem:"עקסטרע הינטערגרונטן, פאנטס און סטיקערס",t_pro:"פאטא-סצענע איינלאדונגען",t_vid:"פראו דיזיינס אלס ווידעאס",t_open:"גרייט אויס אומזיסט. באצאלט נאר ווען איר לאדט אראפ: בילדער פון $4.99, ווידעאס פון $9.99.",pick:"קלייבט אייער שמחה",pick_s:"יעדע געלעגנהייט, אויף ענגליש, אידיש און לשון קודש.",prem_h:"פרימיום און פראו קאלעקציעס",prem_s:"גאלד, בויגן-פענצטער, פאטא-סצענעס און נאך.",ai_h:"AI מאוד",ai_p:"באשרייבט די שמחה, די נעמען און די דאטום. AI שרייבט דעם נוסח און גיט אייך דריי פארטיגע דיזיינס.",ai_go:"מאכט 3 דיזיינס",vid_h:"ווידעא איינלאדונגען",vid_p:"מאכט פון יעדן דיזיין א ווידעא פון 5, 10 אדער 15 סעקונדעס, מיט 18 אנימאציעס און 15 שמחה ניגונים.",f_h:"גרינדונגס מיטגלידער",f_p:"די ערשטע 30 וואס שרייבן זיך איין קענען אראפלאדן אלע פרימיום דיזיינס אומזיסט, אויף שטענדיג.",f_join:"נעמט מיין פלאץ",how_h:"ווי עס ארבעט",how_s:"דריי טריט. מען דארף נישט קיין דיזיין קענטעניש.",s1:"קלייבט א דיזיין",s1p:"קלייבט אייער שמחה און א דיזיין, אדער הייבט אן ליידיג.",s2:"שרייבט אייערע ווערטער",s2p:"טאפט אויף יעדן טעקסט צו טוישן. ניצט גרייטע נוסחאות אדער די אידישע קלאוויאטור.",s3:"לאדט אראפ און שיקט",s3p:"היט אפ א בילד אדער ווידעא, שיקט אויף וואטסעפ אדער דרוקט.",ab_h:"וועגן אונז",ab_p:"Invitely איז דא כדי יעדער זאל קענען מאכן א שיינע איינלאדונג אין עטליכע מינוט, אן א דיזיינער. אידיש, לשון קודש און ענגליש ארבעטן צוזאמען, דער נוסח איז גרייט, און די אומזיסטע ווערסיע איז טאקע אומזיסט.",rv_h:"רעצענזיעס",rv_post:"שיקט",undo:"צוריק",surprise:"איבערראשונג",save:"היטן",download:"אראפלאדן",tb_bg:"הינטערגרונט",tb_text:"טעקסט",tb_ready:"גרייטע טעקסט",tb_el:"עלעמענטן",tb_photo:"בילד",tb_ex:"ביישפילן"},
- he:{nav_designs:"עיצובים",nav_reviews:"ביקורות",nav_ai:"Invitely AI",nav_login:"כניסה",hero_h:"הזמנות לשמחות,<br><em>יפות ופשוטות.</em>",hero_p:"בוחרים עיצוב, מקלידים שמות, מורידים. עיצובים מוכנים לכל שמחה, עם אוספי פרימיום, פרימיום פרו והזמנות וידאו.",cta_start:"להתחיל לעצב",cta_ai:"לנסות AI",t_prem:"רקעים, גופנים ומדבקות נוספים",t_pro:"הזמנות בסצנת צילום",t_vid:"עיצובי פרו כסרטונים",t_open:"העיצוב חינם. משלמים רק בהורדה: תמונות מ-$4.99, סרטונים מ-$9.99.",pick:"בחרו את השמחה",pick_s:"כל אירוע, באנגלית, ביידיש ובלשון קודש.",prem_h:"אוספי פרימיום ופרו",prem_s:"זהב, חלונות קשת, סצנות צילום ועוד.",ai_h:"מצב AI",ai_p:"תארו את השמחה, השמות והתאריך. ה-AI כותב את הנוסח ונותן שלושה עיצובים מוכנים.",ai_go:"צור 3 עיצובים",vid_h:"הזמנות וידאו",vid_p:"הפכו כל עיצוב לסרטון של 5, 10 או 15 שניות, עם 18 אנימציות ו-15 מנגינות.",f_h:"חברים מייסדים",f_p:"30 המצטרפים הראשונים מורידים את כל עיצובי הפרימיום בחינם, לתמיד.",f_join:"שמרו לי מקום",how_h:"איך זה עובד",how_s:"שלושה צעדים. בלי ידע בעיצוב.",s1:"בוחרים עיצוב",s1p:"בוחרים שמחה ועיצוב, או מתחילים מדף ריק.",s2:"מקלידים מילים",s2p:"נוגעים בכל טקסט כדי לשנות. נוסחים מוכנים ומקלדת יידיש.",s3:"מורידים ומשתפים",s3p:"שומרים תמונה או סרטון, שולחים בוואטסאפ או מדפיסים.",ab_h:"אודות",ab_p:"Invitely נועד כדי שכל אחד יוכל לעצב הזמנה יפה בכמה דקות, בלי מעצב. יידיש, לשון קודש ואנגלית עובדות יחד, הנוסח מוכן, והגרסה החינמית באמת חינמית.",rv_h:"ביקורות",rv_post:"פרסום",undo:"בטל",surprise:"הפתעה",save:"שמור",download:"הורדה",tb_bg:"רקע",tb_text:"טקסט",tb_ready:"טקסט מוכן",tb_el:"אלמנטים",tb_photo:"תמונה",tb_ex:"דוגמאות"}
+ yi:{nav_designs:"דיזיינס",nav_reviews:"רעצענזיעס",nav_ai:"Invitely AI",nav_login:"אריינגיין",hero_h:"שמחה איינלאדונגען,<br><em>שיין און פשוט.</em>",hero_p:"קלייבט א דיזיין, שרייבט די נעמען, לאדט אראפ. גרייט אין א פאר מינוט.",cta_start:"מאכט א ווידעא",cta_ai:"פרובירט AI",t_prem:"עקסטרע הינטערגרונטן, פאנטס און סטיקערס",t_pro:"פאטא-סצענע איינלאדונגען",t_vid:"פראו דיזיינס אלס ווידעאס",t_open:"גרייט אויס אומזיסט. באצאלט נאר ווען איר לאדט אראפ: בילדער פון $4.99, ווידעאס פון $9.99.",pick:"קלייבט אייער שמחה",pick_s:"יעדע געלעגנהייט, אויף ענגליש, אידיש און לשון קודש.",prem_h:"פאפולערע דיזיינס",prem_s:"דריקט איינס צו מאכן עס אייערס.",ai_h:"AI מאוד",ai_p:"באשרייבט די שמחה, די נעמען און די דאטום. AI שרייבט דעם נוסח און גיט אייך דריי פארטיגע דיזיינס.",ai_go:"מאכט 3 דיזיינס",vid_h:"ווידעא איינלאדונגען",vid_p:"אייער איינלאדונג אין אן עכטן געפילמטן קאווערט, וואקס חותם אדער ספר, פלוס 18 אנימאציעס און שמחה מוזיק. עפנט א דיזיין און דריקט \"ווידעא\".",f_h:"גרינדונגס מיטגלידער",f_p:"די ערשטע 30 וואס שרייבן זיך איין קענען אראפלאדן אלע פרימיום דיזיינס אומזיסט, אויף שטענדיג.",f_join:"נעמט מיין פלאץ",how_h:"ווי עס ארבעט",how_s:"דריי טריט. מען דארף נישט קיין דיזיין קענטעניש.",s1:"קלייבט א דיזיין",s1p:"קלייבט אייער שמחה און א דיזיין, אדער הייבט אן ליידיג.",s2:"שרייבט אייערע ווערטער",s2p:"טאפט אויף יעדן טעקסט צו טוישן. ניצט גרייטע נוסחאות אדער די אידישע קלאוויאטור.",s3:"לאדט אראפ און שיקט",s3p:"היט אפ א בילד אדער ווידעא, שיקט אויף וואטסעפ אדער דרוקט.",ab_h:"וועגן אונז",ab_p:"Invitely איז דא כדי יעדער זאל קענען מאכן א שיינע איינלאדונג אין עטליכע מינוט, אן א דיזיינער. אידיש, לשון קודש און ענגליש ארבעטן צוזאמען, דער נוסח איז גרייט, און די אומזיסטע ווערסיע איז טאקע אומזיסט.",rv_h:"רעצענזיעס",rv_post:"שיקט",undo:"צוריק",surprise:"איבערראשונג",save:"היטן",download:"אראפלאדן",tb_bg:"הינטערגרונט",tb_text:"טעקסט",tb_ready:"גרייטע טעקסט",tb_el:"עלעמענטן",tb_photo:"בילד",tb_ex:"ביישפילן"},
+ he:{nav_designs:"עיצובים",nav_reviews:"ביקורות",nav_ai:"Invitely AI",nav_login:"כניסה",hero_h:"הזמנות לשמחות,<br><em>יפות ופשוטות.</em>",hero_p:"בוחרים עיצוב, מקלידים שמות, מורידים. מוכן תוך דקות.",cta_start:"יצירת סרטון",cta_ai:"לנסות AI",t_prem:"רקעים, גופנים ומדבקות נוספים",t_pro:"הזמנות בסצנת צילום",t_vid:"עיצובי פרו כסרטונים",t_open:"העיצוב חינם. משלמים רק בהורדה: תמונות מ-$4.99, סרטונים מ-$9.99.",pick:"בחרו את השמחה",pick_s:"כל אירוע, באנגלית, ביידיש ובלשון קודש.",prem_h:"עיצובים פופולריים",prem_s:"לחצו על אחד כדי להתאים אותו לעצמכם.",ai_h:"מצב AI",ai_p:"תארו את השמחה, השמות והתאריך. ה-AI כותב את הנוסח ונותן שלושה עיצובים מוכנים.",ai_go:"צור 3 עיצובים",vid_h:"הזמנות וידאו",vid_p:"ההזמנה שלכם בתוך מעטפה, חותם שעווה או ספר מצולמים באמת, ועוד 18 אנימציות ומוזיקת שמחה. פתחו עיצוב ולחצו \"וידאו\".",f_h:"חברים מייסדים",f_p:"30 המצטרפים הראשונים מורידים את כל עיצובי הפרימיום בחינם, לתמיד.",f_join:"שמרו לי מקום",how_h:"איך זה עובד",how_s:"שלושה צעדים. בלי ידע בעיצוב.",s1:"בוחרים עיצוב",s1p:"בוחרים שמחה ועיצוב, או מתחילים מדף ריק.",s2:"מקלידים מילים",s2p:"נוגעים בכל טקסט כדי לשנות. נוסחים מוכנים ומקלדת יידיש.",s3:"מורידים ומשתפים",s3p:"שומרים תמונה או סרטון, שולחים בוואטסאפ או מדפיסים.",ab_h:"אודות",ab_p:"Invitely נועד כדי שכל אחד יוכל לעצב הזמנה יפה בכמה דקות, בלי מעצב. יידיש, לשון קודש ואנגלית עובדות יחד, הנוסח מוכן, והגרסה החינמית באמת חינמית.",rv_h:"ביקורות",rv_post:"פרסום",undo:"בטל",surprise:"הפתעה",save:"שמור",download:"הורדה",tb_bg:"רקע",tb_text:"טקסט",tb_ready:"טקסט מוכן",tb_el:"אלמנטים",tb_photo:"תמונה",tb_ex:"דוגמאות"}
 };
 const EN={};$$('[data-i]').forEach(e=>EN[e.dataset.i]=e.textContent);$$('[data-ih]').forEach(e=>EN[e.dataset.ih]=e.innerHTML);
 let LANG='en';
@@ -871,12 +951,18 @@ function snap(){HIST.push(JSON.stringify(D));if(HIST.length>80)HIST.shift();FUT=
 function undo(){if(!HIST.length)return;FUT.push(JSON.stringify(D));D=JSON.parse(HIST.pop());SEL=-1;draw();renderPanel()}
 function redo(){if(!FUT.length)return;HIST.push(JSON.stringify(D));D=JSON.parse(FUT.pop());SEL=-1;draw();renderPanel()}
 async function openEditor(d){try{setEZ(1)}catch(e){}document.getElementById('stage').classList.remove('paidok');D=d;EH=d.h||(d.land?864:1350);cv.height=EH;D.objs.forEach(o=>{if(o.t==='photo')getImg(o.src)});SEL=-1;HIST=[];FUT=[];curCat=d.cat||curCat;$('#editor').classList.add('on');document.body.style.overflow='hidden';fitCanvas();draw();
- const fonts=[...new Set(D.objs.filter(o=>o.t==='text').map(o=>o.font))];await Promise.all(fonts.map(f=>loadFont(f)));draw();setTab('bg')}
+ const fonts=[...new Set(D.objs.filter(o=>o.t==='text').map(o=>o.font))];await Promise.all(fonts.map(f=>loadFont(f)));draw();const ct=CAT[curCat];$('#eTitle').textContent=ct?(ct.name||ct.n||ct.en||''):'';setTab('text',!isPhoneEd());if(isPhoneEd())sheet(false)}
 $('#eClose').onclick=()=>{$('#editor').classList.remove('on');document.body.style.overflow='';$('#kbd').classList.remove('on')};
 $('#eUndo').onclick=undo;$('#eRedo').onclick=redo;
 let TAB='bg';
-function setTab(t){TAB=t;$$('#etabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));renderPanel()}
-$$('#etabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
+const isPhoneEd=()=>matchMedia('(max-width:900px)').matches;
+function sheet(on){$('#editor').classList.toggle('psheet',!!on);requestAnimationFrame(()=>{fitCanvas();draw()})}
+function setTab(t,open=true){TAB=t;$$('#etabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));const b=$(`#etabs button[data-t="${t}"] span`);$('#pTitle').textContent=b?b.textContent:'';renderPanel();if(open)sheet(true)}
+$$('#etabs button').forEach(b=>b.onclick=()=>{if(isPhoneEd()&&TAB===b.dataset.t&&$('#editor').classList.contains('psheet')){sheet(false);return}setTab(b.dataset.t)});
+$('#pClose').onclick=()=>sheet(false);
+$('#eMoreBtn').onclick=e=>{e.stopPropagation();$('#eMenu').classList.toggle('on')};
+document.addEventListener('click',e=>{if(!e.target.closest('.emore'))$('#eMenu')?.classList.remove('on')});
+$$('#eMenu button').forEach(b=>b.addEventListener('click',()=>$('#eMenu').classList.remove('on')));
 const SWATCH=['#000000','#ffffff','#2B2320','#7C2D3A','#B8892E','#1F2A44','#0B3D2E','#B76E79','#5D8AB3','#8B74C9','#E2A92B','#C1440E','#1E9E5A','#E05A92'];
 function h(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content}
 function selObj(){return D.objs[SEL]}
@@ -956,6 +1042,8 @@ function renderPanel(){const P=$('#pbody');P.innerHTML='';const o=selObj();
 function adaptInk(old){const oi=bgInk(old),ni=bgInk(D.bg),oa=bgAcc(old),na=bgAcc(D.bg);D.objs.forEach(o=>{if(o.t==='text'&&o.fill==='solid'){if(o.color===oi)o.color=ni;else if(o.color===oa)o.color=na}if(o.t==='el'&&o.color===oa)o.color=na})}
 function rotRow(){return `<div class="row" style="margin-top:6px"><button class="btn sm ghost" data-rot="-15">↺ 15°</button><button class="btn sm ghost" data-rot="15">↻ 15°</button><button class="btn sm ghost" data-rot="0">Straight</button></div>`}
 function rotBind(){$$('#pbody [data-rot]').forEach(b=>b.onclick=()=>{const o=selObj();if(!o)return;snap();const v=+b.dataset.rot;o.rot=v===0?0:((o.rot||0)+v);$$('#pbody input[type=range]').forEach(r=>{if(/R$/.test(r.id))r.value=o.rot});draw()})}
+/* When a text is selected, its own controls come first; Add text and the date tool move to the end. */
+const _renderPanel=renderPanel;renderPanel=function(){_renderPanel();if(TAB==='text'&&selObj()?.t==='text'){const P=$('#pbody'),hd=P.querySelector('.hdate'),ad=$('#addT');if(hd)P.appendChild(hd);if(ad)P.appendChild(ad)}};
 function objBtns(){rotBind();const d=$('#oDel');if(!d)return;d.onclick=()=>{snap();D.objs.splice(SEL,1);SEL=-1;draw();renderPanel()};$('#oDup').onclick=()=>{snap();const c=JSON.parse(JSON.stringify(D.objs[SEL]));c.x+=30;c.y+=30;D.objs.push(c);SEL=D.objs.length-1;draw()};
  $('#oUp').onclick=()=>{if(SEL<D.objs.length-1){snap();const [o]=D.objs.splice(SEL,1);D.objs.splice(SEL+1,0,o);SEL++;draw()}};$('#oDn').onclick=()=>{if(SEL>0){snap();const [o]=D.objs.splice(SEL,1);D.objs.splice(SEL-1,0,o);SEL--;draw()}}}
 
@@ -1244,6 +1332,11 @@ $$('.tb').forEach(b=>b.onclick=()=>{toast('Free to design. You pay only when you
 /* ---------------- boot ---------------- */
 renderCats();renderPremium();renderStats();renderStarPick();
 try{const l=localStorage.getItem('ez_lang');if(l&&l!=='en')setLang(l);else renderFAQ()}catch(e){renderFAQ()}
+/* Home: search box and short category list */
+(function(){const f=$('#hSearch');if(f)f.onsubmit=e=>{e.preventDefault();const q=$('#hQ').value.trim().toLowerCase();if(!q){location.hash='#events';return}
+ const m=[...$$('#cats > *')].find(el=>el.textContent.toLowerCase().includes(q));if(m){m.click();return}
+ location.hash='#simple';setTimeout(()=>{const s=$('#sSearch');if(s){s.value=q;s.dispatchEvent(new Event('input',{bubbles:true}))}},800)};
+ const cm=$('#catMore');if(cm)cm.onclick=()=>{const sh=$('#cats').classList.toggle('short');cm.textContent=sh?'Show all simchas':'Show fewer'}})();
 route();initShared();const setHH=()=>document.documentElement.style.setProperty('--hh',(document.querySelector('header.top')?.offsetHeight||58)+'px');setHH();addEventListener('resize',setHH);
 ['Frank Ruhl Libre','Suez One','Playfair Display','Great Vibes'].forEach(f=>loadFont(f));
 document.fonts.ready.then(()=>{$$('canvas').forEach(c=>{if(c._draw&&c.isConnected&&c.getBoundingClientRect().top<innerHeight*2)queueThumb(c,c._draw)})});
