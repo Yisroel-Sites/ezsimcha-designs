@@ -209,7 +209,7 @@ input[type=range]{padding:0;border:0;background:none}
 .aires{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
 .vidwrap{display:grid;grid-template-columns:240px 1fr;gap:16px}
 @media(max-width:620px){.vidwrap{grid-template-columns:1fr}}
-#vcv{width:100%;border-radius:10px;background:#000;aspect-ratio:4/5}
+#vcv{display:block;margin:0 auto;width:auto;height:auto;max-width:100%;max-height:62vh;border-radius:10px;background:#000}
 .animgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .animgrid button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 4px;font-size:12px;font-weight:700}
 .animgrid button.on{background:var(--ink);color:#fff}
@@ -459,7 +459,7 @@ canvas,.tpl img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:
 <div class="modal" id="mVideo"><div class="sheet" style="max-width:860px">
   <h3><span>Video and invitation link</span><button class="x" data-close>×</button></h3>
   <div class="vidwrap">
-    <div><canvas id="vcv" width="720" height="900"></canvas>
+    <div><canvas id="vcv" width="1080" height="1350"></canvas>
       <div class="row" style="margin-top:8px"><button class="btn ghost sm" id="vPlay">Preview</button><button class="btn sm" id="vRec">Make video</button></div>
       <p class="hint" id="vStatus"></p></div>
     <div>
@@ -1179,8 +1179,8 @@ function buildVideoUI(){const g=$('#vAnims');g.innerHTML='';ANIMS.forEach(([id,i
  $$('#vDur button').forEach(b=>{b.classList.toggle('on',+b.dataset.d===VD);b.onclick=()=>{VD=+b.dataset.d;$$('#vDur button').forEach(x=>x.classList.toggle('on',x===b))}});
  const c=CAT[curCat]||CAT['barmitzvah'];if(!$('#evTitle').value)$('#evTitle').value=c.en;updateEvent()}
 const isReal=()=>VA.startsWith('real');const REALID={realenv:'envelope',realseal:'seal',realsefer:'sefer'};
-function sizeVC(){const vc=$('#vcv'),h=isReal()?1280:900;if(vc.width!==720||vc.height!==h){vc.width=720;vc.height=h}return vc}
-function vImg(vc){return isReal()?designImage(1080,1350):designImage(vc.width,vc.height)}
+function sizeVC(){const vc=$('#vcv'),h=isReal()?1920:1350;if(vc.width!==1080||vc.height!==h){vc.width=1080;vc.height=h}return vc}
+function vImg(vc){if(isReal()){const tw=(window.REAL_CLIPS&&REAL_CLIPS[REALID[VA]]||{}).tex||1080;return designImage(tw,Math.round(tw*1.25))}return designImage(vc.width,vc.height)}
 const vDur=()=>isReal()?Math.max(VD,(window.REAL_CLIPS&&REAL_CLIPS[REALID[VA]]||{dur:10}).dur):VD;
 function playPreview(sound=true){stopPreview();const vc=sizeVC(),ctx=vc.getContext('2d'),img=vImg(vc),t0=performance.now(),VD=vDur();
  if(sound&&VS>=0){try{vAC=new AudioContext();scheduleSong(vAC,vAC.destination,VS,vAC.currentTime+.05,VD)}catch(e){}}
@@ -1193,7 +1193,7 @@ $('#vRec').onclick=async()=>{if(typeof MediaRecorder==='undefined'){$('#vStatus'
  if(isReal()){$('#vStatus').textContent='Loading the video…';const ok=await window.realReady(REALID[VA]);if(!ok){$('#vStatus').textContent='Could not load the video. Check your connection and try again.';return}}
  const stream=vc.captureStream(30);let ac=null;
  if(VS>=0){try{ac=new AudioContext();const dst=ac.createMediaStreamDestination();scheduleSong(ac,dst,VS,ac.currentTime+.1,VD);dst.stream.getAudioTracks().forEach(t=>stream.addTrack(t))}catch(e){}}
- const types=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4;codecs=avc1.4D401F,mp4a.40.2','video/mp4;codecs=avc1,mp4a','video/mp4;codecs=avc1','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'];/* H.264 MP4 plays everywhere; otherwise WebM, named .webm */const mt=types.find(t=>MediaRecorder.isTypeSupported(t))||'';const rec=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:5e6}:{});const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+ const types=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4;codecs=avc1.4D401F,mp4a.40.2','video/mp4;codecs=avc1,mp4a','video/mp4;codecs=avc1','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'];/* H.264 MP4 plays everywhere; otherwise WebM, named .webm */const mt=types.find(t=>MediaRecorder.isTypeSupported(t))||'';const rec=new MediaRecorder(stream,mt?{mimeType:mt,videoBitsPerSecond:isReal()?16e6:12e6,audioBitsPerSecond:192e3}:{});const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
  const btn=$('#vRec');btn.disabled=true;rec.start(250);const t0=performance.now();
  await new Promise(res=>{const step=()=>{const t=(performance.now()-t0)/1000;vFrame(ctx,vc.width,vc.height,Math.min(t,VD),VD,VA,img);$('#vStatus').textContent=`Recording… ${Math.min(VD,Math.ceil(t))}/${VD}s (keep this window open)`;if(t<VD+.15)requestAnimationFrame(step);else res()};step()});
  rec.stop();await new Promise(r=>rec.onstop=r);if(ac)ac.close();btn.disabled=false;const ext=(rec.mimeType||mt).includes('mp4')?'mp4':'webm';const blob=new Blob(chunks,{type:rec.mimeType||'video/webm'});$('#vStatus').textContent=`Done · ${(blob.size/1e6).toFixed(1)} MB ${ext.toUpperCase()}`;offerFile(blob,`${curCat}-video-invitation.${ext}`,'video')};
