@@ -301,6 +301,18 @@ details.rvform[open] summary{display:none}
 .erail button{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;padding:10px 4px;border-radius:12px;font-weight:700;font-size:11.5px;color:var(--muted);line-height:1.15;text-align:center}
 .erail button svg.ic{width:22px;height:22px}
 .erail button.on{background:var(--line);color:var(--ink)}
+#pbody .tfield{border:1.5px solid var(--line);border-radius:14px;padding:8px 10px 2px;margin:0 0 10px;background:#fff;transition:border-color .15s}
+#pbody .tfield.on{border-color:var(--gold,#B8892E);box-shadow:0 0 0 3px rgba(184,137,46,.15)}
+#pbody .tfield label.f{margin-top:0}
+#pbody .tfield textarea{width:100%;resize:none;overflow:hidden;min-height:40px;font-size:16px}
+#pbody .hdrow{gap:6px;align-items:center;margin:4px 0 6px;flex-wrap:wrap}#pbody .hdrow input[type=date]{flex:1;min-width:140px}
+#pbody .frow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:6px 0 8px}
+#pbody .fsize{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;background:#fff;overflow:hidden}
+#pbody .fsize button{border:0;background:none;color:inherit;font:700 14px Georgia,serif;padding:7px 11px;cursor:pointer}
+#pbody .fsize span{font-size:13px;min-width:42px;text-align:center;cursor:pointer;font-variant-numeric:tabular-nums}
+#pbody .fontbtn{padding:7px 11px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:inherit;font:inherit;font-size:13px;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#pbody .fontbtn span{font-family:Georgia,serif;font-weight:700;margin-right:3px}#pbody .fontbtn b{font-weight:600}
+#pbody .tmore{border-top:1px dashed var(--line);margin-top:4px;padding:2px 0 8px}
 .epanel{display:flex;flex-direction:column;min-height:0;background:var(--paper);border-inline-end:1px solid var(--line)}
 .phead{display:flex;align-items:center;justify-content:space-between;padding:10px 12px 0}
 .phead b{font-size:16px}
@@ -1043,7 +1055,38 @@ function adaptInk(old){const oi=bgInk(old),ni=bgInk(D.bg),oa=bgAcc(old),na=bgAcc
 function rotRow(){return `<div class="row" style="margin-top:6px"><button class="btn sm ghost" data-rot="-15">↺ 15°</button><button class="btn sm ghost" data-rot="15">↻ 15°</button><button class="btn sm ghost" data-rot="0">Straight</button></div>`}
 function rotBind(){$$('#pbody [data-rot]').forEach(b=>b.onclick=()=>{const o=selObj();if(!o)return;snap();const v=+b.dataset.rot;o.rot=v===0?0:((o.rot||0)+v);$$('#pbody input[type=range]').forEach(r=>{if(/R$/.test(r.id))r.value=o.rot});draw()})}
 /* When a text is selected, its own controls come first; Add text and the date tool move to the end. */
-const _renderPanel=renderPanel;renderPanel=function(){_renderPanel();if(TAB==='text'&&selObj()?.t==='text'){const P=$('#pbody'),hd=P.querySelector('.hdate'),ad=$('#addT');if(hd)P.appendChild(hd);if(ad)P.appendChild(ad)}};
+const _renderPanel=renderPanel;let TMORE=false;const TBASE=new WeakMap();
+function tLabel(t){t=String(t||'');return /\b\d{1,2}[:.]\d{2}\b|\b(am|pm)\b|אזייגער|שעה/i.test(t)?'Time':/(january|february|march|april|may|june|july|august|september|october|november|december|sunday|monday|tuesday|wednesday|thursday|friday|shabbos|תשפ|פרשת|יום [א-ו]|ליל)/i.test(t)?'Date':/(hall|avenue|ave\b|street|st\.|road|blvd|זאל|אולם|גאס|רחוב)/i.test(t)?'Hall':/^\s*(ב["״'׳]?ה|בס["״]ד|בעזרת|בעזה|B["”]H)\s*$/.test(t)?'ב״ה':/[&]|\bund\b|ומשפחתם|און משפחה|משפ|\bmr\.|\bmrs\./i.test(t)?'Names':t.length>40||/\n/.test(t)?'Wording':'Text'}
+renderPanel=function(){_renderPanel();if(TAB!=='text')return;const P=$('#pbody');const so=selObj();const sel=so&&so.t==='text'?SEL:-1;
+ // pull out pieces built by the old panel
+ const hd=P.querySelector('.hdate'),ad=$('#addT');P.querySelectorAll(':scope>p.hint').forEach(x=>x.remove());
+ let adv=null;if(sel>=0){adv=document.createElement('div');adv.className='tmore';const tx=$('#tTxt');[...P.childNodes].forEach(n=>{if(n!==hd&&n!==ad)adv.appendChild(n)});if(tx){const lb=tx.previousElementSibling;if(lb&&lb.tagName==='LABEL')lb.remove();tx.remove()}}
+ P.innerHTML='';const list=document.createElement('div');list.className='tlist';P.appendChild(list);
+ const idx=D.objs.map((o,i)=>i).filter(i=>D.objs[i].t==='text').sort((a,b)=>D.objs[a].y-D.objs[b].y);
+ if(!idx.length)list.appendChild(h(`<p class="hint">No text yet. Tap “+ Add text” below.</p>`));
+ const CNT={};
+ idx.forEach(i=>{const o=D.objs[i];if(!TBASE.has(o))TBASE.set(o,o.size);let l=tLabel(o.text);CNT[l]=(CNT[l]||0)+1;
+  const card=document.createElement('div');card.className='tfield'+(i===sel?' on':'');card.dataset.i=i;
+  const lab=document.createElement('label');lab.className='f';lab.textContent=CNT[l]>1?l+' '+CNT[l]:l;card.appendChild(lab);
+  const ta=document.createElement('textarea');ta.dir='auto';ta.rows=1;ta.value=o.text;if(i===sel)ta.id='tTxt';
+  const grow=()=>{ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px'};requestAnimationFrame(grow);
+  let typing=0;ta.oninput=()=>{if(!typing){snap();typing=1}clearTimeout(ta._t);ta._t=setTimeout(()=>typing=0,800);o.text=ta.value;grow();draw()};
+  ta.onfocus=()=>{lastField=ta;if(SEL!==i){SEL=i;draw();const c=ta.selectionStart;renderPanel();const n=$('#tTxt');if(n){n.focus();try{n.setSelectionRange(c,c)}catch(e){}}}};
+  card.appendChild(ta);
+  if(lab.textContent.startsWith('Date')){const r=document.createElement('div');r.className='row hdrow';r.innerHTML='<input type="date" aria-label="Pick a date"><label class="chk"><input type="checkbox"> After shkiah</label>';const [di,ck]=r.querySelectorAll('input');const fd=()=>{if(!di.value||!window.hebLine)return;snap();o.text=hebLine(di.value,ck.checked);ta.value=o.text;grow();draw()};di.oninput=fd;ck.onchange=fd;card.appendChild(r)}
+  const row=document.createElement('div');row.className='frow';
+  const fb=document.createElement('button');fb.type='button';fb.className='fontbtn';fb.innerHTML='<span>Aa</span> Font: <b></b> ▾';fb.querySelector('b').textContent=o.font;fb.querySelector('b').style.fontFamily=`"${o.font}"`;
+  fb.onclick=()=>{SEL=i;TMORE=true;draw();renderPanel();const f=$('#fL');if(f)f.scrollIntoView({block:'center',behavior:'smooth'})};row.appendChild(fb);
+  const sz=document.createElement('div');sz.className='fsize';sz.innerHTML='<button type="button" aria-label="Smaller text">A−</button><span></span><button type="button" aria-label="Bigger text">A+</button>';
+  const out=sz.querySelector('span');const base=TBASE.get(o);const show=()=>out.textContent=Math.round(o.size/base*100)+'%';show();
+  const set=p=>{snap();o.size=Math.max(base*.3,Math.min(base*3,base*p/100));show();draw();const r=$('#tS');if(r&&i===SEL){r.value=o.size;$('#vS')&&($('#vS').textContent=Math.round(o.size))}};
+  const cur=()=>Math.round(o.size/base*10)*10;sz.children[0].onclick=()=>set(cur()-10);sz.children[2].onclick=()=>set(cur()+10);out.onclick=()=>set(100);out.title='Tap to reset';row.appendChild(sz);
+  const mb=document.createElement('button');mb.type='button';mb.className='fontbtn tmb';mb.textContent=i===sel&&TMORE?'Less ▴':'More ▾';mb.onclick=()=>{if(SEL===i){TMORE=!TMORE}else{SEL=i;TMORE=true}draw();renderPanel()};row.appendChild(mb);
+  card.appendChild(row);
+  if(i===sel&&adv){adv.style.display=TMORE?'':'none';card.appendChild(adv)}
+  list.appendChild(card)});
+ if(ad){ad.style.marginTop='6px';P.appendChild(ad)}if(hd)P.appendChild(hd);
+ const c=list.querySelector('.tfield.on');if(c&&!P._noScroll)requestAnimationFrame(()=>{const r=c.getBoundingClientRect(),pr=P.getBoundingClientRect();if(r.top<pr.top||r.top>pr.bottom-60)c.scrollIntoView({block:'nearest'})})};
 function objBtns(){rotBind();const d=$('#oDel');if(!d)return;d.onclick=()=>{snap();D.objs.splice(SEL,1);SEL=-1;draw();renderPanel()};$('#oDup').onclick=()=>{snap();const c=JSON.parse(JSON.stringify(D.objs[SEL]));c.x+=30;c.y+=30;D.objs.push(c);SEL=D.objs.length-1;draw()};
  $('#oUp').onclick=()=>{if(SEL<D.objs.length-1){snap();const [o]=D.objs.splice(SEL,1);D.objs.splice(SEL+1,0,o);SEL++;draw()}};$('#oDn').onclick=()=>{if(SEL>0){snap();const [o]=D.objs.splice(SEL,1);D.objs.splice(SEL-1,0,o);SEL--;draw()}}}
 
