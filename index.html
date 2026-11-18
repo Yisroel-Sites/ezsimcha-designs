@@ -95,7 +95,7 @@ html[dir=rtl] .tb .yi{text-align:right}
 .t-green{background:linear-gradient(135deg,#2d4939,#4a6b55)}.t-blue{background:linear-gradient(135deg,#04672f,#069343)}.t-purple{background:linear-gradient(135deg,#10482b,#27b46b 55%,#68cb97)}
 .tier small{font-weight:600;color:var(--muted)}
 .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;padding:2px 7px;border-radius:999px;background:#F1E3BF;color:#6B4C10;text-transform:uppercase}
-.badge.pro{background:#2B2320;color:#F0D58A}.badge.vid{background:#7C2D3A;color:#fff}
+.badge.pro{background:#2B2320;color:#F0D58A}.badge.free{background:#DFF3E4;color:#1E6B34}body.inv .badge.free{background:#DFF3E4;color:#1E6B34}.badge.vid{background:#7C2D3A;color:#fff}
 section{padding:42px 0}
 h2.sec{color:#2d4939;font-family:"Playfair Display","Frank Ruhl Libre",serif;font-size:clamp(28px,4vw,40px);margin:0 0 6px;text-align:center}
 p.sub{text-align:center;color:var(--muted);margin:0 0 26px;font-size:17px}
@@ -380,7 +380,7 @@ details.rvform[open] summary{display:none}
 
   <section id="premium"><div class="wrap">
     <h2 class="sec" data-i="prem_h">Popular designs</h2>
-    <p class="sub" data-i="prem_s">Tap one to make it yours.</p>
+    <p class="sub">Free and Premium picks. Tap one to make it yours.</p>
     <div class="grid" id="premGrid"></div>
   </div></section>
 
@@ -919,9 +919,9 @@ function designThumb(d,w=270){const c=thumbCanvas(w,Math.round(w*((d.h||(d.land?
 /* ---------------- home rendering ---------------- */
 const CAT_IC=new Proxy({},{get:(o,k)=>typeof k==='string'&&CAT[k]?`<img src="ic/photo/${k}.jpg" alt="" loading="lazy" width="320" height="320">`:undefined});
 function renderCats(){const g=$('#cats');g.innerHTML='';CATS.forEach(c=>{const a=document.createElement('a');a.className='cat';a.href='#c-'+c[0];a.innerHTML=`<div class="ic">${CAT_IC[c[0]]||c[3]}</div><b></b><span></span>`;a.querySelector('b').textContent=c[1];a.querySelector('span').textContent=c[2];g.appendChild(a)})}
-function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='Example';b.appendChild(s)}else if(d.tier!=='free'){const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':'');s.textContent=d.tier==='pro'?'Pro':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
+function tplButton(d){const b=document.createElement('button');b.className='tpl'+(d.land?' land':'');b.appendChild(designThumb(d));if(d.featured){const s=document.createElement('span');s.className='badge';s.style.background='#2B2320';s.style.color='#F0D58A';s.textContent='Example';b.appendChild(s)}else{const s=document.createElement('span');s.className='badge'+(d.tier==='pro'?' pro':d.tier==='free'?' free':'');s.textContent=d.tier==='pro'?'Pro':d.tier==='free'?'Free':'Premium';b.appendChild(s)}b.onclick=()=>openEditor(JSON.parse(JSON.stringify(d)));return b}
 function renderPremium(){const g=$('#premGrid');g.innerHTML='<p class="hint"><span class="spin"></span></p>';const picks=['wedding','barmitzvah','kiddush','vort','bris','lchaim','sholomzochor','shevabrachos'];
- const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const L=(SMP_BY[k]||[]).filter(r=>r[3]!=='free'&&!r[7]&&hasBg(r));const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
+ const ob=new IntersectionObserver(async es=>{if(!es.some(e=>e.isIntersecting))return;ob.disconnect();g.innerHTML='';for(const [i,k] of picks.entries()){await loadCat(k);const wantFree=i%2===0;let L=(SMP_BY[k]||[]).filter(r=>(wantFree?r[3]==='free':r[3]!=='free')&&!r[7]&&hasBg(r));if(!L.length)L=(SMP_BY[k]||[]).filter(r=>!r[7]&&hasBg(r));const r=L[(i*5)%Math.max(1,L.length)];g.appendChild(tplButton(r?layoutDesign(r):buildTemplate(k,15)))}},{rootMargin:'300px'});ob.observe(g)}
 const TPL_PER=19;
 let gL='all',gQ='',gList=[],gShown=0;const PAGE=24;
 function tplLang(i){return i%3===2?'en':'yi'}
@@ -1344,13 +1344,13 @@ $('#evG').onclick=e=>{if(!evParts()){e.preventDefault();toast('Pick a date first
 let myStars=5,ME=null;
 function renderStarPick(){$('#starPick').innerHTML='';for(let i=1;i<=5;i++){const b=document.createElement('button');b.textContent='★';b.classList.toggle('on',i<=myStars);b.onclick=()=>{myStars=i;renderStarPick()};$('#starPick').appendChild(b)}}
 async function initShared(){const u=await cap('user'),db=await cap('db');const uid=u?await u.id():null;ME={u,db,uid};if(uid){const m=await u.me();if(m&&m.name)$('#loginBtn').textContent=m.name.split(' ')[0].slice(0,14)}
- if(!db){$('#rvNote').textContent='Reviews are not available right now.';$('#fCount').textContent='30 founding spots';$('#fMeter').style.width='0%';return}
+ if(!db){$('#rvNote').textContent='Reviews are not available right now.';$('#fCount').textContent='Only 30 founding spots.';$('#fMeter').parentNode.style.display='none';return}
  let to=setTimeout(()=>{$('#rvNote').textContent='Reviews can\'t be reached right now.'},10000);
  db.collection('reviews').onSnapshot(async s=>{clearTimeout(to);const rows=s.docs.map(d=>d.data()).filter(r=>r&&r.stars).sort((a,b)=>(b.at||0)-(a.at||0));
-   const avg=rows.length?(rows.reduce((a,r)=>a+(+r.stars||0),0)/rows.length):0;$('#rvAvg').textContent=rows.length?`${'★'.repeat(Math.round(avg))} ${avg.toFixed(1)} · ${rows.length} review${rows.length>1?'s':''}`:'No reviews yet. Be the first.';
+   const avg=rows.length?(rows.reduce((a,r)=>a+(+r.stars||0),0)/rows.length):0;$('#rvAvg').textContent=rows.length?`${'★'.repeat(Math.round(avg))} ${avg.toFixed(1)} · ${rows.length} review${rows.length>1?'s':''}`:'Made an invitation here? Tell others how it went.';
    const ps=u?await u.profiles(rows.map(r=>r.uid).filter(Boolean)):{};$('#rvList').innerHTML='';rows.forEach(r=>{const el=document.createElement('div');el.className='rev';el.innerHTML='<div class="stars"></div><p style="margin:6px 0"></p><small class="muted"></small>';el.querySelector('.stars').textContent='★'.repeat(clamp(+r.stars,1,5))+'☆'.repeat(5-clamp(+r.stars,1,5));el.querySelector('p').textContent=String(r.text||'').slice(0,600).replace(/\btemples\b/gi,'templates');el.querySelector('small').textContent=(String(r.name||'').slice(0,40)||ps[r.uid]?.name||'Someone')+' · '+new Date(r.at||Date.now()).toLocaleDateString();$('#rvList').appendChild(el)})},
   ()=>{clearTimeout(to);$('#rvNote').textContent='Reviews can\'t be reached right now.'});
- db.collection('members').onSnapshot(s=>{const n=s.size;$('#fMeter').style.width=Math.min(100,n/30*100)+'%';$('#fCount').textContent=n>=30?'All 30 founding spots are taken':n===0?'All 30 spots are open.':`${30-n} of 30 spots left.`;const mine=uid&&s.docs.some(d=>d.id===uid);$('#joinBtn').textContent=mine?'You\'re a founding member':(I18N[LANG]?.f_join||EN.f_join);$('#joinBtn').disabled=!!mine||n>=30},()=>{});
+ db.collection('members').onSnapshot(s=>{const n=s.size;$('#fMeter').style.width=Math.min(100,n/30*100)+'%';$('#fMeter').parentNode.style.display=n<5?'none':'';$('#fCount').textContent=n>=30?'All 30 founding spots are taken':n<5?'Only 30 founding spots.':`${30-n} of 30 spots left.`;const mine=uid&&s.docs.some(d=>d.id===uid);$('#joinBtn').textContent=mine?'You\'re a founding member':(I18N[LANG]?.f_join||EN.f_join);$('#joinBtn').disabled=!!mine||n>=30},()=>{});
 }
 $('#rvPost').onclick=async()=>{const t=$('#rvText').value.trim();if(!ME||!ME.db||!ME.uid){toast('Log in to post a review');openAccount();return}if(t.length<3){toast('Write a few words first');return}
  try{await ME.db.doc('reviews/'+ME.uid).set({uid:ME.uid,name:$('#rvName').value.trim().slice(0,40),stars:myStars,text:t.slice(0,600),at:Date.now()});$('#rvText').value='';toast('Thanks for your review!')}catch(e){toast(e&&e.code==='invalid_argument'?'Write a few words and pick your stars':e&&e.code==='login'?'Log in to post a review':'Could not post right now')}};
