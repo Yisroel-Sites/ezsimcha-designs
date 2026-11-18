@@ -73,7 +73,7 @@ textarea{min-height:70px;resize:vertical}
 <div class="foot">Made with <a href="/">Invitely</a>. Free simcha invitations with a guest link like this one.</div>
 <script>
 const q=new URLSearchParams(location.search);
-const T=q.get('t')||'',D=q.get('d')||'',TM=q.get('tm')||'',L=q.get('l')||'',W=(q.get('w')||'').replace(/\D/g,''),AFTER=q.get('n')==='1';
+const T=q.get('t')||'',D=q.get('d')||'',TM=q.get('tm')||'',L=q.get('l')||'',W=(q.get('w')||'').replace(/\D/g,''),AFTER=q.get('n')==='1',Z=/^[A-Za-z_]+(\/[A-Za-z_+-]+)*$/.test(q.get('z')||'')?q.get('z'):'';
 const $=s=>document.querySelector(s);
 if(!T&&!D){$('#card').classList.add('hide');$('#empty').classList.remove('hide')}
 document.title=(T||'Simcha')+' | Invitely';
@@ -84,10 +84,11 @@ if(/^\d{4}-\d{2}-\d{2}$/.test(D)){start=new Date(D+'T'+(/^\d{2}:\d{2}$/.test(TM)
 addEventListener('DOMContentLoaded',()=>{if(start&&window.hebLine)$('#heb').textContent=hebLine(D,AFTER)});
 if(L)$('#where').textContent=L;
 const f=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+const fl=x=>{const p=n=>String(n).padStart(2,'0');return x.getFullYear()+p(x.getMonth()+1)+p(x.getDate())+'T'+p(x.getHours())+p(x.getMinutes())+'00'};
 if(start){const end=new Date(start.getTime()+3*3600e3);
- $('#gcal').href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(T||'Simcha')}&dates=${f(start)}/${f(end)}&location=${encodeURIComponent(L)}&details=${encodeURIComponent(location.href)}`;
+ $('#gcal').href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(T||'Simcha')}&dates=${Z?fl(start):f(start)}/${Z?fl(end):f(end)}${Z?'&ctz='+encodeURIComponent(Z):''}&location=${encodeURIComponent(L)}&details=${encodeURIComponent(location.href)}`;
  $('#ics').onclick=()=>{const esc=s=>String(s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invitely//EN','BEGIN:VEVENT','UID:'+f(start)+'-'+Math.random().toString(36).slice(2)+'@invitely','DTSTAMP:'+f(new Date()),'DTSTART:'+f(start),'DTEND:'+f(end),'SUMMARY:'+esc(T||'Simcha'),'LOCATION:'+esc(L),'DESCRIPTION:'+esc(location.href),'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invitely//EN','BEGIN:VEVENT','UID:'+f(start)+'-'+Math.random().toString(36).slice(2)+'@invitely','DTSTAMP:'+f(new Date()),(Z?'DTSTART;TZID='+Z+':'+fl(start):'DTSTART:'+f(start)),(Z?'DTEND;TZID='+Z+':'+fl(end):'DTEND:'+f(end)),'SUMMARY:'+esc(T||'Simcha'),'LOCATION:'+esc(L),'DESCRIPTION:'+esc(location.href),'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='simcha.ics';a.click()};
 }else{$('#gcal').classList.add('hide');$('#ics').classList.add('hide')}
 if(L)$('#map').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(L);else $('#map').classList.add('hide');
