@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're invited | Invitely</title>
+<meta name="description" content="Simcha details, RSVP, directions and Add to Calendar in one link.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1b2a4a">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<script src="hebdate.js" defer></script>
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{font:16px/1.55 Manrope,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1d24;min-height:100vh;
+ background:radial-gradient(120% 70% at 50% 0%,#2c4170 0%,#1b2a4a 55%,#121c33 100%);padding:28px 16px 40px}
+.card{max-width:460px;margin:0 auto;background:#fffdf8;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px #0007}
+.top{padding:34px 26px 26px;text-align:center;background:linear-gradient(180deg,#fbf3e0,#fffdf8);border-bottom:1px solid #eee3c9;position:relative}
+.top:before{content:"";position:absolute;inset:12px;border:1.5px solid #d9c18a;border-radius:18px;pointer-events:none}
+.bsd{position:absolute;top:20px;inset-inline-end:26px;font:500 13px 'Frank Ruhl Libre',serif;color:#9a7b3c}
+.kick{font:700 12px Manrope;letter-spacing:2.5px;text-transform:uppercase;color:#9a7b3c;margin:6px 0 10px}
+h1{font:700 30px/1.15 'Frank Ruhl Libre',Georgia,serif;margin:0 0 14px;color:#1b2a4a}
+.when{font-weight:700;font-size:17px;color:#1b2a4a}
+.heb{font:500 18px 'Frank Ruhl Libre',serif;color:#6b5527;margin-top:4px;direction:rtl}
+.where{margin-top:12px;color:#3a4150}
+.body{padding:22px 22px 26px}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 14px;border-radius:14px;border:1.5px solid #d7dbe6;background:#fff;color:#1b2a4a;font:700 15px Manrope;text-decoration:none;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.btn.full{grid-column:1/-1}
+.btn.go{background:#1E6B34;border-color:#1E6B34;color:#fff}
+.btn.wa{background:#25D366;border-color:#25D366;color:#fff}
+h2{font:800 18px Manrope;margin:26px 0 4px;color:#1b2a4a}
+.muted{color:#5f6670;font-size:14px;margin:0 0 12px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 6px}
+input,textarea{width:100%;font:16px Manrope;padding:12px 14px;border:1.5px solid #d7dbe6;border-radius:12px;background:#fff}
+textarea{min-height:70px;resize:vertical}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.seg button{min-height:48px;border-radius:14px;border:1.5px solid #d7dbe6;background:#fff;font:700 15px Manrope;color:#1b2a4a;cursor:pointer}
+.seg button.on{border-color:#1E6B34;background:#E7F5EA;color:#1E6B34}
+.count{display:flex;align-items:center;gap:12px}
+.count button{width:46px;height:46px;border-radius:50%;border:1.5px solid #d7dbe6;background:#fff;font:700 22px Manrope;cursor:pointer;color:#1b2a4a}
+.count b{font-size:22px;min-width:28px;text-align:center}
+.hide{display:none}
+.foot{text-align:center;margin-top:22px;font-size:13px;color:#c9d2e6}
+.foot a{color:#fff;font-weight:700}
+.empty{max-width:460px;margin:60px auto;text-align:center;color:#fff}
+.empty a{color:#ffd98a}
+:focus-visible{outline:3px solid #246BFD;outline-offset:2px}
+</style></head><body>
+<div class="card" id="card">
+  <div class="top">
+    <div class="bsd">בס״ד</div>
+    <div class="kick">You're invited</div>
+    <h1 id="t"></h1>
+    <div class="when" id="when"></div>
+    <div class="heb" id="heb"></div>
+    <div class="where" id="where"></div>
+  </div>
+  <div class="body">
+    <div class="acts">
+      <a class="btn" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+      <button class="btn" id="ics">Apple / Outlook</button>
+      <a class="btn full" id="map" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    <h2>Will you be there?</h2>
+    <p class="muted" id="rsvpNote">Let the family know. Your answer opens in WhatsApp, ready to send.</p>
+    <div class="seg" id="ans"><button data-a="yes" class="on">Yes, I'll come</button><button data-a="no">Can't make it</button></div>
+    <label for="nm">Your name</label><input id="nm" autocomplete="name" placeholder="e.g. Moshe and Rivky Klein">
+    <div id="cntWrap"><label>How many people?</label><div class="count"><button id="minus" aria-label="Fewer">−</button><b id="cnt">2</b><button id="plus" aria-label="More">+</button></div></div>
+    <label for="msg">A message for the family (optional)</label><textarea id="msg" placeholder="Mazel tov!"></textarea>
+    <div class="acts" style="margin-top:16px"><a class="btn wa full" id="send" target="_blank" rel="noopener">Send my answer on WhatsApp</a></div>
+  </div>
+</div>
+<div class="empty hide" id="empty"><h1 style="color:#fff">This invitation link is missing its details.</h1><p>Ask whoever sent it for a new link, or <a href="/">make your own invitation</a>.</p></div>
+<div class="foot">Made with <a href="/">Invitely</a>. Free simcha invitations with a guest link like this one.</div>
+<script>
+const q=new URLSearchParams(location.search);
+const T=q.get('t')||'',D=q.get('d')||'',TM=q.get('tm')||'',L=q.get('l')||'',W=(q.get('w')||'').replace(/\D/g,''),AFTER=q.get('n')==='1';
+const $=s=>document.querySelector(s);
+if(!T&&!D){$('#card').classList.add('hide');$('#empty').classList.remove('hide')}
+document.title=(T||'Simcha')+' | Invitely';
+$('#t').textContent=T||'Simcha';
+let start=null;
+if(/^\d{4}-\d{2}-\d{2}$/.test(D)){start=new Date(D+'T'+(/^\d{2}:\d{2}$/.test(TM)?TM:'19:00'));
+ $('#when').textContent=start.toLocaleString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'})+(TM?' · '+start.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'');}
+addEventListener('DOMContentLoaded',()=>{if(start&&window.hebLine)$('#heb').textContent=hebLine(D,AFTER)});
+if(L)$('#where').textContent=L;
+const f=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+if(start){const end=new Date(start.getTime()+3*3600e3);
+ $('#gcal').href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(T||'Simcha')}&dates=${f(start)}/${f(end)}&location=${encodeURIComponent(L)}&details=${encodeURIComponent(location.href)}`;
+ $('#ics').onclick=()=>{const esc=s=>String(s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invitely//EN','BEGIN:VEVENT','UID:'+f(start)+'-'+Math.random().toString(36).slice(2)+'@invitely','DTSTAMP:'+f(new Date()),'DTSTART:'+f(start),'DTEND:'+f(end),'SUMMARY:'+esc(T||'Simcha'),'LOCATION:'+esc(L),'DESCRIPTION:'+esc(location.href),'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reminder','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='simcha.ics';a.click()};
+}else{$('#gcal').classList.add('hide');$('#ics').classList.add('hide')}
+if(L)$('#map').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(L);else $('#map').classList.add('hide');
+if(!W)$('#rsvpNote').textContent='Your answer opens in WhatsApp. Pick the family\'s chat and tap send.';
+let ans='yes',n=2;
+$('#ans').onclick=e=>{const b=e.target.closest('button');if(!b)return;ans=b.dataset.a;$('#ans').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));$('#cntWrap').classList.toggle('hide',ans!=='yes');upd()};
+$('#minus').onclick=()=>{n=Math.max(1,n-1);$('#cnt').textContent=n;upd()};
+$('#plus').onclick=()=>{n=Math.min(30,n+1);$('#cnt').textContent=n;upd()};
+function upd(){const nm=$('#nm').value.trim(),m=$('#msg').value.trim();
+ const line=ans==='yes'?`Yes, we'll be at the ${T||'simcha'}! ${n} ${n===1?'person':'people'}.`:`Sorry, we can't make it to the ${T||'simcha'}.`;
+ const txt=`${line}${nm?'\nFrom: '+nm:''}${m?'\n'+m:''}`;
+ $('#send').href='https://wa.me/'+W+'?text='+encodeURIComponent(txt)}
+['#nm','#msg'].forEach(s=>$(s).addEventListener('input',upd));upd();
+</script>
+</body></html>

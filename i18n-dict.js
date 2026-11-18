@@ -1543,7 +1543,20 @@ window.I18N_DICT={
 "Sample video invitation": [
 "ביישפיל ווידעא איינלאדונג",
 "דוגמת הזמנת וידאו"
-]
+],
+"One link for your whole simcha": ["איין לינק פאר דער גאנצער שמחה", "קישור אחד לכל השמחה"],
+"Send guests one link with the date, the Hebrew date and parsha, Add to Calendar, directions, and an RSVP button. Their answers come straight to your WhatsApp.": ["שיקט די געסט איין לינק מיט דער דאטום, דער אידישער דאטום און פרשה, צולייגן צום קאלענדאר, אנווייזונגען ווי צו פארן, און א קנעפל צו ענטפערן צי מען קומט. די ענטפערס קומען גלייך צו אייער וואטסעפ.", "שלחו לאורחים קישור אחד עם התאריך, התאריך העברי והפרשה, הוספה ליומן, הוראות הגעה וכפתור אישור הגעה. התשובות מגיעות ישר לוואטסאפ שלכם."],
+"Make an invitation": ["מאכט אן איינלאדונג", "צרו הזמנה"],
+"See a sample guest page": ["זעט א ביישפיל פון דעם געסט בלאט", "ראו דוגמה של דף האורחים"],
+"Guest link:": ["געסט לינק:", "קישור לאורחים:"],
+"RSVP on WhatsApp, directions and Add to Calendar, free with every invitation.": ["ענטפערן אויף וואטסעפ, אנווייזונגען און צולייגן צום קאלענדאר, אומזיסט מיט יעדע איינלאדונג.", "אישור הגעה בוואטסאפ, הוראות הגעה והוספה ליומן, בחינם עם כל הזמנה."],
+"Starts after shkiah (Hebrew date is the next day)": ["הייבט זיך אן נאך שקיעה (דער אידישער דאטום איז דעם קומענדיגן טאג)", "מתחיל אחרי השקיעה (התאריך העברי הוא של היום הבא)"],
+"Your WhatsApp number, for RSVPs (optional)": ["אייער וואטסעפ נומער, פאר ענטפערס (נישט מוז)", "מספר הוואטסאפ שלכם, לאישורי הגעה (לא חובה)"],
+"Copy guest link": ["קאפירט דעם געסט לינק", "העתקת הקישור לאורחים"],
+"See guest page": ["זעט דעם געסט בלאט", "צפייה בדף האורחים"],
+"Guest link copied": ["געסט לינק קאפירט", "הקישור לאורחים הועתק"],
+"Your guest link shows the date with the Hebrew date and parsha, Add to Calendar, directions, and an RSVP button that sends their answer to you on WhatsApp. Attach the image or video you downloaded.": ["אייער געסט לינק ווייזט דעם דאטום מיט דעם אידישן דאטום און פרשה, צולייגן צום קאלענדאר, אנווייזונגען, און א קנעפל וואס שיקט זייער ענטפער צו אייך אויף וואטסעפ. לייגט צו דאס בילד אדער ווידעא וואס איר האט אראפגעלאדן.", "הקישור לאורחים מציג את התאריך עם התאריך העברי והפרשה, הוספה ליומן, הוראות הגעה, וכפתור ששולח את תשובתם אליכם בוואטסאפ. צרפו את התמונה או הסרטון שהורדתם."],
+"Fill in the date, time and address, and add your WhatsApp number if you want RSVPs. You get a guest link with the Hebrew date, Add to Calendar, directions and an RSVP button, ready to send on WhatsApp.": ["פילט אויס דעם דאטום, צייט און אדרעס, און לייגט צו אייער וואטסעפ נומער אויב איר ווילט ענטפערס. איר באקומט א געסט לינק מיט דעם אידישן דאטום, צולייגן צום קאלענדאר, אנווייזונגען און א קנעפל צו ענטפערן, גרייט צו שיקן אויף וואטסעפ.", "מלאו תאריך, שעה וכתובת, והוסיפו את מספר הוואטסאפ שלכם אם תרצו אישורי הגעה. תקבלו קישור לאורחים עם התאריך העברי, הוספה ליומן, הוראות הגעה וכפתור אישור הגעה, מוכן לשליחה בוואטסאפ."]
 };
 
 /* Patterns for text with numbers or names inside. f(match, lang, translate) returns the translation or null. */

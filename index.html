@@ -458,6 +458,15 @@ details.rvform[open] summary{display:none}
     <div class="reviews" id="rvList"></div>
   </div></section>
 
+  <section id="guestlink"><div class="wrap">
+    <div class="card" style="max-width:820px;margin:0 auto;text-align:center;padding:28px 22px">
+      <span class="badge free">Free</span>
+      <h2 class="h2s" style="margin:10px 0 8px">One link for your whole simcha</h2>
+      <p class="muted" style="max-width:600px;margin:0 auto 16px">Send guests one link with the date, the Hebrew date and parsha, Add to Calendar, directions, and an RSVP button. Their answers come straight to your WhatsApp.</p>
+      <div class="row" style="justify-content:center;gap:10px;flex-wrap:wrap"><a class="btn" href="#events">Make an invitation</a><a class="btn ghost" href="/e?t=Bar+Mitzvah+of+Yossi&amp;d=2026-12-27&amp;tm=19:30&amp;l=Brooklyn%2C+NY" target="_blank" rel="noopener">See a sample guest page</a></div>
+    </div>
+  </div></section>
+
   <section id="about"><div class="wrap"><div class="two">
     <div>
       <h2 class="sec" style="text-align:start" data-i="ab_h">About Invitely</h2>
@@ -470,6 +479,7 @@ details.rvform[open] summary{display:none}
         <li><b>Free for everyone:</b> designing, every free design, the basic backgrounds, fonts, stickers, ready text and examples. Free designs download free.</li>
         <li><b>Premium and Premium Pro:</b> free to design, you pay only when you download. Pictures $4.99 or $8.99, videos $9.99 or $11.99. No subscription.</li>
         <li><b>Founding members:</b> the first 30 people who sign up keep every Premium item free, for good.</li>
+        <li><b>Guest link:</b> RSVP on WhatsApp, directions and Add to Calendar, free with every invitation.</li>
         <li>No ads in your design. Paid downloads have no stamp. Free downloads carry a small site address in the corner.</li>
       </ul>
       <button class="btn" id="joinBtn2">Become a member, free</button>
@@ -564,8 +574,11 @@ details.rvform[open] summary{display:none}
       <label class="f">Event name</label><input id="evTitle">
       <div class="row"><div><label class="f">Date</label><input type="date" id="evDate"></div><div><label class="f">Time</label><input type="time" id="evTime" value="19:00"></div></div>
       <label class="f">Location</label><input id="evLoc">
+      <label class="f" style="display:flex;gap:8px;align-items:center;font-weight:600"><input type="checkbox" id="evAfter" style="width:auto"> Starts after shkiah (Hebrew date is the next day)</label>
+      <label class="f">Your WhatsApp number, for RSVPs (optional)</label><input id="evPh" type="tel" inputmode="tel" placeholder="e.g. 718 555 0123">
       <div class="row" style="margin-top:10px"><a class="btn sm ghost" id="evG" target="_blank" rel="noopener">Google Calendar</a><a class="btn sm ghost" id="evM" target="_blank" rel="noopener">Open in Maps</a><a class="btn sm" id="evWa" target="_blank" rel="noopener" style="background:#25D366">WhatsApp</a></div>
-      <p class="hint">WhatsApp opens with your message and the calendar link ready. Attach the image or video you downloaded.</p>
+      <div class="row" style="margin-top:8px"><button class="btn sm ghost" id="evCopy">Copy guest link</button><a class="btn sm ghost" id="evOpen" target="_blank" rel="noopener">See guest page</a></div>
+      <p class="hint">Your guest link shows the date with the Hebrew date and parsha, Add to Calendar, directions, and an RSVP button that sends their answer to you on WhatsApp. Attach the image or video you downloaded.</p>
     </div>
   </div>
 </div></div>
@@ -939,7 +952,7 @@ $$('#catFilter button').forEach(b=>b.onclick=()=>{$$('#catFilter button').forEac
 function renderStats(){const s=[[SMP.length+CATS.length*TPL_PER,'ready examples'],[BGS.length+GEN.list.length+PLAIN.length+REAL_BGS.length,'backgrounds'],[new Set(Object.values(ELS).flat()).size,'elements'],[LINES.length,'ready text lines'],[HEB_FONTS.length,'Hebrew-letter fonts'],[18,'video animations'],[15,'tunes']];
  $('#stats').innerHTML=s.map(([n,l])=>`<div class="stat"><b>${n.toLocaleString()}</b><small>${l}</small></div>`).join('')}
 const FAQ=[
-['How do I make a video or an invitation link?','Open any design and tap Video at the top. Pick an animation (envelope, bottle, gold sparkle and 15 more), choose a tune or upload your own music, and tap Make video to download it. Fill in the date, time and address to get a WhatsApp message with Add to Calendar and Open in Maps links for your guests.'],
+['How do I make a video or an invitation link?','Open any design and tap Video at the top. Pick an animation (envelope, bottle, gold sparkle and 15 more), choose a tune or upload your own music, and tap Make video to download it. Fill in the date, time and address, and add your WhatsApp number if you want RSVPs. You get a guest link with the Hebrew date, Add to Calendar, directions and an RSVP button, ready to send on WhatsApp.'],
 ['What is AI mode?','Tap AI mode and tell it your simcha, the names, date and place. It picks matching designs, fills in your details, and opens them ready to edit. It can also suggest wording. It only helps with simcha designs.'],
 ['How much does it cost?',"Designing is always free, and free designs download free. Premium and Premium Pro designs are pay-per-download: pictures are $4.99 (Premium) or $8.99 (Premium Pro), and videos are $9.99 or $11.99. You see the price before you pay, and there are no subscriptions. The first 30 members keep every Premium item free, for good."],
 ['Can I get a refund?',"Yes, if you were charged but did not get your download, were charged twice, or the file is broken. Email us within 14 days. Downloads you received successfully are final, but after paying you have 48 hours to fix a typo and download again at no extra charge. See the Refunds page for details."],
@@ -1332,8 +1345,11 @@ $('#vRec').onclick=async()=>{if(typeof MediaRecorder==='undefined'){$('#vStatus'
 /* event link */
 function evParts(){const d=$('#evDate').value,tm=$('#evTime').value||'19:00';if(!d)return null;const s=new Date(d+'T'+tm);const e=new Date(s.getTime()+3*3600e3);const f=x=>x.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');return{s,e,fs:f(s),fe:f(e)}}
 function updateEvent(){const p=evParts(),title=$('#evTitle').value||'Simcha',loc=$('#evLoc').value;const g=p?`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${p.fs}/${p.fe}&location=${encodeURIComponent(loc)}`:'#';$('#evG').href=g;
- $('#evM').href=loc?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc):'#';const mapsL=loc?'\nMap: '+$('#evM').href:'';const when=p?p.s.toLocaleString(undefined,{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'}):'';const msg=`You're invited! ${title}${when?'\nWhen: '+when:''}${loc?'\nWhere: '+loc:''}${mapsL}${p?'\n\nAdd to calendar: '+g:''}`;$('#evWa').href='https://wa.me/?text='+encodeURIComponent(msg)}
-['#evTitle','#evDate','#evTime','#evLoc'].forEach(s=>$(s).addEventListener('input',updateEvent));
+ $('#evM').href=loc?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc):'#';const mapsL=loc?'\nMap: '+$('#evM').href:'';const when=p?p.s.toLocaleString(undefined,{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'}):'';const gl=guestLink();$('#evOpen').href=gl||'#';const msg=`You're invited! ${title}${when?'\nWhen: '+when:''}${loc?'\nWhere: '+loc:''}${gl?'\n\nDetails, directions and RSVP: '+gl:mapsL+(p?'\n\nAdd to calendar: '+g:'')}`;$('#evWa').href='https://wa.me/?text='+encodeURIComponent(msg)}
+function guestLink(){const d=$('#evDate').value;if(!d)return '';const u=new URLSearchParams({t:$('#evTitle').value||'Simcha',d,tm:$('#evTime').value||'19:00'});const l=$('#evLoc').value.trim();if(l)u.set('l',l);const w=$('#evPh').value.replace(/\D/g,'');if(w)u.set('w',w.length===10?'1'+w:w);if($('#evAfter').checked)u.set('n','1');return location.origin+'/e?'+u.toString()}
+['#evTitle','#evDate','#evTime','#evLoc','#evPh','#evAfter'].forEach(s=>{$(s).addEventListener('input',updateEvent);$(s).addEventListener('change',updateEvent)});
+$('#evCopy').onclick=()=>{const gl=guestLink();if(!gl){toast('Pick a date first');return}(navigator.clipboard?navigator.clipboard.writeText(gl):Promise.reject()).then(()=>toast('Guest link copied')).catch(()=>prompt('Copy this link',gl))};
+$('#evOpen').onclick=e=>{if(!guestLink()){e.preventDefault();toast('Pick a date first')}};
 $('#evG').onclick=e=>{if(!evParts()){e.preventDefault();toast('Pick a date first')}};
 /* demo animation on home */
 (function demo(){const c=$('#demoCv'),ctx=c.getContext('2d');const d=buildTemplate('wedding',16);let img=null,t0=0,ai=0;const seq=['envelope','curtain','seal','gift','scroll','sefer'];
